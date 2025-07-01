@@ -1,0 +1,40 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model activities {
+  id            Int      @id @default(autoincrement())
+  activity_type String?
+  elders        elders[]
+}
+
+model cities {
+  id        Int      @id @default(autoincrement())
+  city_name String   @unique
+  elders    elders[]
+}
+
+model elders {
+  id          Int         @id @default(autoincrement())
+  firstname   String
+  lastname    String
+  password    String
+  email       String?
+  age         Int?
+  job         String?
+  city_id     Int?
+  zipcode     String?     @db.VarChar(5)
+  activity_id Int?
+  description String?
+  picture     String?
+  created_at  DateTime?   @default(now()) @db.Timestamp(6)
+  updated_at  DateTime?   @default(now()) @db.Timestamp(6)
+  activities  activities? @relation(fields: [activity_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  cities      cities?     @relation(fields: [city_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
