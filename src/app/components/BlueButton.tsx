@@ -1,3 +1,3 @@
 export default function BlueButton(props: { label: string }): React.ReactNode {
-  return <button className="black-button">{props.label}</button>;
+  return <button className="blue-button">{props.label}</button>;
 }
