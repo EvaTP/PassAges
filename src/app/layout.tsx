@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import NavElement from "./components/Nav-Element";
+import BlueButton from "./components/BlueButton";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,10 +26,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}  >
+        
         {children}
+         <nav>
+           <NavElement icon={''} label="Adaence" />
+           <NavElement icon={''} label="Accueil" />
+           <NavElement icon={''} label="Je rends visite" />
+           <NavElement icon={''} label="Guide du partage" />
+           <NavElement icon={''} label="Devenir bénévole" />
+           <BlueButton label="Faire un don" />  
+         </nav>
       </body>
     </html>
   );
