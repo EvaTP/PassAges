@@ -3,13 +3,15 @@ import Image from "next/image";
 import Link from "next/link";
 // Rubrique "Comment ça marche"
 import { HOW_IT_WORKS } from "@/app/data/cards";
+import { Header } from "@/app/components/Header";
 
 // import styles from "../accueil/page.module.css";
 import { useState, useEffect } from "react";
 
-export default function Page(): React.ReactNode {
+export default function Home(): React.ReactNode {
   return (
     <p>hello</p>
+    <Header>
     //  <div className="flex items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12">
     //   {/* Add Hero Images Here */}
     //   <Image
