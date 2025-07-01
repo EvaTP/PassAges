@@ -12,6 +12,7 @@
   --grey-color: #595959;
   --medium-grey-color: #f0f0f2;
   --yellowcolor: goldenrod;
+
   --btn-primary-bg: #333;
   --btn-secondary-bg: #8584ff;
   --btn-accent-bg: #ffc412;
@@ -20,9 +21,11 @@
   --btn-accent-hover-bg: #8584ff;
   --btn-disabled: #595959;
   --btn--active: green;
+
   --font-family-heading: "Amatic SC", sans-serif;
   --font-family-body: "Roboto", sans-serif;
   --border-radius: 8px;
+
   --shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.1);
   --shadow-md: 0 3px 10px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -42,6 +45,8 @@ body {
   font-size: 1em;
   box-sizing: border-box;
   padding-bottom: 80px;
+  background: var(--background);
+  color: var(--foreground);
 }
 
 @theme inline {
@@ -58,16 +63,826 @@ body {
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* BOUTONS */
+button {
+  height: 45px;
+  padding: 0.5em;
+  border-radius: 15px;
 }
-
+button#profils {
+  background-color: var(--btn-primary-bg);
+  color: var(--primary-color);
+  border-radius: 15px;
+  margin: 1em;
+}
+button#profils:hover {
+  background-color: var(--btn-primary-hover-bg);
+}
 .black-button {
   background-color: var(--btn-primary-bg);
   color: var(--primary-color);
   border-radius: 15px;
   border: Opx solid var(--btn-primary-bg);
   margin: 1em;
+}
+.black-button:hover {
+  background-color: var(--btn-primary-hover-bg);
+}
+button.violet {
+  background-color: var(--btn-secondary-bg);
+  color: var(--primary-color);
+  border-radius: 15px;
+  border: Opx solid var(--btn-secondary-bg);
+  margin: 1em;
+}
+button.violet:hover {
+  background-color: var(--btn-secondary-hover-bg);
+}
+button.yellow {
+  background-color: var(--btn-accent-bg);
+  color: var(--primary-color);
+  border-radius: 15px;
+  border: Opx solid var(--btn-accent-bgg);
+  margin: 1em;
+}
+button.yellow:hover {
+  background-color: var(--btn-accent-hover-bg);
+}
+
+/* HEADER */
+header {
+  min-height: 4.25rem;
+  background-color: rgb(243, 240, 240);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  font-family: "Roboto", sans-serif;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+#logo {
+  width: 15%;
+  margin-right: 2.5em;
+  margin-left: 1em;
+  padding-right: 0.25em;
+}
+#logo p {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-left: 0.45em;
+}
+#logo p span {
+  color: var(--secondary-color);
+}
+nav {
+  width: 70%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: baseline;
+}
+nav ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+nav ul li {
+  list-style-type: none;
+  align-items: center;
+  padding: 1em;
+}
+
+nav li a {
+  display: inline-block;
+  text-decoration: none;
+  font-family: var(--font-family-body);
+  border-bottom: 2px solid transparent;
+  padding: 10px 0px;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+h1 {
+  font-family: var(--font-family-heading);
+  font-size: 4em;
+  font-weight: bold;
+  margin: 0.5em 0;
+}
+h2 {
+  font-family: var(--font-family-heading);
+  font-size: 3em;
+  font-weight: bold;
+  margin: 1em 0;
+}
+h3 {
+  font-family: var(--font-family-heading);
+  color: var(--secondary-color);
+  font-size: 1.5em;
+  margin-bottom: 0.25em;
+}
+p {
+  margin: 1em 0;
+  color: var(--dark-color);
+}
+a {
+  color: black;
+}
+.blocs {
+  margin: 0.25em 5.5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+/* PAGE 1: ACCUEIL*/
+/* *************** */
+
+/* SECTION ACCUEIL */
+#accueil {
+  position: relative;
+  color: white;
+  text-align: center;
+  min-height: 55vh;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#accueil img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+#hero {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 2em;
+  z-index: 5;
+}
+#hero p {
+  color: white;
+}
+#accueil p {
+  margin: 1em 0;
+  padding: 2em;
+  line-height: 1.5;
+}
+/* FORMULAIRE RECHERCHE */
+#recherche {
+  position: absolute;
+  width: 65%;
+  bottom: -3.5em;
+  background-color: white;
+  box-shadow: var(--shadow-xl);
+  padding: 2em;
+  z-index: 1;
+  border-radius: 15px;
+  color: black;
+}
+#recherche form,
+#recherche2 form {
+  display: flex;
+  align-items: column;
+  gap: 2.5em;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+.form-group label {
+  margin-bottom: 0.3em;
+  text-align: left;
+}
+#btn-searchForm,
+#btn-searchForm2 {
+  width: 50%;
+}
+/* SECTION PERSONNALITES */
+main {
+  /* margin-top: 5em; */
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+section#persons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3.5em;
+}
+/* mosaïque photos */
+#mosaique {
+  width: 70%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 colonnes de largeur égale */
+  /* grid-auto-rows: 150px; */
+  gap: 10px;
+}
+.photo-item {
+  border-radius: 8px;
+  overflow: hidden;
+}
+.photo-item img {
+  width: 100%;
+  height: 100%; /* Important pour que l'image remplisse la cellule */
+  object-fit: cover; /* Empêche la déformation de l'image */
+  border-radius: 8px;
+}
+
+/* Les photos qui sont deux fois plus hautes (occupent deux lignes de hauteur) */
+/* Les autres photos (2, 3, 6, 7) occuperont automatiquement 1 ligne */
+
+/* Photo 1 : colonne 1, hauteur double */
+.photo-item:nth-child(1) {
+  grid-column: 1;
+  grid-row: span 2;
+}
+/* Photo 2 : colonne 1, en dessous de la 1 */
+.photo-item:nth-child(2) {
+  grid-column: 1;
+  grid-row: 3;
+}
+/* Photo 3 : colonne 2, ligne 1 */
+.photo-item:nth-child(3) {
+  grid-column: 2;
+  grid-row: 1;
+}
+/* Photo 4 : colonne 2, hauteur double */
+.photo-item:nth-child(4) {
+  grid-column: 2;
+  grid-row: 2 / span 2;
+}
+/* Photo 5 : colonne 3, hauteur double */
+.photo-item:nth-child(5) {
+  grid-column: 3;
+  grid-row: span 2;
+}
+/* Photo 6 : colonne 3, en dessous de la 5 */
+.photo-item:nth-child(6) {
+  grid-column: 3;
+  grid-row: 3;
+}
+/* Photo 7 : colonne 4, ligne 1 */
+.photo-item:nth-child(7) {
+  grid-column: 4;
+  grid-row: 1;
+}
+/* Photo 8 : colonne 4, hauteur double */
+.photo-item:nth-child(8) {
+  grid-row: span 2;
+  grid-column: 4;
+}
+
+/* COMMENT CA MARCHE */
+/* syles communs à la section "comment ça marche" et "pourquoi devenir bénévole ?" */
+#how {
+  text-align: center;
+  background-color: white;
+  padding: 4em 3em;
+  margin: 1.5em 0;
+}
+#cards {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: stretch; /* Étire les éléments enfants sur l'axe transversal */
+  margin: 1em 0;
+}
+.card {
+  border-radius: 15px;
+  box-shadow: var(--shadow-lg);
+  width: 20%;
+  padding: 0.5em;
+}
+.card p:first-child {
+  font-size: 2em;
+}
+.card-title {
+  font-weight: bold;
+}
+
+/* CALL-TO-ACTION */
+#CTA,
+#testimony,
+#volunteers-questions {
+  padding: 4em 8em 4em 8em;
+  text-align: center;
+}
+#btn-CTA,
+#btn-FAQ {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+/* FOOTER */
+footer {
+  /* position: fixed; */
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px;
+  background-color: var(--dark-color);
+  color: var(--light-color);
+  font-size: 1em;
+  box-sizing: border-box; /* Important pour que le padding n'affecte pas la largeur totale */
+}
+footer p {
+  color: white;
+}
+#footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 1em 2em;
+}
+#footer .footer {
+  flex: 1; /* Chaque div prendra une part égale de l'espace disponible */
+  padding-right: 0.2em;
+}
+#footer .footer:first-of-type {
+  margin-right: 0.5em;
+}
+.footer #social-icons {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: start;
+  gap: 1em;
+}
+.social {
+  background-color: var(--grey-color);
+  border-radius: 50px;
+  margin: 0 0.5em;
+  width: 2.5em;
+  height: 2.5em;
+  text-align: center;
+  line-height: 2.5em;
+}
+.social img {
+  width: 2em;
+  height: 2.5em;
+}
+#footer li {
+  list-style-type: none;
+  padding: 0.75em;
+}
+#footer li a {
+  color: white;
+  text-decoration: none;
+}
+#footer p {
+  line-height: 1.5em;
+  color: white;
+}
+#legal {
+  text-align: center;
+  padding: 1em;
+  border-top: 1px solid grey;
+  color: white;
+}
+
+/* PAGE 2 : VISITER */
+/* **************** */
+
+#bodyPageVisiter {
+  background-color: (--medium-grey-color);
+}
+/* Formulaire recherche */
+#recherchePage2 {
+  margin: 2em auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+#recherche2 {
+  width: 65%;
+  background-color: white;
+  box-shadow: var(--shadow-xl);
+  padding: 2em;
+  border-radius: 15px;
+  color: black;
+  margin-top: 1em;
+}
+.form-groupPage2 {
+  display: flex;
+  flex-direction: column;
+}
+.form-groupPage2 label {
+  margin-bottom: 0.3em;
+  text-align: left;
+}
+#btn-searchForm,
+#btn-searchForm2 {
+  width: 50%;
+}
+#nbr-reset {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.nbrSearchResults p {
+  color: rgb(241, 177, 14);
+  font-weight: bold;
+}
+#reset a {
+  color: rgb(241, 177, 14);
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+/* CARDS AINES */
+#searchFormResults,
+#loader {
+  width: 70%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 colonnes de largeur égale */
+  /* grid-auto-rows: 150px;  rend toutes les lignes égales en hauteur */
+  gap: 10px;
+  background-color: var(--light-color);
+}
+#searchFormResults,
+#loader {
+  width: 70%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 colonnes de largeur égale */
+  /* grid-auto-rows: 150px; */
+  gap: 10px;
+  background-color: var(--light-color);
+}
+/* Affichage tous les aînés dans la section PROFILS */
+#profils {
+  background-color: var(--medium-grey-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 7em;
+}
+#profils p {
+  margin: 0.25em 0;
+}
+.eldercard {
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-md);
+  /* padding : 0.4em; */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: hidden; /* évite le débordement */
+}
+.eldercard p {
+  padding: 0.4em;
+}
+.photoCard {
+  height: 40%;
+  width: 100%;
+  object-fit: cover;
+  object-position: top;
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+}
+#profils .textMomentCard {
+  font-weight: bold;
+  text-align: center;
+  margin: 1.75em 0.1em 0.1em 0.1em;
+}
+.firstnameCard {
+  color: var(--accent-color);
+  font-weight: bold;
+  font-size: 2em;
+  margin-left: 0.25em;
+}
+#profils .paragraphCard {
+  font-size: 0.75em;
+  margin-top: 0.5em;
+  padding: 0.5em;
+}
+/* Affichage tous les aînés dans la section PROFILS */
+#profils {
+  background-color: var(--medium-grey-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 7em;
+}
+#profils p {
+  margin: 0.25em 0;
+}
+.eldercard {
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-md);
+  /* padding : 0.4em; */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: hidden; /* évite le débordement */
+}
+.eldercard p {
+  padding: 0.4em;
+}
+.photoCard {
+  height: 40%;
+  width: 100%;
+  object-fit: cover;
+  object-position: top;
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+}
+#profils .textMomentCard {
+  font-weight: bold;
+  text-align: center;
+  margin: 1.75em 0.1em 0.1em 0.1em;
+}
+.firstnameCard {
+  color: var(--accent-color);
+  font-weight: bold;
+  font-size: 2em;
+  margin-left: 0.25em;
+}
+#profils .paragraphCard {
+  font-size: 0.75em;
+  margin-top: 0.5em;
+  padding: 0.5em;
+}
+
+/* PAGINATION */
+#pagination {
+  margin-top: 1.5em;
+}
+.pagination {
+  display: flex;
+  align-items: center; /* <- aligne verticalement les enfants */
+  justify-content: center; /* <- centre horizontalement les éléments */
+  gap: 1em; /* espace entre les éléments si besoin */
+}
+
+/* Affichage du résultat du filtre dans la div "searchFormResults" */
+#filtered {
+  margin: 2em 1em;
+  padding: 2em 1em;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+#searchFormResults {
+  height: 100%;
+  gap: 14px;
+}
+
+/* PAGE 3 : BENEVOLAT */
+/* ****************** */
+
+#benevolat {
+  position: relative;
+  color: white;
+  text-align: center;
+  min-height: 110vh;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#benevolat img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  object-fit: cover;
+  z-index: 1;
+}
+#volunteer-hero {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  top: 7em;
+  z-index: 5;
+}
+#volunteer-hero p {
+  color: white;
+}
+#benevolat p {
+  margin: 1em 0;
+  padding: 0 2em;
+  line-height: 1.5;
+}
+/* Formulaire devenir bénévole */
+#volunteer-form {
+  position: absolute;
+  width: 65%;
+  top: 20em;
+  /* bottom: -15em; */
+  background-color: white;
+  box-shadow: var(--shadow-xl);
+  padding: 1.5em 1.5em;
+  z-index: 1;
+  border-radius: 15px;
+  color: black;
+  margin-bottom: 3em;
+}
+#volunteer-form h2 {
+  margin: 0.5em 0;
+}
+.form-group-volunteer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0.3em 0;
+}
+.form-groupPage3 {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: start;
+}
+
+.form-groupPage3.name,
+.form-groupPage3.surname,
+.form-groupPage3.city,
+.form-groupPage3.zipcode {
+  width: 45%;
+}
+.form-groupPage3.name input,
+.form-groupPage3.surname input,
+.form-groupPage3.city input,
+.form-groupPage3.zipcode input {
+  width: 100%;
+}
+.form-groupPage3.mail,
+.form-groupPage3.mail input,
+.form-groupPage3.disponibilites,
+.form-groupPage3.disponibilites select,
+.form-groupPage3.motiv,
+.form-groupPage3.motiv textarea {
+  width: 100%;
+}
+
+#volunteer-form label {
+  font-weight: bold;
+  text-align: left;
+  margin-top: 1em;
+  margin-bottom: 0.3em;
+}
+#volunteer-form span {
+  color: red;
+}
+#volunteer-form p {
+  text-align: center;
+}
+button#btn-volunteer {
+  margin-top: 2em;
+  border-radius: 25px;
+  padding: 0.5em 1em;
+}
+/* message erreur remplissage formulaire */
+.error {
+  color: red;
+  font-style: italic;
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+.invisible {
+  display: none;
+}
+.visible {
+  display: block;
+}
+#confirmation {
+  margin-top: 12em;
+  padding: 2em;
+  background-color: var(--light-color);
+  border-radius: 10px;
+  text-align: center;
+  max-width: 800px;
+  box-shadow: var(--shadow-lg);
+  font-weight: bold;
+  font-size: 2em;
+}
+#confirmation h2 {
+  margin-top: 3em;
+}
+#confirmation p {
+  font-weight: lighter;
+}
+
+/* Pourquoi devenir bénévole */
+#why {
+  text-align: center;
+  background-color: white;
+  padding: 4em 3em;
+  margin: 7em 0 5em 0;
+}
+#why .blocs {
+  margin-top: 1em;
+}
+
+/* Témoignages bénévoles */
+#cards-volunteers {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  text-align: left;
+}
+.card-volunteer {
+  border-radius: 15px;
+  box-shadow: var(--shadow-lg);
+  width: 80%;
+  padding: 1em;
+  background-color: #f9f9f9;
+}
+.volunteer-credentials {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 2px;
+}
+.volunteer-photo {
+  margin: 0.5em;
+}
+.volunteer-photo img {
+  width: 4em;
+  border-radius: 50px;
+}
+.volunteer-name {
+  display: flex;
+  flex-direction: column;
+}
+.card-volunteer p {
+  font-style: italic;
+  margin: 1.25em 0 -0.5em 1em;
+}
+.quotation {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5em;
+  margin: 1em 0;
+}
+.quote {
+  font-size: 4em;
+  color: #ccc;
+  line-height: 1;
+}
+.quotation blockquote {
+  margin: 0;
+  padding: 0 1em 0 0;
+  font-style: italic;
+  font-size: 1em;
+  line-height: 1.5;
+}
+
+/* STYLES COMPONENT ElderCard */
+
+.item {
+  background-color: var(--palegreen);
+  border-radius: 8px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center; /* centrage vertical */
+  overflow: hidden;
+}
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  height: 180px; /* tu peux ajuster */
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  overflow: hidden;
+}
+.photo {
+  width: 100%;
+  height: 100%;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  object-fit: cover;
+  margin-top: 0;
+  display: block;
+}
+.item h2 {
+  font-size: 2em;
+  margin: 0.25em 0;
+}
+.item p {
+  text-align: start;
+  margin-top: 1em;
+  padding: 0.5em 1em 0 1em;
 }
