@@ -9,15 +9,21 @@ export default function Header()
             
             <Logo image="" label="PassAges"/>
 
-           <NavElement icon={''} label="Adaence" />
-           <NavElement icon={''} label="Accueil" />
-           <NavElement icon={''} label="Je rends visite" />
-           <NavElement icon={''} label="Guide du partage" />
-           <NavElement icon={''} label="Devenir bénévole" />
+      <NavElement icon={"/public/icones/house.svg"} label="Accueil" />
+      <NavElement
+        icon={"/public/icones/accessibility.svg"}
+        label="Je rends visite"
+      />
+      <NavElement
+        icon={"/public/icones/book-open.svg"}
+        label="Guide du partage"
+      />
+      <NavElement
+        icon={"/public/icones/hand-heart.svg"}
+        label="Devenir bénévole"
+      />
 
-           <BlueButton label="Faire un don" />
-
-        </div>
-        
-    )
+      <BlueButton label="Faire un don" />
+    </div>
+  );
 }

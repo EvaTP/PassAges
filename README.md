@@ -2,11 +2,14 @@
 
 Project école par :
 
-Ahmed Ayari
-Eva Tharrats
+Ahmed Ayari : https://github.com/ahmedAyari94400
+
+Eva Tharrats :
 
 # Stack
-HTML/CSS, Typescript
-Next.js
-BDD Neon
-ORM Prisma
+
+- Trello, drawSQL
+- HTML/CSS, Typescript
+- Next.js
+- BDD Neon
+- ORM Prisma
