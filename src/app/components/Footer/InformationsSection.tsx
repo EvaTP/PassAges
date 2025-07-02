@@ -20,14 +20,12 @@ const informationLinks: InformationLink[] = [
 
 export const InformationsSection: React.FC = () => {
   return (
-    <div className="footer">
-      <h3>INFORMATIONS UTILES</h3>
+    <div className="flex flex-column">
+      <h4>INFORMATIONS UTILES</h4>
       <ul className="footer-li">
         <li>FAQs</li>
         <li>Liste des activités</li>
-        <li>
-          <a href="#">Nous contacter</a>
-        </li>
+        <li>Nous contacter</li>
         <li>Mentions légales</li>
 
         {/* {informationLinks.map((link, index) => (
