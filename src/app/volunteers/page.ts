@@ -1,5 +1,18 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-// Rubrique "Devenir bénévole"
-import { WHY_VOLUNTEER } from "@/app/data/cards";
+import Header from '@/app/components/Header'
+import Footer from '@/app/components/Footer/Footer';
+import { useState, useEffect } from "react";
+import { PrismaClient } from "@/app/lib/prisma";
+
+
+export default function Volunteers(Header, Footer) {
+  
+	<Header>
+      {/* Votre contenu de page */}
+      <Footer >
+   
+  );
+}
+

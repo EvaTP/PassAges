@@ -22,8 +22,15 @@ export const InformationsSection: React.FC = () => {
   return (
     <div className="footer">
       <h3>INFORMATIONS UTILES</h3>
-      <ul>
-        {informationLinks.map((link, index) => (
+      <ul className="footer-li">
+        <li>FAQs</li>
+        <li>Liste des activités</li>
+        <li>
+          <a href="#">Nous contacter</a>
+        </li>
+        <li>Mentions légales</li>
+
+        {/* {informationLinks.map((link, index) => (
           <li key={index}>
             {link.href ? (
               link.isExternal ? (
@@ -35,7 +42,7 @@ export const InformationsSection: React.FC = () => {
               <span>{link.label}</span>
             )}
           </li>
-        ))}
+        ))} */}
       </ul>
     </div>
   );

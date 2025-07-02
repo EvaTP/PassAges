@@ -7,12 +7,14 @@ import { LegalSection } from "./LegalSection";
 const Footer: React.FC = () => {
   return (
     <footer>
-      <div id="footer">
+      <div className="footer">
         <PassagesSection />
         <InformationsSection />
         <ContactSection />
       </div>
-      <LegalSection />
+      <div className="footer">
+        <LegalSection />
+      </div>
     </footer>
   );
 };
