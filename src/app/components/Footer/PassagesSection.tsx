@@ -34,18 +34,19 @@ export const PassagesSection: React.FC = () => {
         Notre mission est de recréer du lien avec les personnes âgées isolées,
         en leur offrant des moments de partage, d'écoute et de présence.
       </p>
-      <div id="social-icons">
-        {socialIcons.map((icon, index) => (
-          <div key={index} className="social">
-            {icon.href ? (
-              <a href={icon.href} target="_blank" rel="noopener noreferrer">
-                <Image src={icon.src} alt={icon.alt} width={32} height={40} />
-              </a>
-            ) : (
-              <Image src={icon.src} alt={icon.alt} width={32} height={40} />
-            )}
-          </div>
-        ))}
+      <div className="social-icons">
+        <div className="social">
+          <img src="icones/facebook.svg" alt="facebook-icon" />
+        </div>
+        <div className="social">
+          <img src="icones/instagram.svg" alt="instagram-icon" />
+        </div>
+        <div className="social">
+          <img src="icones/linkedin.svg" alt="linkedin-icon" />
+        </div>
+        <div className="social">
+          <img src="icones/twitch.svg" alt="twitch-icon" />
+        </div>
       </div>
     </div>
   );
