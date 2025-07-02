@@ -1,5 +1,9 @@
-export default function Logo(props: {image: string}) {
+export default function Logo(props: {image: string, label: string }) {
     return (
-        <img src={props.image} />
+        <div>
+
+            <img src={props.image} /> <label>{props.label}</label>
+        </div>
+        
     )
 }

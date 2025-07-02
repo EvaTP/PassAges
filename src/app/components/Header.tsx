@@ -7,7 +7,7 @@ export default function Header()
     return (
         <div>
             
-            <Logo image="" />
+            <Logo image="" label="PassAges"/>
 
            <NavElement icon={''} label="Adaence" />
            <NavElement icon={''} label="Accueil" />
