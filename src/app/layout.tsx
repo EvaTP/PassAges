@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "./components/Header";
+import MomentToShare from "./components/MomentToShare";
+
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -30,6 +33,10 @@ export default function RootLayout({
         <div>
           <Header />
         </div>
+        <div>
+          <MomentToShare /> 
+        </div>
+
         {children}
       </body>
     </html>

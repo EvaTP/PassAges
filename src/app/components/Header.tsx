@@ -7,7 +7,7 @@ export default function Header()
     return (
         <div>
             
-            <Logo image="" label="PassAges"/>
+            <Logo image="public/logo_passages.svg" label="PassAges"/>
 
       <NavElement icon={"/public/icones/house.svg"} label="Accueil" />
       <NavElement
