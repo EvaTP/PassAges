@@ -10,6 +10,7 @@ export async function getEldersPicture() {
         picture: true,
       },
     });
+    //console.log("elders", elders);
     return elders;
   } catch (error: any) {
     console.error("Erreur lors de la récupération des images :", error.message);

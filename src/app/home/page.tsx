@@ -8,12 +8,6 @@ import { getEldersPicture } from "@/app/actions/getEldersPicture";
 import { HOW_IT_WORKS } from "@/app/data/cards";
 import { ElderPicture } from "@/app/types/elders";
 
-const elders: ElderPicture[] = await getEldersPicture();
-
-{
-  /* export default function Home(): React.ReactNode  */
-}
-
 export default async function Home() {
   const elders: ElderPicture[] = await getEldersPicture();
 
@@ -42,6 +36,10 @@ export default async function Home() {
               )}
             </div>
           ))}
+          {HOW_IT_WORKS.map((w) => (
+            <div key={w.text}>{w.text}</div>
+          ))}
+          ;
         </div>
       </main>
       <Footer />
