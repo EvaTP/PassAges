@@ -7,13 +7,14 @@ import Footer from "@/app/components/Footer/Footer";
 import { getEldersPicture } from "@/app/actions/getEldersPicture";
 import { HOW_IT_WORKS } from "@/app/data/cards";
 import { ElderPicture } from "@/app/types/elders";
+import BlackButton from "@/app/components/BlackButton";
 
 export default async function Home() {
   const elders: ElderPicture[] = await getEldersPicture();
 
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <main className="p-6 bg-gray-50 mt-20">
         <div className="mx-auto w-[80%]">
           {/* BENTO GRID */}
@@ -106,6 +107,7 @@ export default async function Home() {
             humaine.
           </p>
           <div id="btn-CTA">
+            <BlackButton label="Programmer une visite" />;
             <button className="black">Programmer une visite</button>
             <button className="violet">Faire un don 🫶</button>
             <button className="yellow">Devenir bénévole</button>
