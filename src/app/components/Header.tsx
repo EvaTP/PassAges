@@ -5,25 +5,34 @@ import BlueButton from "./BlueButton";
 export default function Header()
 {
     return (
-        <div>
+        <div className="flex flex-row  gap-x-4 mt-10 mb-10" >
+
+            {/* Logo    */}
+            <div className="flex flex-row flex-shrink-0  size-14" >
+                <Logo image="/logo_passages.svg" label="PassAges"  
+                  
+                />
+            </div>
+                
+             {/* Nav Elements    */}
+            <div className=" flex-shrink-0">
+              
+              <NavElement icon={"icones/house.svg"} label="Accueil" />
+              <NavElement icon={"icones/accessibility.svg"} label="Je rends visite"/>
+              <NavElement icon={"icones/book-open.svg"} label="Guide du partage"/>
+              <NavElement icon={"icones/hand-heart.svg"} label="Devenir bénévole" />
+             
+            </div>
+
+            {/* Button */}
+            <div className=" flex-shrink-0">
+              <BlueButton label="Faire un don" />  
+            </div>
             
-            <Logo image="public/logo_passages.svg" label="PassAges"/>
 
-      <NavElement icon={"/public/icones/house.svg"} label="Accueil" />
-      <NavElement
-        icon={"/public/icones/accessibility.svg"}
-        label="Je rends visite"
-      />
-      <NavElement
-        icon={"/public/icones/book-open.svg"}
-        label="Guide du partage"
-      />
-      <NavElement
-        icon={"/public/icones/hand-heart.svg"}
-        label="Devenir bénévole"
-      />
+      
 
-      <BlueButton label="Faire un don" />
+      
     </div>
   );
 }

@@ -12,8 +12,9 @@ export default function MomentToShare() : React.ReactNode
          { label: 'Un repas', value: 'repas' },
          { label: 'Une promenade', value: ' promenade' },
          { label: 'Une sortie culturelle', value: 'sortie' },
-         { label: 'Autres activité', value: 'autres' },
          { label: 'Un cinéma', value: ' cinéma' },
+         { label: 'Autres activité', value: 'autres' },
+         
     ]
     return(
         <section>
