@@ -7,7 +7,7 @@ import Footer from "@/app/components/Footer/Footer";
 import { getEldersPicture } from "@/app/actions/getEldersPicture";
 import { HOW_IT_WORKS } from "@/app/data/cards";
 import { ElderPicture } from "@/app/types/elders";
-import BlackButton from "@/app/components/BlackButton";
+import BlackButton from "../components/BlackButton";
 
 export default async function Home() {
   const elders: ElderPicture[] = await getEldersPicture();
@@ -107,7 +107,7 @@ export default async function Home() {
             humaine.
           </p>
           <div id="btn-CTA">
-            <BlackButton label="Programmer une visite" />;
+            <BlackButton label="Programmer une visite" />
             <button className="black">Programmer une visite</button>
             <button className="violet">Faire un don 🫶</button>
             <button className="yellow">Devenir bénévole</button>

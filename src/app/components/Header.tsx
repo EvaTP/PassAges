@@ -1,5 +1,5 @@
 import Logo from "./Logo";
-import NavElement from "./Nav-Element";
+import NavElement from "./NavElement";
 import BlueButton from "./BlueButton";
 
 export default function Header()
@@ -15,9 +15,9 @@ export default function Header()
             </div>
                 
              {/* Nav Elements    */}
-            <div className=" flex-shrink-0">
+            <div className="flex flex-shrink-0">
               
-              <NavElement icon={"icones/house.svg"} label="Accueil" />
+              <NavElement icon="icones/house.svg" label="Accueil" />
               <NavElement icon={"icones/accessibility.svg"} label="Je rends visite"/>
               <NavElement icon={"icones/book-open.svg"} label="Guide du partage"/>
               <NavElement icon={"icones/hand-heart.svg"} label="Devenir bénévole" />
@@ -25,7 +25,7 @@ export default function Header()
             </div>
 
             {/* Button */}
-            <div className=" flex-shrink-0">
+            <div className="flex flex-shrink-0">
               <BlueButton label="Faire un don" />  
             </div>
             

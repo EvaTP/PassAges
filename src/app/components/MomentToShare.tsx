@@ -1,4 +1,4 @@
-import MomentType from "./Moment-Type";
+import MomentType from "./MomentType";
 import ChooseCity from "./ChooseCity";
 import BlackButton from "./BlackButton";
 
