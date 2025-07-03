@@ -28,14 +28,25 @@ const socialIcons: SocialIcon[] = [
 
 export const PassagesSection: React.FC = () => {
   return (
-    <div className="footer">
-      <h3>PASSAGES</h3>
-      <p>
+    <div className="flex flex-col p-4 bg-gray-900 text-white max-w-sm mx-auto rounded-md">
+      <h4 className="text-xl font-bold mb-2 text-white">PASSAGES</h4>
+      <p className="mb-4 leading-relaxed">
         Notre mission est de recréer du lien avec les personnes âgées isolées,
         en leur offrant des moments de partage, d'écoute et de présence.
       </p>
-      <div className="social-icons">
-        <div className="social">
+      <div className="flex space-x-4 gap-4">
+        {socialIcons.map(({ src, alt }) => (
+          <a
+            key={alt}
+            href="#"
+            className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-700 hover:bg-gray-600 transition"
+            aria-label={alt}
+          >
+            <img src={src} alt={alt} className="w-6 h-6" />
+          </a>
+        ))}
+
+        {/* <div className="social">
           <img src="icones/facebook.svg" alt="facebook-icon" />
         </div>
         <div className="social">
@@ -46,7 +57,7 @@ export const PassagesSection: React.FC = () => {
         </div>
         <div className="social">
           <img src="icones/twitch.svg" alt="twitch-icon" />
-        </div>
+        </div> */}
       </div>
     </div>
   );

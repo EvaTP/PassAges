@@ -3,21 +3,25 @@ import { CardData } from "@/app/types/card";
 // Cards "Comment ça marche" page Accueil
 export const HOW_IT_WORKS: CardData[] = [
   {
+    id: 1,
     emoji: "🔍",
     title: "1. Choisissez une rencontre",
     text: "Parcourez les profils de nos aînés et trouvez la personne avec qui vous aimeriez partage un moment chalureux.",
   },
   {
+    id: 2,
     emoji: "📝",
     title: "2. Remplissez le formulaire",
     text: "Indiquez vos disponibilités et vos envies. Cela nous aide à organiser une rencontre adaptée et en toute confiance.",
   },
   {
+    id: 3,
     emoji: "👋",
     title: "3. Partagez un moment",
     text: "Rendez visite à la personne âgée dans un cadre bienveillant. Une discussion, une balade ou simplement l'aider à une tâche ! Chaque moment compte.",
   },
   {
+    id: 4,
     emoji: "💞",
     title: "4. Créez du lien",
     text: "Si le courant passe, vous pouvez revenir ! Ensemble, tissons des liens durables et combattons l'isolement pas à pas.",
