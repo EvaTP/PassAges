@@ -1,5 +1,19 @@
-"use client";
 import Image from "next/image";
 import Link from "next/link";
-import Header from "@/app/components/Header";
-import Footer from "@/app/components/Footer/Footer";
+// import { useState, useEffect } from "react";
+import { prisma } from "@/app/lib/prisma";
+// import Header from "@/app/components/Header";
+// import Footer from "@/app/components/Footer/Footer";
+import BlackButton from "@/app/components/BlackButton";
+
+export default async function Visit() {
+  return (
+    <>
+      <main className="p-6 bg-gray-50 mt-20">
+        <div className="mx-auto">
+          <h1>Je rends visite</h1>
+        </div>
+      </main>
+    </>
+  );
+}

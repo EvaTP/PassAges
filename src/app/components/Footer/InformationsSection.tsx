@@ -20,9 +20,14 @@ const informationLinks: InformationLink[] = [
 
 export const InformationsSection: React.FC = () => {
   return (
-    <div className="flex flex-column">
-      <h4>INFORMATIONS UTILES</h4>
-      <ul className="footer-li">
+    <div className="flex flex-column p-2">
+      <h4
+        className="text-xl font-bold mb-2 text-pink-400"
+        style={{ color: "pink" }}
+      >
+        INFORMATIONS UTILES
+      </h4>
+      <ul className="footer-li text-white">
         <li>FAQs</li>
         <li>Liste des activités</li>
         <li>Nous contacter</li>

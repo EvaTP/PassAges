@@ -6,7 +6,7 @@ import { LegalSection } from "./LegalSection";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-gray-900 flex flex-col flex-1 text-white px-6 py-8">
+    <footer className="bg-gray-900 flex flex-col flex-1">
       <div className="flex flex-row space-x-6 mb-6">
         <div className="flex-1 flex flex-col">
           <PassagesSection />
