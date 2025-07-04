@@ -23,10 +23,15 @@ const contactInfo: ContactInfo[] = [
 
 export const ContactSection: React.FC = () => {
   return (
-    <div className="flex flex-column text-white">
-      <h4>CONTACT</h4>
+    <div className="flex flex-colum p-2">
+      <h4
+        className="text-xl font-bold mb-2 text-pink-400"
+        style={{ color: "pink" }}
+      >
+        CONTACT
+      </h4>
       {contactInfo.map((info, index) => (
-        <p key={index}>
+        <p className="text-white" key={index}>
           {info.href ? (
             <a href={info.href} className="text-white hover:underline">
               {info.content}

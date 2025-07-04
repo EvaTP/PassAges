@@ -28,9 +28,14 @@ const socialIcons: SocialIcon[] = [
 
 export const PassagesSection: React.FC = () => {
   return (
-    <div className="flex flex-col p-4 bg-gray-900 text-white max-w-sm mx-auto rounded-md">
-      <h4 className="text-xl font-bold mb-2 text-white">PASSAGES</h4>
-      <p className="mb-4 leading-relaxed">
+    <div className="flex flex-col p-2 bg-gray-900 max-w-sm mx-auto rounded-md">
+      <h4
+        className="text-xl font-bold mb-2 text-pink-400"
+        style={{ color: "pink" }}
+      >
+        PASSAGES
+      </h4>
+      <p className="mb-4 leading-relaxed text-white">
         Notre mission est de recréer du lien avec les personnes âgées isolées,
         en leur offrant des moments de partage, d'écoute et de présence.
       </p>
