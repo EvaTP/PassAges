@@ -1,4 +1,4 @@
-git PublicKeyCredentialimport Image from "next/image";
+import Image from "next/image";
 import Link from "next/link";
 
 import { prisma } from "@/app/lib/prisma";
@@ -15,16 +15,35 @@ export default async function Home() {
 
   return (
     <>
-      
+      {/* <div className="relative w-full h-[300px]">
+        <Image
+          src="/images/hero-desktop.svg"
+          alt="hero-image"
+          fill
+          className="object-cover"
+          priority
+        />
+      </div> */}
+      <div className="border-4 border-red-500 pt-24 min-h-[100px]">
+        <p className="text-center">TEST - Espace pour header</p>
+
+        <Image
+          className="w-full"
+          src="/images/hero-desktop.svg"
+          alt="hero-image"
+          width={180}
+          height={50}
+          priority
+        />
+      </div>
 
       {/* Moments à partager*/}
-          <div>
-                    <MomentToShare /> 
-                  </div>
- 
-      <main className="p-6 bg-gray-50 mt-20">
+      <div>
+        <MomentToShare />
+      </div>
 
-                         <div className="mx-auto w-[80%]">
+      <main className="p-6 bg-gray-50 mt-20">
+        <div className="mx-auto w-[80%]">
           {/* BENTO GRID */}
 
           <div className="grid grid-cols-2 md:grid-cols-4 auto-rows-[150px] md:auto-rows-[200px] gap-3">
@@ -115,7 +134,6 @@ export default async function Home() {
             humaine.
           </p>
           <div id="btn-CTA">
-            <BlackButton label="Programmer une visite" />
             <button className="black">Programmer une visite</button>
             <button className="violet">Faire un don 🫶</button>
             <button className="yellow">Devenir bénévole</button>
