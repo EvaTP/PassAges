@@ -1,4 +1,4 @@
-import Image from "next/image";
+git PublicKeyCredentialimport Image from "next/image";
 import Link from "next/link";
 
 import { prisma } from "@/app/lib/prisma";
@@ -115,7 +115,7 @@ export default async function Home() {
             humaine.
           </p>
           <div id="btn-CTA">
-            
+            <BlackButton label="Programmer une visite" />
             <button className="black">Programmer une visite</button>
             <button className="violet">Faire un don 🫶</button>
             <button className="yellow">Devenir bénévole</button>
