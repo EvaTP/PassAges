@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Image from "next/image";
+import Link from "next/link";
 import Header from "./components/Header";
-import MomentToShare from "./components/MomentToShare";
-
+import Footer from "./components/Footer/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,11 +34,9 @@ export default function RootLayout({
         <div>
           <Header />
         </div>
-        <div>
-          <MomentToShare /> 
-        </div>
-
+        {/* <Image aria-hidden src="" alt="" width={24} height={24} /> */}
         {children}
+        <Footer />
       </body>
     </html>
   );
