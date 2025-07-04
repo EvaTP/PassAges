@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Header from "./components/Header";
 import Footer from "./components/Footer/Footer";
+//import MomentToShare from "./components/MomentToShare";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,9 +35,9 @@ export default function RootLayout({
         <div>
           <Header />
         </div>
-        <div>
+        {/* <div>
           <MomentToShare />
-        </div>
+        </div> */}
 
         {children}
         <Footer />
