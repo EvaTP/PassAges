@@ -7,7 +7,7 @@ import Footer from "@/app/components/Footer/Footer";
 import { getEldersPicture } from "@/app/actions/getEldersPicture";
 import { HOW_IT_WORKS } from "@/app/data/cards";
 import { ElderPicture } from "@/app/types/elders";
-import BlackButton from "../components/BlackButton";
+import BlackButton from "@/app/components/BlackButton";
 
 export default async function Home() {
   const elders: ElderPicture[] = await getEldersPicture();
