@@ -34,7 +34,10 @@ export default function RootLayout({
         <div>
           <Header />
         </div>
-        {/* <Image aria-hidden src="" alt="" width={24} height={24} /> */}
+        <div>
+          <MomentToShare />
+        </div>
+
         {children}
         <Footer />
       </body>

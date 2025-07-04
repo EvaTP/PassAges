@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-// import { useState, useEffect } from "react";
+
 import { prisma } from "@/app/lib/prisma";
 import Header from "@/app/components/Header";
 import Footer from "@/app/components/Footer/Footer";
@@ -8,15 +8,23 @@ import { getEldersPicture } from "@/app/actions/getEldersPicture";
 import { HOW_IT_WORKS } from "@/app/data/cards";
 import { ElderPicture } from "@/app/types/elders";
 import BlackButton from "@/app/components/BlackButton";
+import MomentToShare from "../components/MomentToShare";
 
 export default async function Home() {
   const elders: ElderPicture[] = await getEldersPicture();
 
   return (
     <>
-      {/* <Header /> */}
+      
+
+      {/* Moments à partager*/}
+          <div>
+                    <MomentToShare /> 
+                  </div>
+ 
       <main className="p-6 bg-gray-50 mt-20">
-        <div className="mx-auto w-[80%]">
+
+                         <div className="mx-auto w-[80%]">
           {/* BENTO GRID */}
 
           <div className="grid grid-cols-2 md:grid-cols-4 auto-rows-[150px] md:auto-rows-[200px] gap-3">
