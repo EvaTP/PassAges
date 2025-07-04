@@ -1,16 +1,14 @@
 
-export default function Logo(props: {image: string, label: string  }) {
+export default function Logo(props: {image: string, label: string , label2: string }) {
+const firstPart =props.label.slice(0,4);
+const secondPart= props.label.slice(4);
+
     return (
         <div className="flex items-center gap-2">
-        <img src={props.image} width={50} height={50}   /> <label className="text-xl font-bold font-serif">{props.label}</label>
-        </div>
-    //     <div className="flex items-center gap-2">
-    //   <img src={image} alt="Logo PassAges" className="w-10 h-10 object-contain" />
-    //   <h1 className="text-xl font-bold font-serif">
-    //     <span className="text-black">Pass</span>
-    //     <span className="text-pink-500">Ages</span>
-    //   </h1>
-    // </div>
-
+        <img src={props.image} width={50} height={50} />
+        <p className="text-xl font-bold whitespace-nowrap"><span className="text-black  font-serif inline">{props.label}</span> <span className="text-pink-500  font-serif inline">{props.label2}</span> </p>
+    
+</div>
+    
     )
 }
