@@ -24,17 +24,23 @@ export default async function Home() {
           priority
         />
       </div> */}
-      <div className="border-4 border-red-500 pt-24 min-h-[100px]">
-        <p className="text-center">TEST - Espace pour header</p>
-
+      <div className="">
         <Image
-          className="w-full"
+          className="w-full h-[290px] object-cover"
           src="/images/hero-desktop.svg"
           alt="hero-image"
           width={180}
           height={50}
           priority
         />
+        {/* <Image
+          className="w-full"
+          src="/images/hero-desktop.svg"
+          alt="hero-image"
+          width={180}
+          height={50}
+          priority
+        /> */}
       </div>
 
       {/* Moments à partager*/}
@@ -105,9 +111,9 @@ export default async function Home() {
           <h2 className="text-center text-2xl font-bold mb-2">
             COMMENT CA MARCHE
           </h2>
-          <p className="text-center mt-2 mb-15">
-            Offrir un peu de votre temps, c'est offrir beaucoup. Découvrez
-            comment planifier une visite en toute simplicité.
+          <p className="text-center mt-2 mb-15 text-xl">
+            Offrir un peu de votre temps, c'est offrir beaucoup.<br></br>
+            Découvrez comment planifier une visite en toute simplicité.
           </p>
           <div className="grid md:grid-cols-4 gap-6">
             {HOW_IT_WORKS.map((w, index) => (

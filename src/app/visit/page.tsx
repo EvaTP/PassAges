@@ -9,7 +9,17 @@ import BlackButton from "@/app/components/BlackButton";
 export default async function Visit() {
   return (
     <>
-      <main className="p-6 bg-gray-50 mt-20">
+      <div className="">
+        <Image
+          className="w-full h-[290px] object-cover"
+          src="/images/hero-desktop-visiter.svg"
+          alt="hero-image"
+          width={180}
+          height={50}
+          priority
+        />
+      </div>
+      <main className="p-6 bg-gray-50">
         <div className="mx-auto">
           <h1>Je rends visite</h1>
         </div>
