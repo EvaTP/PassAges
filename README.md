@@ -13,3 +13,8 @@ Eva Tharrats :
 - Next.js
 - BDD Neon
 - ORM Prisma
+
+# Images & Icônes
+
+- Canva
+- Lucide : https://lucide.dev/icons/
