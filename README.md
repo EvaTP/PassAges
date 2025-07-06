@@ -1,20 +1,23 @@
 # PassAges
 
-Project école par :
+Site associatif de rencontres entre volontaires et seniors pour partager des moments de convivialité.
+
+👥 Project école réalisé par :
 
 Ahmed Ayari : https://github.com/ahmedAyari94400
 
-Eva Tharrats :
+Eva Tharrats : https://github.com/EvaTP
 
-# Stack
+## Stack
 
 - Trello, drawSQL
 - HTML/CSS, Typescript
-- Next.js
+- Node.js
+- React, Next.js
 - BDD Neon
 - ORM Prisma
 
-# Images & Icônes
+### Images & Icônes
 
 - Canva
 - Lucide : https://lucide.dev/icons/
