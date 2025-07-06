@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { prisma } from "@/app/lib/prisma";
+import { prisma } from "@/lib/prisma";
 import Header from "@/app/components/Header";
 import Footer from "@/app/components/Footer/Footer";
 import { getEldersPicture } from "@/app/actions/getEldersPicture";

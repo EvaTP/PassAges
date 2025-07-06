@@ -4,7 +4,7 @@ import Link from "next/link";
 import Header from "@/app/components/Header";
 import Footer from "@/app/components/Footer/Footer";
 import { useState, useEffect } from "react";
-import { prisma } from "@/app/lib/prisma";
+import { prisma } from "@/lib/prisma";
 // Rubrique "Pourquoi devenir bénévole"
 import { WHY_VOLUNTEER } from "@/app/data/cards";
 

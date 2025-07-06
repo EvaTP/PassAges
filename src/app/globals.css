@@ -166,23 +166,20 @@ nav li a {
 }
 h1 {
   font-family: var(--font-family-heading);
-  font-size: 4em;
+  font-size: 3em;
   font-weight: bold;
   margin: 0.5em 0;
+  text-align: center;
 }
 h2 {
   font-family: var(--font-family-heading);
-  font-size: 3em;
+  font-size: 1.5em;
   font-weight: bold;
-  margin: 1em 0;
 }
 h3 {
   font-family: var(--font-family-heading);
-  font-size: 1em;
-  color: black;
   font-weight: bold;
   margin-bottom: 0.25em;
-  margin-top: 1em;
 }
 h4 {
   font-family: var(--font-family-heading);
@@ -192,13 +189,7 @@ h4 {
   margin-bottom: 0.25em;
   margin-top: 0.5em;
 }
-p {
-  margin: 1em 0;
-  color: var(--dark-color);
-}
-a {
-  color: black;
-}
+
 .blocs {
   margin: 0.25em 5.5em;
   display: flex;
@@ -256,7 +247,6 @@ a {
   padding: 2em;
   z-index: 1;
   border-radius: 15px;
-  color: black;
 }
 #recherche form,
 #recherche2 form {
@@ -461,7 +451,6 @@ footer p {
 #legal {
   text-align: center;
   padding: 1em;
-  border-top: 1px solid grey;
   color: white;
 }
 
@@ -706,9 +695,9 @@ footer p {
   color: black;
   margin-bottom: 3em;
 }
-#volunteer-form h2 {
+/* #volunteer-form h2 {
   margin: 0.5em 0;
-}
+} */
 .form-group-volunteer {
   display: flex;
   flex-direction: row;
@@ -785,9 +774,9 @@ button#btn-volunteer {
   font-weight: bold;
   font-size: 2em;
 }
-#confirmation h2 {
+/* #confirmation h2 {
   margin-top: 3em;
-}
+} */
 #confirmation p {
   font-weight: lighter;
 }

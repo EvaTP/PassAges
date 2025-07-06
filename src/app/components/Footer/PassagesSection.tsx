@@ -39,7 +39,7 @@ export const PassagesSection: React.FC = () => {
         Notre mission est de recréer du lien avec les personnes âgées isolées,
         en leur offrant des moments de partage, d'écoute et de présence.
       </p>
-      <div className="flex space-x-4 gap-4">
+      <div className="flex space-x-4 gap-4 ml-2">
         {socialIcons.map(({ src, alt }) => (
           <a
             key={alt}

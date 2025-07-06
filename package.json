@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@neondatabase/serverless": "^1.0.1",
     "@prisma/client": "^6.11.0",
     "cors": "^2.8.5",
     "next": "15.3.4",

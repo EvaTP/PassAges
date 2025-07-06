@@ -39,7 +39,7 @@ export default function Header() {
 
       {/* Button */}
       <div className="flex flex-shrink-0">
-        <BlueButton label="Faire un don" />
+        <BlueButton label="Faire un don&nbsp;🫶" />
       </div>
     </div>
   );

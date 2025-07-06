@@ -1,12 +1,20 @@
 import Image from "next/image";
 import Link from "next/link";
 // import { useState, useEffect } from "react";
-import { prisma } from "@/app/lib/prisma";
+import { prisma } from "@/lib/prisma";
 // import Header from "@/app/components/Header";
 // import Footer from "@/app/components/Footer/Footer";
 import BlackButton from "@/app/components/BlackButton";
+import ElderCard from "@/app/components/ElderCard";
 
 export default async function Visit() {
+  // Récupération des elders avec leurs relations
+  const elders = await prisma.elders.findMany({
+    include: {
+      cities: true,
+      activities: true,
+    },
+  });
   return (
     <>
       <div className="">
@@ -22,6 +30,20 @@ export default async function Visit() {
       <main className="p-6 bg-gray-50">
         <div className="mx-auto">
           <h1>Je rends visite</h1>
+
+          {/* Affichage de tous les elders */}
+          <div className="w-4/5 mx-auto grid grid-cols-4 gap-2.5">
+            {elders.map((elder) => (
+              <ElderCard key={elder.id} elder={elder} />
+            ))}
+          </div>
+
+          {/* Message si aucun elder */}
+          {elders.length === 0 && (
+            <p className="text-center text-gray-500 mt-8">
+              Aucune visite disponible pour le moment.
+            </p>
+          )}
         </div>
       </main>
     </>

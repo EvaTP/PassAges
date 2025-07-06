@@ -14,8 +14,8 @@ export default function MomentToShare(): React.ReactNode {
     { label: "Autre activité", value: "autres" },
   ];
   return (
-    <section className="flex justify-center -mt-20 z-10">
-      <div className="flex flex-row  justify-center  content-between gap-15 border-2 rounded-sm w-[80%]  shadow-[10px_10px_0_rgba(0,0,0,0.20)]">
+    <section className="flex justify-center -mt-16 z-1O">
+      <div className="bg-white flex flex-row  justify-center  content-between border-1 gap-15 p-6 rounded-sm w-[80%]  shadow-[10px_10px_0_rgba(0,0,0,0.20)]">
         <MomentType label="Moments à partager" moment={moments} />
         <br></br>
         <ChooseCity label="Localisation" />

@@ -32,20 +32,6 @@ export const InformationsSection: React.FC = () => {
         <li>Liste des activités</li>
         <li>Nous contacter</li>
         <li>Mentions légales</li>
-
-        {/* {informationLinks.map((link, index) => (
-          <li key={index}>
-            {link.href ? (
-              link.isExternal ? (
-                <a href={link.href}>{link.label}</a>
-              ) : (
-                <Link href={link.href}>{link.label}</Link>
-              )
-            ) : (
-              <span>{link.label}</span>
-            )}
-          </li>
-        ))} */}
       </ul>
     </div>
   );

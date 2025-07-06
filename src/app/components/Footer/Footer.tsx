@@ -18,7 +18,7 @@ const Footer: React.FC = () => {
           <ContactSection />
         </div>
       </div>
-      <div className="border-t border-gray-700 py-4 max-w-7xl mx-auto px-6 text-center text-sm">
+      <div className="border-t-indigo-500 py-4 max-w-7xl mx-auto px-6 text-center text-sm">
         <LegalSection />
       </div>
     </footer>
