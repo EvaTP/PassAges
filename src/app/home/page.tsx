@@ -7,23 +7,16 @@ import Footer from "@/app/components/Footer/Footer";
 import { getEldersPicture } from "@/app/actions/getEldersPicture";
 import { HOW_IT_WORKS } from "@/app/data/cards";
 import { ElderPicture } from "@/app/types/elders";
-import BlackButton from "@/app/components/BlackButton";
 import MomentToShare from "../components/MomentToShare";
+import BlackButton from "@/app/components/BlackButton";
+import BlueButton from "@/app/components/BlueButton";
+import YellowButton from "@/app/components/YellowButton";
 
 export default async function Home() {
   const elders: ElderPicture[] = await getEldersPicture();
 
   return (
     <>
-      {/* <div className="relative w-full h-[300px]">
-        <Image
-          src="/images/hero-desktop.svg"
-          alt="hero-image"
-          fill
-          className="object-cover"
-          priority
-        />
-      </div> */}
       <div className="">
         <Image
           className="w-full h-[290px] object-cover"
@@ -136,19 +129,19 @@ export default async function Home() {
         </div>
 
         <div>
-          <h2 className="text-center text-2xl font-bold mb-2">
+          <h2 className="text-center text-2xl font-bold mb-4 mt-8">
             PRÊT⸱E À FAIRE LA DIFFÉRENCE ?
           </h2>
-          <p>
+          <p className="text-center mb-4">
             Offrez un peu de votre temps, partagez un moment, créez du lien...
-            Chaque présence compte. En tendant la main à une personne âgée, vous
-            lui offrez bien plus qu'une visite : une vraie bouffée de chaleur
-            humaine.
+            Chaque présence compte. <br />
+            En tendant la main à une personne âgée, vous lui offrez bien plus
+            qu'une visite : une vraie bouffée de chaleur humaine.
           </p>
-          <div id="btn-CTA">
-            <button className="black">Programmer une visite</button>
-            <button className="violet">Faire un don 🫶</button>
-            <button className="yellow">Devenir bénévole</button>
+          <div className=" flex flex-row mt-10 mb-5 gap-6 content-center">
+            <BlackButton label="Programmer une visite" />
+            <BlueButton label="Faire un don 🫶" />
+            <YellowButton label="Devenir bénévole" />
           </div>
         </div>
       </main>

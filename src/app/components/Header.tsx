@@ -17,7 +17,7 @@ export default function Header() {
 
       {/* Nav Elements    */}
       <div className="flex items-center space-x-2">
-        <ul className="flex space-x-6 items-center ">
+        <ul className="flex space-x-6 items-center gap-4">
           <NavElement icon="icones/house.svg" label="Accueil" link="/home" />
           <NavElement
             icon={"icones/accessibility.svg"}
@@ -25,20 +25,20 @@ export default function Header() {
             link="/visit"
           />
           <NavElement
-            icon={"icones/book-open.svg"}
-            label="Guide du partage"
-            link=""
-          />
-          <NavElement
             icon={"icones/hand-heart.svg"}
             label="Devenir bénévole"
             link="/volunteers"
+          />
+          <NavElement
+            icon={"icones/log-in.svg"}
+            label="Connexion"
+            link="/login"
           />
         </ul>
       </div>
 
       {/* Button */}
-      <div className="flex flex-shrink-0">
+      <div className="flex flex-shrink">
         <BlueButton label="Faire un don&nbsp;🫶" />
       </div>
     </div>
