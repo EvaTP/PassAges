@@ -34,7 +34,7 @@ export default async function Login() {
           <p className="mt-10 text-center text-sm/8 text-gray-500">
             Pas encore membre de la communauté Passages ? 👇<br></br>
             <div className="mt-5">
-              <YellowButton label="Devenir bénévole" href="/volunteers" />
+              <YellowButton label="Devenir bénévole" />
             </div>
           </p>
         </div>

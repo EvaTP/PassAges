@@ -8,15 +8,19 @@ datasource db {
 }
 
 model activities {
-  id            Int      @id @default(autoincrement())
+  id            Int          @id @default(autoincrement())
   activity_type String?
   elders        elders[]
+  moments       moments[]
+  volunteers    volunteers[]
 }
 
 model cities {
-  id        Int      @id @default(autoincrement())
-  city_name String   @unique
-  elders    elders[]
+  id         Int          @id @default(autoincrement())
+  city_name  String       @unique
+  elders     elders[]
+  moments    moments[]
+  volunteers volunteers[]
 }
 
 model elders {
@@ -34,6 +38,38 @@ model elders {
   picture     String?
   created_at  DateTime?   @default(now()) @db.Timestamp(6)
   updated_at  DateTime?   @default(now()) @db.Timestamp(6)
+  activities  activities? @relation(fields: [activity_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  cities      cities?     @relation(fields: [city_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  moments     moments[]
+}
+
+model moments {
+  id           Int         @id @default(autoincrement())
+  elder_id     Int?
+  volunteer_id Int?
+  activity_id  Int?
+  city_id      Int?
+  activities   activities? @relation(fields: [activity_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  cities       cities?     @relation(fields: [city_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  elders       elders?     @relation(fields: [elder_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  volunteers   volunteers? @relation(fields: [volunteer_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model roles {
+  id   Int     @id @default(autoincrement())
+  role String?
+}
+
+model volunteers {
+  id          Int         @id @default(autoincrement())
+  firstname   String
+  lastname    String
+  role        String?
+  password    String?
+  city_id     Int?
+  zipcode     String?     @db.VarChar(5)
+  activity_id Int?
+  moments     moments[]
   activities  activities? @relation(fields: [activity_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   cities      cities?     @relation(fields: [city_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
