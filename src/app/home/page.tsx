@@ -48,8 +48,14 @@ export default async function Home() {
         <MomentToShare />
       </div>
 
-      <main className="p-6 bg-gray-50 mt-20">
-        <div className="mx-auto w-[80%]">
+      <main className="p-6 bg-gray-50 mt-10">
+        <h1>LES PERSONNALITÉS À RENCONTRER</h1>
+        <p className="text-center mt-1 mb-5 text-2xl">
+          Feuilletez les visages de celles et ceux qui attendent simplement un
+          peu de votre temps. <br />
+          Chaque sourire porte une histoire, chaque rencontre est une promesse.
+        </p>
+        <div className="mx-auto w-[80%] mt-10">
           {/* BENTO GRID */}
 
           <div className="grid grid-cols-2 md:grid-cols-4 auto-rows-[150px] md:auto-rows-[200px] gap-3">
