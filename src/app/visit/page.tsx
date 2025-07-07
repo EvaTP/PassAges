@@ -6,6 +6,8 @@ import { prisma } from "@/lib/prisma";
 // import Footer from "@/app/components/Footer/Footer";
 import BlackButton from "@/app/components/BlackButton";
 import ElderCard from "@/app/components/ElderCard";
+// import { useParams } from "next/navigation";
+
 
 export default async function Visit() {
   // Récupération des elders avec leurs relations
@@ -48,4 +50,11 @@ export default async function Visit() {
       </main>
     </>
   );
+
+ 
 }
+
+
+
+
+ 
