@@ -1,9 +1,9 @@
-// toutes les données elder
+// toutes les données elders pour l'admin
 export interface Elder {
   id: number;
   firstname: string;
   lastname: string;
-  password?: string; // Généralement on ne l'expose pas côté client
+  password?: string;
   email?: string;
   age?: number;
   job?: string;
@@ -25,7 +25,7 @@ export interface Elder {
   };
 }
 
-// données elder sans données sensibles
+// données elders sans données sensibles
 export interface PublicElder {
   id: number;
   firstname: string;
@@ -33,6 +33,24 @@ export interface PublicElder {
   age?: number;
   job?: string;
   zipcode?: string;
+  description?: string;
+  picture?: string;
+  activities?: {
+    id: number;
+    name: string;
+  };
+  cities?: {
+    id: number;
+    name: string;
+  };
+}
+
+// données elders pour les cards de la page visit
+export interface ElderCardDisplay {
+  id: number;
+  firstname: string;
+  age?: number;
+  job?: string;
   description?: string;
   picture?: string;
   activities?: {

@@ -6,7 +6,7 @@ import Header from "@/app/components/Header";
 import Footer from "@/app/components/Footer/Footer";
 import { getEldersPicture } from "@/app/actions/getEldersPicture";
 import { HOW_IT_WORKS } from "@/app/data/cards";
-import { ElderPicture } from "@/app/types/elders";
+// import { ElderPicture } from "@/app/types/elders";
 import MomentToShare from "../components/MomentToShare";
 import BlackButton from "@/app/components/BlackButton";
 import BlueButton from "@/app/components/BlueButton";
@@ -26,14 +26,6 @@ export default async function Home() {
           height={50}
           priority
         />
-        {/* <Image
-          className="w-full"
-          src="/images/hero-desktop.svg"
-          alt="hero-image"
-          width={180}
-          height={50}
-          priority
-        /> */}
       </div>
 
       {/* Moments à partager*/}

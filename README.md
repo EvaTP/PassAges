@@ -16,6 +16,7 @@ Eva Tharrats : https://github.com/EvaTP
 - React, Next.js
 - BDD Neon
 - ORM Prisma
+- Middleware: bcrypt, NextAuth
 
 ### Images & Icônes
 
