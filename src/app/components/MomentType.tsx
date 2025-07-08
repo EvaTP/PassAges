@@ -1,7 +1,8 @@
 "use client"
 
 import { getEldersPicture } from "../actions/getEldersPicture";
-import { getElders } from "@/lib/actions";
+
+
 
 export default function MomentType(props: { label: string, moments: Array<{ label: string, value: string }>, onChange: (moment: string) => void }) {
 

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+
 import { prisma } from "@/lib/prisma";
 
 import BlackButton from "@/app/components/BlackButton";
@@ -20,6 +20,38 @@ const VisitParams = async ({
 
   const activity = (await searchParams)?.activity || "";
   console.log(activity);
+
+ //Appel avec prisma
+
+ const filters: any = {};
+
+if (city) {
+  filters.cities = {
+    city_name: {
+      contains: city,
+      mode: 'insensitive',
+    },
+  };
+}
+
+if (activity) {
+  filters.activities = {
+    activity_type: {
+      contains: activity,
+      mode: 'insensitive',
+    },
+  };
+}
+
+const elders = await prisma.elders.findMany({
+  where: filters,
+  include: {
+    cities: true,
+    activities: true,
+  },
+});
+
+
 
   return (
     <>
