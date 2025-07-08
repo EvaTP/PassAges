@@ -1,6 +1,7 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
 import { prisma } from "@/lib/prisma";
 // import Header from "@/app/components/Header";
 // import Footer from "@/app/components/Footer/Footer";
@@ -34,9 +35,9 @@ export default async function Visit() {
 
           {/* Affichage de tous les elders */}
           <div className="w-4/5 mx-auto grid grid-cols-4 gap-2.5">
-            {/* {elders.map((elder) => (
+            {elders.map((elder) => (
               <ElderCard key={elder.id} elder={elder} />
-            ))} */}
+            ))}
           </div>
 
           {/* Message si aucun elder */}

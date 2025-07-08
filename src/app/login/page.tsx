@@ -32,11 +32,12 @@ export default async function Login() {
         <LoginForm />
         <div>
           <p className="mt-10 text-center text-sm/8 text-gray-500">
-            Pas encore membre de la communauté Passages ? 👇<br></br>
-            <div className="mt-5">
-              <YellowButton label="Devenir bénévole" />
-            </div>
+            Pas encore membre de la communauté Passages ? 👇
           </p>
+          <br></br>
+          <div className="mt-5">
+            <YellowButton label="Devenir bénévole" />
+          </div>
         </div>
       </main>
     </>

@@ -59,7 +59,7 @@ export default function ElderCard({ elder }: ElderCardProps): React.ReactNode {
       </p>
 
       {/* 6. Description */}
-      <p className="text-xs mt-2 px-2 py-2 flex-grow">
+      <p className="text-sm mt-2 px-2 py-2 flex-grow">
         {elder.description || "Aucune description"}
       </p>
 
