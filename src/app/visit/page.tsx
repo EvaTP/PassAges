@@ -1,22 +1,26 @@
-"use client";
 import Image from "next/image";
 import Link from "next/link";
-// import { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { prisma } from "@/lib/prisma";
-// import Header from "@/app/components/Header";
-// import Footer from "@/app/components/Footer/Footer";
+
 import BlackButton from "@/app/components/BlackButton";
 import ElderCard from "@/app/components/ElderCard";
-// import { useParams } from "next/navigation";
+import { searchVisitElders } from "../actions/getEldersPicture";
 
-export default async function Visit() {
-  // Récupération des elders avec leurs relations
-  const elders = await prisma.elders.findMany({
-    include: {
-      cities: true,
-      activities: true,
-    },
-  });
+const VisitParams = async ({
+  searchParams,
+}: {
+  searchParams?: {
+    activity?: string;
+    city?: string;
+  };
+}) => {
+  const city = (await searchParams)?.city || "";
+  console.log(city);
+
+  const activity = (await searchParams)?.activity || "";
+  console.log(activity);
+
   return (
     <>
       <div className="">
@@ -41,13 +45,14 @@ export default async function Visit() {
           </div>
 
           {/* Message si aucun elder */}
-          {elders.length === 0 && (
+          {/* {elders.length === 0 && (
             <p className="text-center text-gray-500 mt-8">
               Aucune visite disponible pour le moment.
             </p>
-          )}
+          )} */}
         </div>
       </main>
     </>
   );
-}
+};
+export default VisitParams;
