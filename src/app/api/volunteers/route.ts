@@ -6,6 +6,16 @@ import { NextRequest, NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
 
+// typage
+type newVolunteerData = {
+  firstname: string;
+  lastname: string;
+  email: string;
+  city: string;
+  zipcode?: string;
+  motivation?: string;
+};
+
 export async function GET(request: NextRequest) {
   try {
     const allVolunteers = await prisma.volunteers.findMany();
@@ -26,6 +36,58 @@ export async function GET(request: NextRequest) {
         error: "Erreur lors de la récupération des bénévoles",
         details: error instanceof Error ? error.message : "Erreur inconnue",
       },
+      { status: 500 }
+    );
+  } finally {
+    await prisma.$disconnect();
+  }
+}
+
+// créer un volunteer
+// POST : AJOUTER un volunteer
+export async function POST(req: NextRequest) {
+  try {
+    const newVolunteerData = await req.json();
+
+    const { firstname, lastname, email, city, zipcode, motivation } =
+      newVolunteerData;
+
+    if (!firstname || !lastname || !email || !city) {
+      return NextResponse.json(
+        { success: false, message: "Champs requis manquants." },
+        { status: 400 }
+      );
+    }
+
+    // On récupère l'ID de la ville à partir de son nom
+    const cityRecord = await prisma.cities.findUnique({
+      where: { city_name: city },
+    });
+
+    if (!cityRecord) {
+      return NextResponse.json(
+        { success: false, message: "Ville non trouvée dans la base." },
+        { status: 404 }
+      );
+    }
+
+    // Création du bénévole
+    const newVolunteer = await prisma.volunteers.create({
+      data: {
+        firstname,
+        lastname,
+        email,
+        zipcode,
+        motivation,
+        city_id: cityRecord.id,
+      },
+    });
+
+    return NextResponse.json({ success: true, data: newVolunteer });
+  } catch (error) {
+    console.error("Erreur dans la création d’un bénévole :", error);
+    return NextResponse.json(
+      { success: false, message: "Erreur serveur", error },
       { status: 500 }
     );
   } finally {
