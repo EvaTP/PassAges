@@ -5,14 +5,14 @@ import Header from "@/app/components/Header";
 import Footer from "@/app/components/Footer/Footer";
 import { useState, useEffect } from "react";
 import { prisma } from "@/lib/prisma";
-import VolunteerFormNew from "@/app/components/VolunteerFormNew";
+import VolunteerForm from "@/app/components/VolunteerForm";
 // Rubrique "Pourquoi devenir bénévole"
 import { WHY_VOLUNTEER } from "@/app/data/cards";
 
 export default function Volunteers() {
   return (
     <>
-      <VolunteerFormNew />
+      <VolunteerForm />
       <div>
         <div className="bg-rose-50 mt-5 mb-15 p-6">
           <h2 className="text-center text-2xl font-bold mb-2">
