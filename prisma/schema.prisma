@@ -69,6 +69,7 @@ model volunteers {
   city_id     Int?
   zipcode     String?     @db.VarChar(5)
   activity_id Int?
+  motivation  String?
   moments     moments[]
   activities  activities? @relation(fields: [activity_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   cities      cities?     @relation(fields: [city_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
