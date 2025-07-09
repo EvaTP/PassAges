@@ -64,7 +64,8 @@ export default function ElderCard({ elder }: ElderCardProps): React.ReactNode {
       </p>
 
       {/* 7. Bouton "programmer un moment" */}
-      <BlackButton label="Programmer un moment" />
+      <a href="/volunteers">
+      <BlackButton label="Programmer un moment" /></a>
       {/* <BlackButton/> */}
     </div>
   );
