@@ -6,7 +6,7 @@ import { LegalSection } from "./LegalSection";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-gray-900 flex flex-col flex-1">
+    <footer className="bg-gray-900 border-b border-white flex flex-col flex-1">
       <div className="flex flex-row space-x-6 mb-6">
         <div className="flex-1 flex flex-col">
           <PassagesSection />
@@ -18,7 +18,8 @@ const Footer: React.FC = () => {
           <ContactSection />
         </div>
       </div>
-      <div className="border-t-indigo-500 py-4 max-w-7xl mx-auto px-6 text-center text-sm">
+
+      <div className="border-t border-white py-4 max-w-7xl mx-auto px-6 text-center text-sm">
         <LegalSection />
       </div>
     </footer>

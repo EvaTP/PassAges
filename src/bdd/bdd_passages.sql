@@ -165,3 +165,5 @@ VALUES
 
 -- (on insère les ids des activités et villes au lieu de les écrire en dur)
 
+
+

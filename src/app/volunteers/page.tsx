@@ -9,10 +9,27 @@ import VolunteerForm from "@/app/components/VolunteerForm";
 // Rubrique "Pourquoi devenir bénévole"
 import { WHY_VOLUNTEER } from "@/app/data/cards";
 
+// récupération de la ville
+type City = {
+  id: number;
+  city_name: string;
+};
+
 export default function Volunteers() {
   return (
     <>
-      <VolunteerForm />
+      <div className="">
+        <Image
+          className="w-full h-[290px] object-cover"
+          src="/images/hero-devenir-benevole.svg"
+          alt="hero-image"
+          width={180}
+          height={50}
+          priority
+        />
+        <VolunteerForm />
+      </div>
+
       <div>
         <div className="bg-rose-50 mt-5 mb-15 p-6">
           <h2 className="text-center text-2xl font-bold mb-2">

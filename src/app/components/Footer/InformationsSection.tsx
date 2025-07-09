@@ -20,7 +20,7 @@ const informationLinks: InformationLink[] = [
 
 export const InformationsSection: React.FC = () => {
   return (
-    <div className="flex flex-column p-2">
+    <div className="flex flex-col p-2">
       <h4
         className="text-xl font-bold mb-2 text-pink-400"
         style={{ color: "pink" }}

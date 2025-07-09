@@ -1,6 +1,99 @@
-export default function Example() {
+"use client";
+import { useEffect, useState } from "react";
+
+//^ interfaces TypeScript
+type VolunteerFormData = {
+  firstname: string;
+  lastname: string;
+  email: string;
+  city_id: number;
+  zipcode?: string;
+  motivation: string;
+};
+type City = {
+  id: number;
+  city_name: string;
+};
+
+export default function VolunteerForm() {
+  const [formData, setFormData] = useState<VolunteerFormData>({
+    firstname: "",
+    lastname: "",
+    email: "",
+    city_id: 0,
+    zipcode: "",
+    motivation: "",
+  });
+
+  const [cities, setCities] = useState<City[]>([]);
+
+  // changer les villes depuis l'API
+  useEffect(() => {
+    const fetchCities = async () => {
+      try {
+        const res = await fetch("/api/cities");
+        const result = await res.json();
+        if (res.ok) {
+          setCities(result.data);
+        } else {
+          console.error("Erreur lors du chargement des villes :", result.error);
+        }
+      } catch (error) {
+        console.error("Erreur réseau lors du chargement des villes :", error);
+      }
+    };
+
+    fetchCities();
+  }, []);
+
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: name === "city_id" ? Number(value) : value,
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+      const res = await fetch("/api/volunteers", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await res.json();
+
+      if (res.ok) {
+        alert("Candidature envoyée ! 👍");
+        // Optionnel : reset du formulaire
+        setFormData({
+          firstname: "",
+          lastname: "",
+          email: "",
+          city_id: "",
+          zipcode: "",
+          motivation: "",
+        });
+      } else {
+        alert("Erreur : " + result.message);
+      }
+    } catch (error) {
+      console.error("Erreur lors de l'envoi :", error);
+    }
+  };
+
   return (
-    <form className="space-y-12flex flex-col gap-4 mt-6 mb-6 p-6 bg-white rounded-2xl shadow-md max-w-xl mx-auto">
+    <form
+      onSubmit={handleSubmit}
+      className="space-y-12 flex flex-col gap-4 mt-5 mb-6 p-6 z-10 bg-white rounded-2xl shadow-md max-w-xl mx-auto"
+    >
       <div className="">
         <div className="border-b border-gray-900/10 pb-3">
           <h2 className="text-center text-base/7 font-semibold text-gray-900 mt-4">
@@ -24,40 +117,46 @@ export default function Example() {
           <div className="mt-3 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
             <div className="sm:col-span-3">
               <label
-                htmlFor="first-name"
+                htmlFor="firstname"
                 className="block text-sm/6 font-medium text-gray-900"
               >
                 Prénom<span className="text-red-500">*</span>
               </label>
               <div className="mt-1">
                 <input
-                  id="first-name"
-                  name="first-name"
+                  id="firstname"
+                  name="firstname"
                   type="text"
+                  required
+                  placeholder="Prénom"
+                  value={formData.firstname}
+                  onChange={handleChange}
                   autoComplete="given-name"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
               </div>
             </div>
-
             <div className="sm:col-span-3">
               <label
-                htmlFor="last-name"
+                htmlFor="lastname"
                 className="block text-sm/6 font-medium text-gray-900"
               >
                 Nom<span className="text-red-500">*</span>
               </label>
               <div className="mt-1">
                 <input
-                  id="last-name"
-                  name="last-name"
+                  id="lastname"
+                  name="lastname"
                   type="text"
+                  required
+                  placeholder="Nom"
+                  value={formData.lastname}
+                  onChange={handleChange}
                   autoComplete="family-name"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
               </div>
             </div>
-
             <div className="sm:col-span-4">
               <label
                 htmlFor="email"
@@ -70,15 +169,44 @@ export default function Example() {
                   id="email"
                   name="email"
                   type="email"
+                  required
+                  placeholder="Email"
+                  value={formData.email}
+                  onChange={handleChange}
                   autoComplete="email"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
               </div>
             </div>
 
-            <div className="sm:col-span-2 sm:col-start-1">
+            <div className="sm:col-span-3">
               <label
-                htmlFor="city"
+                htmlFor="city_id"
+                className="block text-sm font-medium text-gray-900"
+              >
+                Ville<span className="text-red-500">*</span>
+              </label>
+              <select
+                id="city_id"
+                name="city_id"
+                required
+                value={formData.city_id}
+                onChange={(e) => handleChange(e)}
+                className="mt-1 block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 outline-gray-300 focus:outline-2 focus:outline-indigo-600"
+              >
+                <option value={0} disabled>
+                  -- Sélectionnez une ville --
+                </option>
+                {cities.map((city) => (
+                  <option key={city.id} value={city.id}>
+                    {city.city_name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            {/* <div className="sm:col-span-3 sm:col-start-1">
+              <label
+                htmlFor="city_id"
                 className="block text-sm/6 font-medium text-gray-900"
               >
                 Ville<span className="text-red-500">*</span>
@@ -88,25 +216,31 @@ export default function Example() {
                   id="city"
                   name="city"
                   type="text"
-                  autoComplete="address-level2"
+                  required
+                  placeholder="Ville"
+                  value={formData.city}
+                  onChange={handleChange}
+                  autoComplete="city"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
-              </div>
-            </div>
-
+              </div> 
+            </div>*/}
             <div className="sm:col-span-2">
               <label
-                htmlFor="postal-code"
+                htmlFor="zipcode"
                 className="block text-sm/6 font-medium text-gray-900"
               >
                 Code postal<span className="text-red-500">*</span>
               </label>
               <div className="mt-1">
                 <input
-                  id="postal-code"
-                  name="postal-code"
+                  id="zipcode"
+                  name="zipcode"
                   type="text"
-                  autoComplete="postal-code"
+                  placeholder="Code postal"
+                  value={formData.zipcode}
+                  onChange={handleChange}
+                  autoComplete="zipcode"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
               </div>
@@ -116,18 +250,21 @@ export default function Example() {
 
         <div className="col-span-full mt-4">
           <label
-            htmlFor="about"
+            htmlFor="motivation"
             className="block text-sm/6 font-medium text-gray-900"
           >
             Votre motivation<span className="text-red-500">*</span>
           </label>
           <div className="mt-1">
             <textarea
-              id="about"
-              name="about"
-              rows={3}
+              id="motivation"
+              name="motivation"
+              rows={4}
+              placeholder="Votre motivation"
+              value={formData.motivation}
+              onChange={handleChange}
               className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-              defaultValue={""}
+              // defaultValue={""}
             />
           </div>
           <p className="mt-3 text-sm/6 text-gray-600">
