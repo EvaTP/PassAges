@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, ChangeEvent } from "react";
 
 //^ interfaces TypeScript
 type VolunteerFormData = {
@@ -10,10 +10,6 @@ type VolunteerFormData = {
   zipcode?: string;
   motivation: string;
 };
-// type City = {
-//   id: number;
-//   city_name: string;
-// };
 
 export default function VolunteerForm() {
   const [formData, setFormData] = useState<VolunteerFormData>({
@@ -24,27 +20,29 @@ export default function VolunteerForm() {
     zipcode: "",
     motivation: "",
   });
-
-  const [cities, setCities] = useState<City[]>([]);
-
-  // changer les villes depuis l'API
-  useEffect(() => {
-    const fetchCities = async () => {
-      try {
-        const res = await fetch("/api/cities");
-        const result = await res.json();
-        if (res.ok) {
-          setCities(result.data);
-        } else {
-          console.error("Erreur lors du chargement des villes :", result.error);
-        }
-      } catch (error) {
-        console.error("Erreur réseau lors du chargement des villes :", error);
-      }
-    };
-
-    fetchCities();
-  }, []);
+  // Pour formulaire SELECT CITIES
+  // type City = {
+  //   id: number;
+  //   city_name: string;
+  // };
+  // const [cities, setCities] = useState<City[]>([]);
+  // changer les villes depuis l'API (formulaire SELECT)
+  // useEffect(() => {
+  //   const fetchCities = async () => {
+  //     try {
+  //       const res = await fetch("/api/cities");
+  //       const result = await res.json();
+  //       if (res.ok) {
+  //         setCities(result.data);
+  //       } else {
+  //         console.error("Erreur lors du chargement des villes :", result.error);
+  //       }
+  //     } catch (error) {
+  //       console.error("Erreur réseau lors du chargement des villes :", error);
+  //     }
+  //   };
+  //   fetchCities();
+  // }, []);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -71,7 +69,9 @@ export default function VolunteerForm() {
       const result = await res.json();
 
       if (res.ok) {
-        alert("Candidature envoyée ! 👍");
+        alert(
+          "Merci pour votre candidature. Nous reviendrons vers vous prochainement. 💖"
+        );
         // Optionnel : reset du formulaire
         setFormData({
           firstname: "",
@@ -275,8 +275,7 @@ export default function VolunteerForm() {
 
         <div className="border-b border-gray-900/10 pb-3 italic">
           <p className="mt-1 italic text-sm/6 text-gray-600">
-            <span className="text-red-500">*</span>&nbsp;Tous les champs sont
-            obligatoires.
+            <span className="text-red-500">*</span>&nbsp;Champs obligatoires.
           </p>
         </div>
       </div>
@@ -285,6 +284,16 @@ export default function VolunteerForm() {
         <button
           type="button"
           className="text-sm/6 font-semibold bg-gray-900  hover:bg-[#ffc412] text-white"
+          onClick={() =>
+            setFormData({
+              firstname: "",
+              lastname: "",
+              city: "",
+              zipcode: "",
+              email: "",
+              motivation: "",
+            })
+          }
         >
           Annuler
         </button>
