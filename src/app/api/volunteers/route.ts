@@ -43,8 +43,7 @@ export async function GET(request: NextRequest) {
   }
 }
 
-// créer un volunteer
-// POST : AJOUTER un volunteer
+// POST : CREER un volunteer par l'administrateur
 export async function POST(req: NextRequest) {
   try {
     const newVolunteerData = await req.json();
@@ -59,7 +58,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // On récupère l'ID de la ville à partir de son nom
+    // On récupère l'ID de la ville à partir de son nom dans la table CITIES
     const cityRecord = await prisma.cities.findUnique({
       where: { city_name: city },
     });
