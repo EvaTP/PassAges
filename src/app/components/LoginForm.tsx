@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import BlueButton from "@/app/components/BlueButton";
 
 export default function LoginForm() {

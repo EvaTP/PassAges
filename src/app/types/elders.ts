@@ -64,4 +64,8 @@ export interface ElderCardDisplay {
 }
 
 // Photos elders
-export type ElderPicture = Pick<PublicElder, "id" | "picture">;
+
+export type ElderPicture = {
+  id: number;
+  picture: string | null;
+};

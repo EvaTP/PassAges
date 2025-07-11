@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Image from "next/image";
-import Link from "next/link";
+// import Image from "next/image";
+// import Link from "next/link";
 import Header from "./components/Header";
 import Footer from "./components/Footer/Footer";
 //import MomentToShare from "./components/MomentToShare";

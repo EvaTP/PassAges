@@ -1,17 +1,11 @@
 import Image from "next/image";
-import Link from "next/link";
-
-import { prisma } from "@/lib/prisma";
-import Header from "@/app/components/Header";
-import Footer from "@/app/components/Footer/Footer";
 import { getEldersPicture } from "@/app/actions/getEldersPicture";
 import { HOW_IT_WORKS } from "@/app/data/cards";
- import { ElderPicture } from "@/app/types/elders";
+import { ElderPicture } from "@/app/types/elders";
 import MomentToShare from "../components/MomentToShare";
 import BlackButton from "@/app/components/BlackButton";
 import BlueButton from "@/app/components/BlueButton";
 import YellowButton from "@/app/components/YellowButton";
-
 
 export default async function Home() {
   const elders: ElderPicture[] = await getEldersPicture();

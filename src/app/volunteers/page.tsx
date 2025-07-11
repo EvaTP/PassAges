@@ -1,19 +1,10 @@
 "use client";
 import Image from "next/image";
-import Link from "next/link";
-import Header from "@/app/components/Header";
-import Footer from "@/app/components/Footer/Footer";
-import { useState, useEffect } from "react";
-import { prisma } from "@/lib/prisma";
+// import { useState, useEffect } from "react";
+// import { prisma } from "@/lib/prisma";
 import VolunteerForm from "@/app/components/VolunteerForm";
 // Rubrique "Pourquoi devenir bénévole"
 import { WHY_VOLUNTEER } from "@/app/data/cards";
-
-// récupération de la ville
-type City = {
-  id: number;
-  city_name: string;
-};
 
 export default function Volunteers() {
   return (

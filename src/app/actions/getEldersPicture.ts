@@ -23,9 +23,7 @@ export async function getEldersPicture() {
   }
 }
 
-
 export async function searchVisitElders(formData: FormData) {
-  
   const moments = formData.get("moment") as string;
 
   if (moments == "-- Choisissez un moment --") {
@@ -37,33 +35,28 @@ export async function searchVisitElders(formData: FormData) {
     include: { elders: true },
   });
 
-  console.log(activity); 
+  console.log(activity);
 
   return activity;
 
-  const city = formData.get("city")
+  const city = formData.get("city");
 
   const activities = await prisma.activities.findMany({
     where: { activity_type: moments },
     include: { elders: true },
   });
 
-  if(city=="" )
-  {
+  if (city == "") {
     throw new Error("Veuillez taper la ville recherchée");
   }
 
-  if (city && moments )
-  {
-    redirect(`/activities?moment=${moments}&city=${city}`);   
-    }
-  };
-
-  
-
+  if (city && moments) {
+    redirect(`/activities?moment=${moments}&city=${city}`);
+  }
+}
 
 /**
  * select id from activities
  * where elders.activity_id = activities.id
- * 
+ *
  */
