@@ -2,11 +2,11 @@
 // http://localhost:3000/api/cities
 
 import { PrismaClient } from "@prisma/client";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
 
-export async function GET(_request: NextRequest) {
+export async function GET() {
   try {
     const allCities = await prisma.cities.findMany();
 

@@ -1,5 +1,3 @@
-import react from "react";
-
 export default function ChooseCity(props: {
   label: string;
   onChange: (city: string | number) => void;

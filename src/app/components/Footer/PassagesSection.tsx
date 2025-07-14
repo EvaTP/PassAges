@@ -42,26 +42,13 @@ export const PassagesSection: React.FC = () => {
         {socialIcons.map(({ src, alt }) => (
           <a
             key={alt}
-            href="#"
+            // href="#"
             className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-700 hover:bg-gray-600 transition"
             aria-label={alt}
           >
             <img src={src} alt={alt} className="w-6 h-6" />
           </a>
         ))}
-
-        {/* <div className="social">
-          <img src="icones/facebook.svg" alt="facebook-icon" />
-        </div>
-        <div className="social">
-          <img src="icones/instagram.svg" alt="instagram-icon" />
-        </div>
-        <div className="social">
-          <img src="icones/linkedin.svg" alt="linkedin-icon" />
-        </div>
-        <div className="social">
-          <img src="icones/twitch.svg" alt="twitch-icon" />
-        </div> */}
       </div>
     </div>
   );

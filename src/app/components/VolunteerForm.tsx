@@ -85,7 +85,7 @@ export default function VolunteerForm() {
         alert("Erreur : " + result.message);
       }
     } catch (error) {
-      console.error("Erreur lors de l'envoi :", error);
+      console.error("Erreur lors de l&aposenvoi :", error);
     }
   };
 

@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import { CardData } from "@/app/types/card";
 
 interface CardProps {

@@ -77,7 +77,7 @@ export default async function Home() {
                   {elder.picture ? (
                     <Image
                       src={elder.picture}
-                      alt={`Photo de l'aîné #${elder.id}`}
+                      alt={`Photo aîné #${elder.id}`}
                       width={400}
                       height={300}
                       className="object-cover w-full h-full rounded-sm"

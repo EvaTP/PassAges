@@ -2,7 +2,7 @@
 import Image from "next/image";
 import LoginForm from "@/app/components/LoginForm";
 // import { useState, useEffect } from "react";
-import { prisma } from "@/lib/prisma";
+// import { prisma } from "@/lib/prisma";
 import YellowButton from "@/app/components/YellowButton";
 
 export default async function Login() {
