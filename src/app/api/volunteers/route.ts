@@ -6,6 +6,13 @@ import { NextRequest, NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
 
+// Définition du type pour les paramètres de la route dynamique avec l'ID
+interface RouteParams {
+  params: {
+    id: string;
+  };
+}
+
 // typage
 type newVolunteerData = {
   firstname: string;
@@ -16,6 +23,7 @@ type newVolunteerData = {
   motivation?: string;
 };
 
+// GET : récupérer tous les bénévoles
 export async function GET(request: NextRequest) {
   try {
     const allVolunteers = await prisma.volunteers.findMany();
@@ -28,13 +36,13 @@ export async function GET(request: NextRequest) {
       count: allVolunteers.length,
     });
   } catch (error) {
-    console.error("Erreur lors de la récupération des bénévoles :", error);
+    console.error("❌ Erreur lors de la récupération des bénévoles :", error);
 
     return NextResponse.json(
       {
         success: false,
-        error: "Erreur lors de la récupération des bénévoles",
-        details: error instanceof Error ? error.message : "Erreur inconnue",
+        error: "❌ Erreur lors de la récupération des bénévoles",
+        details: error instanceof Error ? error.message : "❌ Erreur inconnue",
       },
       { status: 500 }
     );
@@ -53,7 +61,7 @@ export async function POST(req: NextRequest) {
 
     if (!firstname || !lastname || !email || !city) {
       return NextResponse.json(
-        { success: false, message: "Champs requis manquants." },
+        { success: false, message: "❓Champs requis manquants." },
         { status: 400 }
       );
     }
@@ -65,7 +73,7 @@ export async function POST(req: NextRequest) {
 
     if (!cityRecord) {
       return NextResponse.json(
-        { success: false, message: "Ville non trouvée dans la base." },
+        { success: false, message: "❓Ville non trouvée dans la base." },
         { status: 404 }
       );
     }
@@ -84,9 +92,9 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ success: true, data: newVolunteer });
   } catch (error) {
-    console.error("Erreur dans la création d’un bénévole :", error);
+    console.error("❌ Erreur dans la création d’un bénévole :", error);
     return NextResponse.json(
-      { success: false, message: "Erreur serveur", error },
+      { success: false, message: "❌ Erreur serveur", error },
       { status: 500 }
     );
   } finally {
