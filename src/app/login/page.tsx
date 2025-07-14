@@ -28,11 +28,11 @@ export default async function Login() {
         </p>
         <LoginForm />
         <div>
-          <p className="mt-10 text-center text-sm/8 text-gray-500">
+          <p className="mt-10 text-center text-lg text-gray-800">
             Pas encore membre de la communauté Passages ? 👇
           </p>
           <br></br>
-          <div className="mt-5">
+          <div className="flex justify-center p-8">
             <YellowButton label="Devenir bénévole" />
           </div>
         </div>

@@ -54,7 +54,7 @@ export default function LoginForm() {
             </div>
             <div>
               <div className="flex flex-shrink place-content-center">
-                <BlueButton label="Envoyer" />
+                <BlueButton label="Je me connecte" />
               </div>
             </div>
           </form>
