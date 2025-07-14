@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { prisma } from "@/lib/prisma";
 import ElderCard from "@/app/components/ElderCard";
+import MomentToShare from "../components/MomentToShare";
 
 const VisitParams = async ({
   searchParams,
@@ -57,6 +58,10 @@ const VisitParams = async ({
           height={50}
           priority
         />
+      </div>
+      {/* Moments à partager*/}
+      <div>
+        <MomentToShare />
       </div>
       <main className="p-6 bg-gray-50">
         <div className="mx-auto">

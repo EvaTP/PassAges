@@ -21,7 +21,7 @@ export default function MomentToShare(): React.ReactNode {
   ];
   return (
     <section className="flex justify-center -mt-16 z-1O">
-      <div className="bg-white flex flex-row  justify-center  content-between border-1 gap-15 p-6 rounded-sm w-[80%]  shadow-[10px_10px_0_rgba(0,0,0,0.20)]">
+      <div className="bg-white flex flex-row justify-center content-between gap-15 p-6 rounded-sm w-[80%] shadow-[8px_8px_0_rgba(0,0,0,0.20)]">
         <MomentType
           label="Moments à partager"
           moments={moments}

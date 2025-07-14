@@ -64,9 +64,20 @@ export default function ElderCard({ elder }: ElderCardProps): React.ReactNode {
       </p>
 
       {/* 7. Bouton "programmer un moment" */}
-      <a href="/volunteers">
+
+      {/* NOUVELLE DIV POUR LE CENTRAGE */}
+      <div className="flex justify-center p-4 mt-auto">
+        {" "}
+        {/* Added mt-auto here */}
+        <a href="/volunteers">
+          <BlackButton label="Programmer un moment" />
+        </a>
+      </div>
+      {/* FIN DE LA NOUVELLE DIV */}
+
+      {/* <a href="/volunteers">
       <BlackButton label="Programmer un moment" /></a>
-      {/* <BlackButton/> */}
+      <BlackButton/> */}
     </div>
   );
 }
