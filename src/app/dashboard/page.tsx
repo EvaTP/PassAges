@@ -118,7 +118,7 @@ export default function Dashboard() {
 
       <main className="p-6 bg-gray-50 mt-10">
         <h1>DASHBOARD ADMINISTRATEUR</h1>
-        <h2 className="text-2xl font-semibold mb-8">Liste des Volontaires</h2>
+        <h2 className="text-2xl font-semibold mb-8">Gestion des Volontaires</h2>
 
         {volunteers.length === 0 ? (
           <p className="text-center text-lg text-gray-600">
