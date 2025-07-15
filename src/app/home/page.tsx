@@ -31,7 +31,7 @@ export default async function Home() {
       <main className="p-6 bg-gray-50 mt-10">
         <h1>LES PERSONNALITÉS À RENCONTRER</h1>
         <p className="text-center mt-1 mb-5 text-2xl">
-          Feuilletez les visages de celles et ceux qui attendent simplement un
+          Feuilletez les profils de celles et ceux qui attendent simplement un
           peu de votre temps. <br />
           Chaque sourire porte une histoire, chaque rencontre est une promesse.
         </p>
