@@ -6,6 +6,8 @@ import MomentToShare from "../components/MomentToShare";
 import BlackButton from "@/app/components/BlackButton";
 import BlueButton from "@/app/components/BlueButton";
 import YellowButton from "@/app/components/YellowButton";
+import BlackButtonVisit from "@/app/components/BlackButtonVisit";
+// import { useRouter } from "next/navigation";
 
 export default async function Home() {
   const elders: ElderPicture[] = await getEldersPicture();
@@ -126,7 +128,11 @@ export default async function Home() {
             qu'une visite : une vraie bouffée de chaleur humaine.
           </p>
           <div className=" flex flex-row mt-10 mb-5 gap-6 content-center">
-            <BlackButton label="Programmer une visite" />
+            {/* <BlackButton
+              label="Programmer une visite"
+              onClick={handleProgrammerVisiteClick}
+            /> */}
+            <BlackButtonVisit label="Programmer une visite" />
             <BlueButton label="Faire un don 🫶" />
             <YellowButton label="Devenir bénévole" />
           </div>
