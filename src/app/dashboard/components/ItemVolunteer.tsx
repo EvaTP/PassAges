@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image";
 import { Volunteer } from "@/app/types/volunteers";
-//import BlackButton from "@/BlackButton";
 
 interface VolunteersProps {
   volunteer: Volunteer;

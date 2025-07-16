@@ -1,7 +1,10 @@
+import { ButtonProps } from "@/app/types/buttons";
+
 import Link from "next/link";
 
 export default function YellowButton(props: {
   label: string;
+  onClick: () => void;
 }): React.ReactNode {
   return (
     <Link href="/volunteers">

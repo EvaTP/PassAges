@@ -5,6 +5,7 @@ import BlackButton from "@/app/components/BlackButton";
 import BlueButton from "@/app/components/BlueButton";
 import YellowButton from "@/app/components/YellowButton";
 import ItemVolunteer from "./components/ItemVolunteer";
+import VolunteerOnhold from "./components/VolunteerOnhold";
 import { Volunteer } from "@/app/types/volunteers";
 
 export default function Dashboard() {
@@ -40,9 +41,19 @@ export default function Dashboard() {
     fetchVolunteers();
   }, []);
 
+  // Filtrer les volontaires en attente (role)
+  const volunteersOnHold = volunteers.filter(
+    (volunteer) => volunteer.role === "volunteer_onhold"
+  );
+
   // Fonctions pour gérer l'édition et la suppression
   const handleEdit = (volunteerToEdit: Volunteer) => {
     console.log("Éditer le volontaire:", volunteerToEdit);
+
+    {
+      /* MODALE */
+    }
+
     // Implémentez ici la logique d'édition (ex: ouvrir un modal, naviguer vers une page d'édition)
     // Par exemple: router.push(`/dashboard/volunteers/edit/${volunteerToEdit.id}`);
   };
@@ -116,27 +127,52 @@ export default function Dashboard() {
         />
       </div>
 
-      <main className="p-6 bg-gray-50 mt-10">
+      {/* AFFICHAGE VOLONTAIRES */}
+      <main className=" flex flex-col p-6 bg-gray-50 mt-10">
         <h1>DASHBOARD ADMINISTRATEUR</h1>
-        <h2 className="text-2xl font-semibold mb-8">Gestion des Volontaires</h2>
-
-        {volunteers.length === 0 ? (
-          <p className="text-center text-lg text-gray-600">
-            Aucun volontaire trouvé pour le moment.
-          </p>
-        ) : (
-          <div className="flex flex-col space-y gap-4 p-4">
-            {volunteers.map((volunteer) => (
-              <ItemVolunteer
-                key={volunteer.id}
-                volunteer={volunteer}
-                onEdit={handleEdit}
-                onDelete={handleDelete}
-              />
-            ))}
-            <div></div>
-          </div>
-        )}
+        <section>
+          <h2 className="text-2xl font-semibold mb-8">
+            Gestion des Volontaires
+          </h2>
+          {volunteers.length === 0 ? (
+            <p className="text-center text-lg text-gray-600">
+              Aucun volontaire trouvé pour le moment.
+            </p>
+          ) : (
+            <div className="flex flex-col space-y gap-4 p-4">
+              {volunteers.map((volunteer) => (
+                <ItemVolunteer
+                  key={volunteer.id}
+                  volunteer={volunteer}
+                  onEdit={handleEdit}
+                  onDelete={handleDelete}
+                />
+              ))}
+              <div></div>
+            </div>
+          )}
+        </section>
+        <section className="bg-color-gray">
+          <h2 className="text-2xl font-semibold mb-4">
+            Volontaires en attente de validation
+          </h2>
+          {volunteersOnHold.length === 0 ? (
+            <p className="text-center text-lg text-gray-600">
+              Aucune demande de volontariat pour le moment.
+            </p>
+          ) : (
+            <div className="flex flex-col space-y-4 p-4">
+              {volunteersOnHold.map((volunteer) => (
+                <VolunteerOnhold
+                  key={volunteer.id}
+                  volunteer={volunteer}
+                  onAccept={handleEdit}
+                  onDeny={handleDelete}
+                />
+              ))}
+            </div>
+          )}
+        </section>
       </main>
     </>
   );
