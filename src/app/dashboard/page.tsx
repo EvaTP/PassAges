@@ -6,6 +6,7 @@ import BlueButton from "@/app/components/BlueButton";
 import YellowButton from "@/app/components/YellowButton";
 import ItemVolunteer from "./components/ItemVolunteer";
 import VolunteerOnhold from "./components/VolunteerOnhold";
+import VolunteerFormAdmin from "@/app/components/VolunteerFormAdmin";
 import { Volunteer } from "@/app/types/volunteers";
 
 export default function Dashboard() {
@@ -173,6 +174,10 @@ export default function Dashboard() {
             </div>
           )}
         </section>
+        <div>
+          <h2>Ajouter un volontaire</h2>
+          <VolunteerFormAdmin />
+        </div>
       </main>
     </>
   );
