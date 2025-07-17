@@ -101,3 +101,23 @@ export async function POST(req: NextRequest) {
     await prisma.$disconnect();
   }
 }
+
+// POST : CREER un volunteer par le biais du formulaire
+
+// model volunteers {
+//   id          Int         @id @default(autoincrement())
+//   firstname   String
+//   lastname    String
+//   role        String?
+//   password    String?
+//   city_id     Int?
+//   zipcode     String?     @db.VarChar(5)
+//   activity_id Int?
+//   motivation  String?
+//   email       String?     @unique
+//   created_at  DateTime?   @default(now()) @db.Timestamp(6)
+//   updated_at  DateTime?   @default(now()) @db.Timestamp(6)
+//   moments     moments[]
+//   activities  activities? @relation(fields: [activity_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+//   cities      cities?     @relation(fields: [city_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+// }

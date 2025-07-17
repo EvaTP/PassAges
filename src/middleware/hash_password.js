@@ -1,8 +1,12 @@
+
+
+
 console.log("début du script de hashage");
 
 const bcrypt = require("bcrypt");
 const saltRounds = 10; // Facteur de travail : nombre de fois que l'algorithme sera exécuté
-
+const { PrismaClient } = require("@prisma/client");
+const prisma = new PrismaClient();
 // hasher un mot de passe
 const hashPassword = async (plainPassword) => {
   try {
