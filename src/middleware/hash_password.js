@@ -3,7 +3,7 @@ console.log("début du script de hashage");
 const bcrypt = require("bcrypt");
 const saltRounds = 10; // Facteur de travail : nombre de fois que l'algorithme sera exécuté
 
-// hasher un mot de passe (création volontaire)
+// hasher un mot de passe
 const hashPassword = async (plainPassword) => {
   try {
     const salt = await bcrypt.genSalt(saltRounds);

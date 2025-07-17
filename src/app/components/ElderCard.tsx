@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import BlackButton from "./BlackButton";
+import { useContext } from "react";
 
 // Type pour les données d'un elder avec ses relations
 type ElderWithRelations = {
