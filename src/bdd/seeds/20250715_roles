@@ -1,13 +1,8 @@
--- table volunteers :
-	-- ajout colonnes "motivation" et "email" pour harmonisation avec le formulaire d'inscription
-	-- et "created"/"updated"
+-- table roles :
+	-- ajout valeur 'volunteer_denied' : pour garder le volontaire dans la table même s'il est refusé.
 
-ALTER TABLE volunteers
-ADD  motivation text
+INSERT INTO roles (role_id)
+VALUES
+('volunteer_denied');
 
-ALTER TABLE volunteers
-ADD email TEXT UNIQUE;
 
-ALTER TABLE volunteers
-ADD COLUMN created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-ADD COLUMN updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
