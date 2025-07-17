@@ -3,7 +3,7 @@ console.log("début du script de hashage");
 const bcrypt = require("bcrypt");
 const saltRounds = 10; // Facteur de travail : nombre de fois que l'algorithme sera exécuté
 
-// hasher un mot de passe
+// hasher un mot de passe (création volontaire)
 const hashPassword = async (plainPassword) => {
   try {
     const salt = await bcrypt.genSalt(saltRounds);
@@ -22,7 +22,7 @@ const hashPassword = async (plainPassword) => {
 console.log(hashPassword("nouveaumotdepasse"));
 // //hashPassword("monMotDePassesuperclasse");
 
-// comparer les mots de passe
+// comparer les mots de passe (page login)
 const verifyPassword = async (plainPassword, hashedPassword) => {
   try {
     const match = await bcrypt.compare(plainPassword, hashedPassword);
@@ -37,3 +37,8 @@ const verifyPassword = async (plainPassword, hashedPassword) => {
     throw error;
   }
 };
+
+// ancien exemple
+// const plainPassword = 'monMotDePasseSuperSecret';
+// const hashedPassword = '$2b$10$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36YzTQ0iP/hxt8PxyeKnVSS';
+// verifyPassword(plainPassword, hashedPassword);

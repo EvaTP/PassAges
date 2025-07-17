@@ -6,7 +6,7 @@ import BlueButton from "@/app/components/BlueButton";
 import YellowButton from "@/app/components/YellowButton";
 import ItemVolunteer from "./components/ItemVolunteer";
 import VolunteerOnhold from "./components/VolunteerOnhold";
-import VolunteerFormAdmin from "@/app/components/VolunteerFormAdmin";
+import VolunteerFormAdmin from "./components/VolunteerFormAdmin";
 import { Volunteer } from "@/app/types/volunteers";
 
 export default function Dashboard() {
@@ -131,8 +131,8 @@ export default function Dashboard() {
       {/* AFFICHAGE VOLONTAIRES */}
       <main className=" flex flex-col p-6 bg-gray-50 mt-10">
         <h1>DASHBOARD ADMINISTRATEUR</h1>
-        <section>
-          <h2 className="text-2xl font-semibold mb-8">
+        <section className="w-[70%]">
+          <h2 className="text-2xl font-semibold mb-8 text-pink-500">
             Gestion des Volontaires
           </h2>
           {volunteers.length === 0 ? (
@@ -153,8 +153,8 @@ export default function Dashboard() {
             </div>
           )}
         </section>
-        <section className="bg-color-gray">
-          <h2 className="text-2xl font-semibold mb-4">
+        <section className="w-[70%] bg-color-gray">
+          <h2 className="text-2xl font-semibold mb-4  text-pink-500">
             Volontaires en attente de validation
           </h2>
           {volunteersOnHold.length === 0 ? (
@@ -174,10 +174,14 @@ export default function Dashboard() {
             </div>
           )}
         </section>
-        <div>
-          <h2>Ajouter un volontaire</h2>
-          <VolunteerFormAdmin />
-        </div>
+        <section className="w-[80%]">
+          <div>
+            <h2 className="ml-6 mt-4 mb-4 text-2xl  text-pink-500">
+              Ajouter un volontaire
+            </h2>
+            <VolunteerFormAdmin />
+          </div>
+        </section>
       </main>
     </>
   );

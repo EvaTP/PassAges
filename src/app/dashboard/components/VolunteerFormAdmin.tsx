@@ -101,14 +101,14 @@ export default function VolunteerForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-6 p-6 bg-white shadow-md rounded-xl max-w-xl mx-auto"
+      className="w-full space-y-6 p-6 bg-white shadow-md rounded-xl max-w-xl mx-auto"
     >
       <h2 className="text-center text-lg font-semibold text-gray-800">
         Création de volontaire
       </h2>
 
       {/* Prénom */}
-      <div>
+      <div className="flex flex-row gap-4">
         <label
           htmlFor="firstname"
           className="block text-sm/6 font-medium text-gray-900"
@@ -124,10 +124,7 @@ export default function VolunteerForm() {
           onChange={handleChange}
           className="input"
         />
-      </div>
-
-      {/* Nom */}
-      <div>
+        {/* Nom */}
         <label
           htmlFor="lastname"
           className="block text-sm/6 font-medium text-gray-900"
@@ -146,11 +143,13 @@ export default function VolunteerForm() {
       </div>
 
       {/* Email */}
-      <div>
+      <div className="flex flex-row gap-4">
         <label
           htmlFor="email"
           className="block text-sm/6 font-medium text-gray-900"
-        ></label>
+        >
+          Email
+        </label>
         <input
           type="email"
           name="email"
@@ -160,20 +159,31 @@ export default function VolunteerForm() {
           onChange={handleChange}
           className="input"
         />
+        {/* Mot de passe */}
+        <label
+          htmlFor="password"
+          className="block text-sm/6 font-medium text-gray-900"
+        >
+          Mot de passe
+        </label>
+        <input
+          type="password"
+          name="password"
+          placeholder="Mot de passe"
+          required
+          value={formData.password}
+          onChange={handleChange}
+          className="input"
+        />
       </div>
 
-      {/* Mot de passe */}
-      <input
-        type="password"
-        name="password"
-        placeholder="Mot de passe"
-        required
-        value={formData.password}
-        onChange={handleChange}
-        className="input"
-      />
-
       {/* Rôle */}
+      <label
+        htmlFor="role"
+        className="block text-sm/6 font-medium text-gray-900"
+      >
+        Statut
+      </label>
       <input
         type="text"
         name="role"
@@ -184,6 +194,12 @@ export default function VolunteerForm() {
       />
 
       {/* Ville */}
+      <label
+        htmlFor="city"
+        className="block text-sm/6 font-medium text-gray-900"
+      >
+        Ville
+      </label>
       <select
         name="city_id"
         value={formData.city_id}
@@ -202,6 +218,12 @@ export default function VolunteerForm() {
       </select>
 
       {/* Code postal */}
+      <label
+        htmlFor="zipcode"
+        className="block text-sm/6 font-medium text-gray-900"
+      >
+        Code Postal
+      </label>
       <input
         type="text"
         name="zipcode"
@@ -212,6 +234,12 @@ export default function VolunteerForm() {
       />
 
       {/* Activité */}
+      <label
+        htmlFor="activity"
+        className="block text-sm/6 font-medium text-gray-900"
+      >
+        Activité
+      </label>
       <select
         name="activity_id"
         value={formData.activity_id}
@@ -256,7 +284,7 @@ export default function VolunteerForm() {
               motivation: "",
             });
           }}
-          className="bg-gray-600 text-white px-4 py-2 rounded"
+          className="bg-gray-600 text-white px-8 py-2 rounded"
         >
           Annuler
         </button>
