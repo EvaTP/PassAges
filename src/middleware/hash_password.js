@@ -9,14 +9,18 @@ const hashPassword = async (plainPassword) => {
     const salt = await bcrypt.genSalt(saltRounds);
     const hashedPassword = await bcrypt.hash(plainPassword, salt);
     console.log("🔐 Mot de passe haché :", hashedPassword);
+
+    verifyPassword("nouveaumotdepasse", hashedPassword);
+
     return hashedPassword;
   } catch (error) {
     console.error("❌ Erreur lors du hachage du mot de passe :", error);
     throw error;
   }
 };
-
-hashPassword("monMotDePassesuperclasse");
+// const mdp = hashPassword("nouveaumotdepasse");
+console.log(hashPassword("nouveaumotdepasse"));
+// //hashPassword("monMotDePassesuperclasse");
 
 // comparer les mots de passe
 const verifyPassword = async (plainPassword, hashedPassword) => {
@@ -33,7 +37,3 @@ const verifyPassword = async (plainPassword, hashedPassword) => {
     throw error;
   }
 };
-
-const plainPassword = "monMotDePasseSuperSecret";
-const hashedPassword = "$2b$10$EixZaYVK1fsbw1ZfbX3OXePaWxn96p3t8PxyeKnVSS";
-verifyPassword(plainPassword, hashedPassword);
