@@ -2,7 +2,8 @@
 import MomentType from "./MomentType";
 import ChooseCity from "./ChooseCity";
 import BlackButton from "./BlackButton";
-//import { searchVisitElders } from "../actions/getEldersPicture";
+import { useContext } from "react";
+import Authentication from "./Authentication";
 import { useState } from "react";
 
 export default function MomentToShare(): React.ReactNode {
