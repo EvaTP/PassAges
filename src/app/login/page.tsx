@@ -1,8 +1,7 @@
 //"use client";
 import Image from "next/image";
 import LoginForm from "@/app/components/LoginForm";
- import { useState } from "react";
-import { useAuth } from "../components/AuthContext";
+
 
 
 
@@ -10,20 +9,8 @@ import YellowButton from "@/app/components/YellowButton";
 
 export default async function Login() {
 
-    const { authStatus, setAuthStatus } = useAuth(); // 👈 accès lecture + écriture
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-
-    const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    // ici : logique d'authentification simulée
-    if (email === "admin@example.com" && password === "1234") {
-      setAuthStatus("connected"); // ✅ utilisateur connecté
-    } else {
-      alert("Identifiants incorrects");
-    }
-  };
+    
+    
 
   return (
     <>
