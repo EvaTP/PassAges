@@ -1,7 +1,42 @@
 "use client";
 import BlueButton from "@/app/components/BlueButton";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function LoginForm() {
+
+  const [firstname, setFirstname] = useState(""); 
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
+  const router = useRouter();
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault(); // empêche le rechargement de la page
+
+    try {
+      const response = await fetch("/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ firstname, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setMessage(data.message); // ✅ Connexion réussie
+        router.push("/home") //On redirige le bénévole vers la page d'accueil une fois connecté
+        
+      } else {
+        setMessage(data.message); // ❌ Identifiants incorrects
+      }
+    } catch (error) {
+      console.error("Erreur lors de la connexion :", error);
+      setMessage("❌ Erreur de connexion.");
+    }
+  };
+
+
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">

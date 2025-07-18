@@ -1,10 +1,13 @@
+
+
 import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma"; // adapte ce chemin si nécessaire
+import { prisma } from "@/lib/prisma";
+import { cookies } from "next/headers";
 
 export async function POST(req: NextRequest) {
   try {
-    const newVolunteerRegistration = await req.json();
-    const { firstname, password } = newVolunteerRegistration;
+    const body = await req.json();
+    const { firstname, password } = body;
 
     // Vérifie que les champs obligatoires sont présents
     if (!firstname || !password) {
@@ -24,18 +27,28 @@ export async function POST(req: NextRequest) {
 
     // Si le bénévole est trouvé → Connexion réussie
     if (volunteerDbInfo) {
-      return NextResponse.json(
+      const response = NextResponse.json(
         {
           success: true,
           message: "✅ Connexion réussie",
           data: {
             id: volunteerDbInfo.id,
             firstname: volunteerDbInfo.firstname,
-            // ⚠️ ne renvoie jamais le mot de passe !
           },
         },
         { status: 200 }
       );
+
+      // 🔐 On ajoute un cookie httpOnly
+      response.cookies.set("session", volunteerDbInfo.firstname, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "lax",
+        path: "/",
+        maxAge: 60 * 60 * 24, // 1 jour
+      });
+
+      return response;
     }
 
     // Si aucun bénévole correspondant
@@ -52,5 +65,4 @@ export async function POST(req: NextRequest) {
   } finally {
     await prisma.$disconnect();
   }
-}
-
+}    
