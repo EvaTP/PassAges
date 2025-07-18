@@ -117,7 +117,7 @@ export default function Dashboard() {
 
   return (
     <>
-      <div className="">
+      <div className="w-full">
         <Image
           className="w-full h-[290px] object-cover"
           src="/images/hero-dashboard.svg"
@@ -129,9 +129,9 @@ export default function Dashboard() {
       </div>
 
       {/* AFFICHAGE VOLONTAIRES */}
-      <main className=" flex flex-col p-6 bg-gray-50 mt-10">
+      <main className="flex flex-col w-full p-6 bg-gray-50 mt-10">
         <h1>DASHBOARD ADMINISTRATEUR</h1>
-        <section className="w-[70%]">
+        <section className="w-[90%]">
           <h2 className="text-2xl font-semibold mb-8 text-pink-500">
             Gestion des Volontaires
           </h2>
@@ -153,7 +153,7 @@ export default function Dashboard() {
             </div>
           )}
         </section>
-        <section className="w-[70%] bg-color-gray">
+        <section className="w-[90%] bg-color-gray">
           <h2 className="text-2xl font-semibold mb-4  text-pink-500">
             Volontaires en attente de validation
           </h2>
@@ -174,9 +174,9 @@ export default function Dashboard() {
             </div>
           )}
         </section>
-        <section className="w-[80%]">
-          <div>
-            <h2 className="ml-6 mt-4 mb-4 text-2xl  text-pink-500">
+        <section className="w-full">
+          <div className="w-full">
+            <h2 className="ml-8 mt-4 mb-4 text-2xl text-pink-500">
               Ajouter un volontaire
             </h2>
             <VolunteerFormAdmin />

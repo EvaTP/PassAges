@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 
-type VolunteerFormData = {
+type VolunteerFormAdminData = {
   firstname: string;
   lastname: string;
   email: string;
@@ -9,15 +9,16 @@ type VolunteerFormData = {
   role: string;
   city_id: number;
   zipcode?: string;
-  activity_id: number;
-  motivation: string;
+  activity_id?: number;
+  motivation?: string;
 };
 
 type City = { id: number; city_name: string };
-type Activity = { id: number; activity_name: string };
+type Activity = { id: number; activity_type: string };
+type Role = { id: number; role: string };
 
 export default function VolunteerForm() {
-  const [formData, setFormData] = useState<VolunteerFormData>({
+  const [formData, setFormData] = useState<VolunteerFormAdminData>({
     firstname: "",
     lastname: "",
     email: "",
@@ -31,12 +32,14 @@ export default function VolunteerForm() {
 
   const [cities, setCities] = useState<City[]>([]);
   const [activities, setActivities] = useState<Activity[]>([]);
+  const [roles, setRoles] = useState<Role[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const [citiesRes, activitiesRes] = await Promise.all([
+      const [citiesRes, activitiesRes, rolesRes] = await Promise.all([
         fetch("/api/cities"),
         fetch("/api/activities"),
+        fetch("api/roles"),
       ]);
 
       if (citiesRes.ok) {
@@ -46,6 +49,10 @@ export default function VolunteerForm() {
       if (activitiesRes.ok) {
         const result = await activitiesRes.json();
         setActivities(result.data);
+      }
+      if (rolesRes.ok) {
+        const result = await rolesRes.json();
+        setRoles(result.data);
       }
     };
 
@@ -101,163 +108,204 @@ export default function VolunteerForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full space-y-6 p-6 bg-white shadow-md rounded-xl max-w-xl mx-auto"
+      className="w-full max-w-4xl sm:p-6 md:p-8 space-y-6 bg-white shadow-md rounded-xl mx-auto"
     >
       <h2 className="text-center text-lg font-semibold text-gray-800">
         Création de volontaire
       </h2>
 
-      {/* Prénom */}
-      <div className="flex flex-row gap-4">
-        <label
-          htmlFor="firstname"
-          className="block text-sm/6 font-medium text-gray-900"
-        >
-          Prénom
-        </label>
-        <input
-          type="text"
-          name="firstname"
-          placeholder="Prénom"
-          required
-          value={formData.firstname}
-          onChange={handleChange}
-          className="input"
-        />
+      <div className="grid grid-cols-2 gap-6">
+        {/* Prénom */}
+        <div className="flex items-center gap-2">
+          <label
+            htmlFor="firstname"
+            className="w-28 text-sm font-medium text-gray-900"
+          >
+            Prénom :
+          </label>
+          <input
+            type="text"
+            name="firstname"
+            placeholder="Prénom"
+            required
+            value={formData.firstname}
+            onChange={handleChange}
+            className="block w-full rounded-md bg-white px-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+          />
+        </div>
         {/* Nom */}
-        <label
-          htmlFor="lastname"
-          className="block text-sm/6 font-medium text-gray-900"
-        >
-          Nom
-        </label>
-        <input
-          type="text"
-          name="lastname"
-          placeholder="Nom"
-          required
-          value={formData.lastname}
-          onChange={handleChange}
-          className="input"
-        />
+        <div className="flex items-center gap-2">
+          <label
+            htmlFor="lastname"
+            className="w-28 text-sm font-medium text-gray-900"
+          >
+            Nom :
+          </label>
+          <input
+            type="text"
+            name="lastname"
+            placeholder="Nom"
+            required
+            value={formData.lastname}
+            onChange={handleChange}
+            className="flex-1 rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600"
+          />
+        </div>
       </div>
 
       {/* Email */}
-      <div className="flex flex-row gap-4">
-        <label
-          htmlFor="email"
-          className="block text-sm/6 font-medium text-gray-900"
-        >
-          Email
-        </label>
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          required
-          value={formData.email}
-          onChange={handleChange}
-          className="input"
-        />
+      <div className="grid grid-cols-2 gap-6">
+        <div className="flex items-center gap-2">
+          <label
+            htmlFor="email"
+            className="w-28 text-sm font-medium text-gray-900"
+          >
+            Email :
+          </label>
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            required
+            value={formData.email}
+            onChange={handleChange}
+            className="-flex-1 rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600-2 focus:outline-indigo-600"
+          />
+        </div>
+
         {/* Mot de passe */}
-        <label
-          htmlFor="password"
-          className="block text-sm/6 font-medium text-gray-900"
-        >
-          Mot de passe
-        </label>
-        <input
-          type="password"
-          name="password"
-          placeholder="Mot de passe"
-          required
-          value={formData.password}
-          onChange={handleChange}
-          className="input"
-        />
+        <div className="flex items-center gap-2">
+          <label
+            htmlFor="password"
+            className="w-28 text-sm font-medium text-gray-900"
+          >
+            Mot de passe :
+          </label>
+
+          <input
+            type="password"
+            name="password"
+            placeholder="Mot de passe"
+            required
+            value={formData.password}
+            onChange={handleChange}
+            className="flex-1 rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600"
+          />
+        </div>
       </div>
 
-      {/* Rôle */}
-      <label
-        htmlFor="role"
-        className="block text-sm/6 font-medium text-gray-900"
-      >
-        Statut
-      </label>
-      <input
+      {/* Rôle/Statut */}
+      <div className="flex items-center gap-6 mt-10">
+        <label
+          htmlFor="role"
+          className="block text-sm/6 font-medium text-gray-900"
+        >
+          Statut :
+        </label>
+        {/* <input
         type="text"
         name="role"
-        placeholder="Rôle (facultatif)"
+        placeholder="Rôle: admin / volunteer / volunteer_onhold / volunteer_denied"
         value={formData.role}
         onChange={handleChange}
-        className="input"
-      />
-
-      {/* Ville */}
-      <label
-        htmlFor="city"
-        className="block text-sm/6 font-medium text-gray-900"
-      >
-        Ville
-      </label>
-      <select
-        name="city_id"
-        value={formData.city_id}
-        required
-        onChange={handleChange}
-        className="input"
-      >
-        <option value={0} disabled>
-          -- Sélectionnez une ville --
-        </option>
-        {cities.map((city) => (
-          <option key={city.id} value={city.id}>
-            {city.city_name}
+        className="block w-full rounded-md bg-white px-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+      /> */}
+        <select
+          name="role"
+          value={formData.role}
+          required
+          onChange={handleChange}
+          className="input"
+        >
+          <option value="" disabled>
+            -- Sélectionnez un statut --
           </option>
-        ))}
-      </select>
+          {roles.map((role) => (
+            <option key={role.id} value={role.role}>
+              {role.role}
+            </option>
+          ))}
+        </select>
+      </div>
 
-      {/* Code postal */}
-      <label
-        htmlFor="zipcode"
-        className="block text-sm/6 font-medium text-gray-900"
-      >
-        Code Postal
-      </label>
-      <input
-        type="text"
-        name="zipcode"
-        placeholder="Code postal"
-        value={formData.zipcode}
-        onChange={handleChange}
-        className="input"
-      />
+      <div className="grid grid-cols-2 gap-2 mt-10">
+        <div className="flex items-center gap-5">
+          {/* Ville */}
+          <label
+            htmlFor="city"
+            className="block text-sm/6 font-medium text-gray-900"
+          >
+            Ville :
+          </label>
+          <select
+            name="city_id"
+            value={formData.city_id}
+            required
+            onChange={handleChange}
+            className="input"
+          >
+            <option value={0} disabled>
+              -- Sélectionnez une ville --
+            </option>
+            {cities.map((city) => (
+              <option key={city.id} value={city.id}>
+                {city.city_name}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="flex items-center gap-5">
+          {/* Code postal */}
+          <label
+            htmlFor="zipcode"
+            className="w-32 text-sm font-medium text-gray-900"
+          >
+            Code Postal :
+          </label>
+          <input
+            type="text"
+            name="zipcode"
+            placeholder="Code postal"
+            value={formData.zipcode}
+            onChange={handleChange}
+            className="block w-full rounded-md bg-white px-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+          />
+        </div>
+      </div>
 
       {/* Activité */}
-      <label
-        htmlFor="activity"
-        className="block text-sm/6 font-medium text-gray-900"
-      >
-        Activité
-      </label>
-      <select
-        name="activity_id"
-        value={formData.activity_id}
-        required
-        onChange={handleChange}
-        className="input"
-      >
-        <option value={0} disabled>
-          -- Sélectionnez une activité --
-        </option>
-        {activities.map((activity) => (
-          <option key={activity.id} value={activity.id}>
-            {activity.activity_name}
+      <div className="flex items-center gap-8">
+        <label
+          htmlFor="activity"
+          className="block text-sm/6 font-medium text-gray-900"
+        >
+          Activité :
+        </label>
+        <select
+          name="activity_id"
+          value={formData.activity_id}
+          required
+          onChange={handleChange}
+          className="input"
+        >
+          <option value={0} disabled>
+            -- Sélectionnez une activité --
           </option>
-        ))}
-      </select>
+          {activities.map((activity) => (
+            <option key={activity.id} value={activity.id}>
+              {activity.activity_type}
+            </option>
+          ))}
+        </select>
+      </div>
 
       {/* Motivation */}
+      <label
+        htmlFor="motivation"
+        className="block text-sm/6 font-medium text-gray-900"
+      >
+        Motivation :
+      </label>
       <textarea
         name="motivation"
         rows={4}
@@ -265,7 +313,7 @@ export default function VolunteerForm() {
         placeholder="Votre motivation"
         value={formData.motivation}
         onChange={handleChange}
-        className="input"
+        className="block w-full rounded-md bg-white px-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
       />
 
       <div className="flex justify-end gap-4 mt-4">

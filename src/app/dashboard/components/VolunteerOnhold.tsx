@@ -51,12 +51,12 @@ export default function VolunteerOnhold({
         {/* 5. Volunteer management buttons */}
         <div className="flex flex-row justify-end gap-4">
           <BlueButton
-            label="Accepter le candidat ✅"
+            label="✅ Accepter le candidat"
             onClick={() => onAccept(volunteer)}
           />
 
           <BlackButton
-            label="Refuser le candidat ⛔️"
+            label="⛔️ Refuser le candidat"
             onClick={() => onDeny(volunteer)}
           />
         </div>
