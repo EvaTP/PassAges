@@ -1,5 +1,8 @@
+// route pour créer un volontaire depuis le formulaire admin dans DASHBOARD
+
 import { PrismaClient } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
+import { VolunteerFormAdminData } from "@/app/types/volunteers";
 import bcrypt from "bcrypt";
 
 const prisma = new PrismaClient();
@@ -7,17 +10,18 @@ const SALT_ROUNDS = 10;
 
 export async function POST(req: NextRequest) {
   try {
+    const body: VolunteerFormAdminData = await req.json();
     const {
       firstname,
       lastname,
       email,
       password,
-      role = "volunteer_onhold",
+      role,
       city,
       zipcode,
-      activity,
+      activity_id,
       motivation,
-    } = await req.json();
+    } = body;
 
     if (
       !firstname ||
@@ -25,7 +29,7 @@ export async function POST(req: NextRequest) {
       !email ||
       !password ||
       !city ||
-      !activity ||
+      !activity_id ||
       !motivation
     ) {
       return NextResponse.json(
@@ -46,14 +50,18 @@ export async function POST(req: NextRequest) {
     }
 
     // 2. Gérer l'activité
-    let activityRecord = await prisma.activities.findUnique({
-      where: { name: activity },
+    const activityRecord = await prisma.activities.findFirst({
+      where: { id: activity_id },
     });
 
     if (!activityRecord) {
-      activityRecord = await prisma.activities.create({
-        data: { name: activity },
-      });
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Activité inconnue. Veuillez en choisir une valide.",
+        },
+        { status: 400 }
+      );
     }
 
     // 3. Hacher le mot de passe
@@ -69,7 +77,7 @@ export async function POST(req: NextRequest) {
         role,
         city_id: cityRecord.id,
         zipcode,
-        activity_id: activityRecord.id,
+        activity_id,
         motivation,
       },
     });

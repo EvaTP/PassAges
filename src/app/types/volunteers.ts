@@ -25,3 +25,16 @@ export interface Volunteer {
   activities?: Activity | null;
   cities?: City | null;
 }
+
+// interface ADMIN pour le formulaire de création de volontaires dans le dashboard
+export interface VolunteerFormAdminData {
+  firstname: string;
+  lastname: string;
+  email: string;
+  password: string;
+  role: string;
+  city: string; // texte libre
+  zipcode?: string;
+  motivation: string;
+  activity_id: number;
+}

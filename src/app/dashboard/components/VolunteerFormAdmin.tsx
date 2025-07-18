@@ -7,7 +7,7 @@ type VolunteerFormAdminData = {
   email: string;
   password: string;
   role: string;
-  city_id: number;
+  city: string;
   zipcode?: string;
   activity_id?: number;
   motivation?: string;
@@ -24,7 +24,7 @@ export default function VolunteerForm() {
     email: "",
     password: "",
     role: "",
-    city_id: 0,
+    city: "",
     zipcode: "",
     activity_id: 0,
     motivation: "",
@@ -77,7 +77,7 @@ export default function VolunteerForm() {
     e.preventDefault();
 
     try {
-      const res = await fetch("/api/volunteers/register", {
+      const res = await fetch("/api/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -92,7 +92,7 @@ export default function VolunteerForm() {
           email: "",
           password: "",
           role: "",
-          city_id: 0,
+          city: "",
           zipcode: "",
           activity_id: 0,
           motivation: "",
@@ -237,22 +237,12 @@ export default function VolunteerForm() {
           >
             Ville :
           </label>
-          <select
-            name="city_id"
-            value={formData.city_id}
-            required
+          <input
+            name="city"
+            value={formData.city}
             onChange={handleChange}
-            className="input"
-          >
-            <option value={0} disabled>
-              -- Sélectionnez une ville --
-            </option>
-            {cities.map((city) => (
-              <option key={city.id} value={city.id}>
-                {city.city_name}
-              </option>
-            ))}
-          </select>
+            required
+          />
         </div>
         <div className="flex items-center gap-5">
           {/* Code postal */}
@@ -326,7 +316,7 @@ export default function VolunteerForm() {
               email: "",
               password: "",
               role: "",
-              city_id: 0,
+              city: "",
               zipcode: "",
               activity_id: 0,
               motivation: "",
