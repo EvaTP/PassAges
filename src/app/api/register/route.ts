@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // 1. Gérer la ville
+    // 1. Gérer la ville et la créer si absente
     let cityRecord = await prisma.cities.findUnique({
       where: { city_name: city },
     });

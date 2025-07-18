@@ -13,6 +13,8 @@ export default function Dashboard() {
   const [volunteers, setVolunteers] = useState<Volunteer[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [showVolunteers, setShowVolunteers] = useState(false);
+  const [showVolunteersOnHold, setShowVolunteersOnHold] = useState(false);
 
   useEffect(() => {
     const fetchVolunteers = async () => {
@@ -50,13 +52,6 @@ export default function Dashboard() {
   // Fonctions pour gérer l'édition et la suppression
   const handleEdit = (volunteerToEdit: Volunteer) => {
     console.log("Éditer le volontaire:", volunteerToEdit);
-
-    {
-      /* MODALE */
-    }
-
-    // Implémentez ici la logique d'édition (ex: ouvrir un modal, naviguer vers une page d'édition)
-    // Par exemple: router.push(`/dashboard/volunteers/edit/${volunteerToEdit.id}`);
   };
 
   const handleDelete = async (volunteerToDelete: Volunteer) => {
@@ -131,11 +126,45 @@ export default function Dashboard() {
       {/* AFFICHAGE VOLONTAIRES */}
       <main className="flex flex-col w-full p-6 bg-gray-50 mt-10">
         <h1>DASHBOARD ADMINISTRATEUR</h1>
+
+        {/* TOUS LES VOLONTAIRES */}
         <section className="w-[90%]">
-          <h2 className="text-2xl font-semibold mb-8 text-pink-500">
+          <h2 className="text-2xl font-semibold mb-8 mt-6 text-pink-500">
             Gestion des Volontaires
           </h2>
-          {volunteers.length === 0 ? (
+
+          <div className="bg-white shadow-lg rounded-xl p-4 mb-6">
+            <button
+              onClick={() => setShowVolunteers(!showVolunteers)}
+              className="w-full text-left text-lg font-medium text-gray-700 hover:text-pink-500 transition-colors"
+            >
+              {showVolunteers
+                ? "Masquer les volontaires"
+                : "Afficher tous les volontaires"}
+            </button>
+
+            {/* Liste des volontaires affichée seulement si showVolunteers est true */}
+            <div className={`${showVolunteers ? "block" : "hidden"} mt-4`}>
+              {volunteers.length === 0 ? (
+                <p className="text-center text-lg text-gray-600">
+                  Aucun volontaire trouvé pour le moment.
+                </p>
+              ) : (
+                <div className="flex flex-col gap-4">
+                  {volunteers.map((volunteer) => (
+                    <ItemVolunteer
+                      key={volunteer.id}
+                      volunteer={volunteer}
+                      onEdit={handleEdit}
+                      onDelete={handleDelete}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* {volunteers.length === 0 ? (
             <p className="text-center text-lg text-gray-600">
               Aucun volontaire trouvé pour le moment.
             </p>
@@ -151,13 +180,48 @@ export default function Dashboard() {
               ))}
               <div></div>
             </div>
-          )}
+          )} */}
         </section>
+
+        {/* VOLONTAIRES EN ATTENTE DE VALIDATION */}
         <section className="w-[90%] bg-color-gray">
-          <h2 className="text-2xl font-semibold mb-4  text-pink-500">
+          <h2 className="text-2xl font-semibold mb-4 mt-6 text-pink-500">
             Volontaires en attente de validation
           </h2>
-          {volunteersOnHold.length === 0 ? (
+
+          <div className="bg-white shadow-lg rounded-xl p-4 mb-6">
+            <button
+              onClick={() => setShowVolunteersOnHold(!showVolunteersOnHold)}
+              className="w-full text-left text-lg font-medium text-gray-700 hover:text-pink-500 transition-colors"
+            >
+              {showVolunteersOnHold
+                ? "Masquer les volontaires en attente"
+                : "Afficher les volontaires en attente"}
+            </button>
+
+            <div
+              className={`${showVolunteersOnHold ? "block" : "hidden"} mt-4`}
+            >
+              {volunteersOnHold.length === 0 ? (
+                <p className="text-center text-lg text-gray-600">
+                  Aucune demande de volontariat pour le moment.
+                </p>
+              ) : (
+                <div className="flex flex-col space-y-4">
+                  {volunteersOnHold.map((volunteer) => (
+                    <VolunteerOnhold
+                      key={volunteer.id}
+                      volunteer={volunteer}
+                      onAccept={handleEdit}
+                      onDeny={handleDelete}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* {volunteersOnHold.length === 0 ? (
             <p className="text-center text-lg text-gray-600">
               Aucune demande de volontariat pour le moment.
             </p>
@@ -172,11 +236,11 @@ export default function Dashboard() {
                 />
               ))}
             </div>
-          )}
+          )} */}
         </section>
         <section className="w-full">
           <div className="w-full">
-            <h2 className="ml-8 mt-4 mb-4 text-2xl text-pink-500">
+            <h2 className="ml-20 mt-6 mb-4 text-2xl text-pink-500">
               Ajouter un volontaire
             </h2>
             <VolunteerFormAdmin />
