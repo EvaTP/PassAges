@@ -148,7 +148,7 @@ export default function Dashboard() {
 
       const updatedVolunteer = await response.json();
 
-      // 💡 Affichage du message de succès
+      // 💡 Affichage du message de la modale
       setModalMessage(
         newRole === "volunteer"
           ? "✅ Volontaire accepté !"

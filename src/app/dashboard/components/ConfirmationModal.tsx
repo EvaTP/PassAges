@@ -10,19 +10,26 @@ export default function ConfirmationModal({
   onClose: () => void;
 }) {
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/10 backdrop-blur-sm">
       <div
-        className={`p-6 rounded-lg shadow-lg text-white text-center w-80 ${
-          type === "success" ? "bg-green-600" : "bg-red-600"
+        className={`max-w-md w-full mx-4 p-6 rounded-2xl shadow-xl border ${
+          type === "success"
+            ? "bg-green-50 border-green-300 text-green-800"
+            : "bg-red-50 border-red-300 text-red-800"
         }`}
       >
-        <p className="text-lg font-semibold">{message}</p>
-        <button
-          onClick={onClose}
-          className="mt-4 bg-white text-black px-4 py-2 rounded hover:bg-gray-200 transition-colors duration-200"
-        >
-          Fermer
-        </button>
+        <h2 className="text-xl font-semibold mb-2">
+          {type === "success" ? "Succès" : "Erreur"}
+        </h2>
+        <p className="mb-4">{message}</p>
+        <div className="flex justify-end">
+          <button
+            onClick={onClose}
+            className="px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition"
+          >
+            Fermer
+          </button>
+        </div>
       </div>
     </div>
   );
