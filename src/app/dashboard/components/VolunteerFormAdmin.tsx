@@ -130,7 +130,7 @@ export default function VolunteerForm() {
             required
             value={formData.firstname}
             onChange={handleChange}
-            className="block w-full rounded-md bg-white px-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+            className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
           />
         </div>
         {/* Nom */}
@@ -258,7 +258,7 @@ export default function VolunteerForm() {
             placeholder="Code postal"
             value={formData.zipcode}
             onChange={handleChange}
-            className="block w-full rounded-md bg-white px-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+            className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
           />
         </div>
       </div>
@@ -329,7 +329,7 @@ export default function VolunteerForm() {
 
         <button
           type="submit"
-          className="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-yellow-400"
+          className="bg-indigo-600 text-white px-8 py-4 rounded hover:bg-yellow-400"
         >
           Envoyer
         </button>

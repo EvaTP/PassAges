@@ -1,20 +1,19 @@
 "use client";
-import Image from "next/image";
 import { Volunteer } from "@/app/types/volunteers";
 import BlueButton from "@/app/components/BlueButton";
 import BlackButton from "@/app/components/BlackButton";
 
 interface VolunteersProps {
   volunteer: Volunteer;
-  onAccept: (volunteer: Volunteer) => void;
-  onDeny: (volunteer: Volunteer) => void;
+  onAccept: (id: number) => void;
+  onDeny: (id: number) => void;
 }
 
 export default function VolunteerOnhold({
   volunteer,
   onAccept,
   onDeny,
-}: VolunteersProps): React.ReactNode {
+}: VolunteersProps) {
   return (
     <>
       <div className="bg-white rounded-lg shadow-md h-full flex flex-col p-4 justify-start overflow-hidden w-full">
@@ -52,12 +51,16 @@ export default function VolunteerOnhold({
         <div className="flex flex-row justify-end gap-4">
           <BlueButton
             label="✅ Accepter le candidat"
-            onClick={() => onAccept(volunteer)}
+            onClick={() => onAccept(volunteer.id)}
           />
 
           <BlackButton
             label="⛔️ Refuser le candidat"
-            onClick={() => onDeny(volunteer)}
+            onClick={() => {
+              console.log("Refuser cliqué", volunteer.id);
+              alert("bouton cliqué");
+              onDeny(volunteer.id);
+            }}
           />
         </div>
       </div>

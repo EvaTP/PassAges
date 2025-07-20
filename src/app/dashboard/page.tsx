@@ -1,13 +1,11 @@
 "use client";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import BlackButton from "@/app/components/BlackButton";
-import BlueButton from "@/app/components/BlueButton";
-import YellowButton from "@/app/components/YellowButton";
 import ItemVolunteer from "./components/ItemVolunteer";
 import VolunteerOnhold from "./components/VolunteerOnhold";
 import VolunteerFormAdmin from "./components/VolunteerFormAdmin";
 import { Volunteer } from "@/app/types/volunteers";
+import ConfirmationModal from "./components/ConfirmationModal";
 
 export default function Dashboard() {
   const [volunteers, setVolunteers] = useState<Volunteer[]>([]);
@@ -15,6 +13,9 @@ export default function Dashboard() {
   const [error, setError] = useState<string | null>(null);
   const [showVolunteers, setShowVolunteers] = useState(false);
   const [showVolunteersOnHold, setShowVolunteersOnHold] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+  const [modalType, setModalType] = useState<"success" | "error">("success");
 
   useEffect(() => {
     const fetchVolunteers = async () => {
@@ -44,10 +45,7 @@ export default function Dashboard() {
     fetchVolunteers();
   }, []);
 
-  // Filtrer les volontaires en attente (role)
-  const volunteersOnHold = volunteers.filter(
-    (volunteer) => volunteer.role === "volunteer_onhold"
-  );
+  //^ LISTE DE TOUS LES VOLONTAIRES avec actions edit et delete
 
   // Fonctions pour gérer l'édition et la suppression
   const handleEdit = (volunteerToEdit: Volunteer) => {
@@ -84,9 +82,90 @@ export default function Dashboard() {
         );
       } catch (err) {
         console.error("Erreur de suppression:", err);
-        // Utilisez un modal personnalisé au lieu d'alert pour une meilleure UX
+        // mettre un modal personnalisé au lieu d'alert pour une meilleure UX
         alert("Échec de la suppression du volontaire.");
       }
+    }
+  };
+  //^ LISTE DES VOLONTAIRES EN ATTENTE DE VALIDATION (_onhold) avec actions accept et deny
+  // Filtrer les volontaires en attente (role)
+  const volunteersOnHold = volunteers.filter(
+    (volunteer) => volunteer.role === "volunteer_onhold"
+  );
+
+  // Mettre à jour le statut dans "Volontaires en attente" : accepter ou refuser
+  // const handleUpdateRole = async (volunteerId: number, newRole: string) => {
+  //   try {
+  //     const response = await fetch(`/api/volunteers/${volunteerId}/role`, {
+  //       method: "PATCH",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({ role: newRole }),
+  //     });
+
+  //     if (!response.ok) {
+  //       throw new Error("Erreur lors de la mise à jour du rôle");
+  //     }
+
+  //     const updatedVolunteer = await response.json();
+
+  //      setModalMessage(
+  //     newRole === "volunteer"
+  //       ? "✅ Volontaire accepté !"
+  //       : "❌ Volontaire refusé."
+  //   );
+  //     setModalType("success");
+  //     setModalVisible(true);
+
+  //     // Met à jour localement la liste des bénévoles
+  //     setVolunteers((prevVolunteers) =>
+  //       prevVolunteers.map((v) =>
+  //         v.id === volunteerId ? { ...v, role: newRole } : v
+  //       )
+  //     );
+  //   } catch (error) {
+  //     console.error("Erreur mise à jour du rôle:", error);
+  //     setModalMessage("❌ Erreur lors de l'acceptation");
+  //     setModalType("error");
+  //     setModalVisible(true);
+  //   }
+  // };
+
+  const handleUpdateRole = async (volunteerId: number, newRole: string) => {
+    try {
+      const response = await fetch(`/api/volunteers/${volunteerId}/role`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ role: newRole }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Erreur lors de la mise à jour du rôle");
+      }
+
+      const updatedVolunteer = await response.json();
+
+      // 💡 Affichage du message de succès
+      setModalMessage(
+        newRole === "volunteer"
+          ? "✅ Volontaire accepté !"
+          : "❌ Volontaire refusé."
+      );
+      setModalType("success");
+      setModalVisible(true);
+
+      // 💾 Mise à jour de la liste des bénévoles localement
+      setVolunteers((prev) =>
+        prev.map((v) => (v.id === volunteerId ? { ...v, role: newRole } : v))
+      );
+    } catch (error) {
+      console.error("Erreur mise à jour du rôle:", error);
+      setModalMessage("❌ Une erreur est survenue.");
+      setModalType("error");
+      setModalVisible(true);
     }
   };
 
@@ -126,7 +205,6 @@ export default function Dashboard() {
       {/* AFFICHAGE VOLONTAIRES */}
       <main className="flex flex-col w-full p-6 bg-gray-50 mt-10">
         <h1>DASHBOARD ADMINISTRATEUR</h1>
-
         {/* TOUS LES VOLONTAIRES */}
         <section className="w-[90%]">
           <h2 className="text-2xl font-semibold mb-8 mt-6 text-pink-500">
@@ -163,26 +241,7 @@ export default function Dashboard() {
               )}
             </div>
           </div>
-
-          {/* {volunteers.length === 0 ? (
-            <p className="text-center text-lg text-gray-600">
-              Aucun volontaire trouvé pour le moment.
-            </p>
-          ) : (
-            <div className="flex flex-col space-y gap-4 p-4">
-              {volunteers.map((volunteer) => (
-                <ItemVolunteer
-                  key={volunteer.id}
-                  volunteer={volunteer}
-                  onEdit={handleEdit}
-                  onDelete={handleDelete}
-                />
-              ))}
-              <div></div>
-            </div>
-          )} */}
         </section>
-
         {/* VOLONTAIRES EN ATTENTE DE VALIDATION */}
         <section className="w-[90%] bg-color-gray">
           <h2 className="text-2xl font-semibold mb-4 mt-6 text-pink-500">
@@ -212,8 +271,8 @@ export default function Dashboard() {
                     <VolunteerOnhold
                       key={volunteer.id}
                       volunteer={volunteer}
-                      onAccept={handleEdit}
-                      onDeny={handleDelete}
+                      onAccept={(id) => handleUpdateRole(id, "volunteer")}
+                      onDeny={(id) => handleUpdateRole(id, "volunteer_denied")}
                     />
                   ))}
                 </div>
@@ -238,6 +297,7 @@ export default function Dashboard() {
             </div>
           )} */}
         </section>
+
         <section className="w-full">
           <div className="w-full">
             <h2 className="ml-20 mt-6 mb-4 text-2xl text-pink-500">
@@ -246,6 +306,15 @@ export default function Dashboard() {
             <VolunteerFormAdmin />
           </div>
         </section>
+
+        {/* MODALE DE CONFIRMATION */}
+        {modalVisible && (
+          <ConfirmationModal
+            message={modalMessage}
+            type={modalType}
+            onClose={() => setModalVisible(false)}
+          />
+        )}
       </main>
     </>
   );
