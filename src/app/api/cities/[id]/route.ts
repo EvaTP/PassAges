@@ -46,9 +46,15 @@ export async function DELETE(req: NextRequest, { params }: RouteParams) {
       data: deletedCity,
       message: "✅ Ville supprimée avec succès.",
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     // Gère l'erreur si la ville n'existe pas (P2025 de Prisma)
-    if (error.code === "P2025") {
+    // Vérifie si l'erreur est un objet avec une propriété 'code'
+    if (
+      typeof error === "object" &&
+      error !== null &&
+      "code" in error &&
+      error.code === "P2025"
+    ) {
       return NextResponse.json(
         {
           success: false,

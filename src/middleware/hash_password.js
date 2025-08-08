@@ -41,4 +41,4 @@ const verifyPassword = async (plainPassword, hashedPassword) => {
 // ancien exemple
 // const plainPassword = 'monMotDePasseSuperSecret';
 // const hashedPassword = '$2b$10$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36YzTQ0iP/hxt8PxyeKnVSS';
-// verifyPassword(plainPassword, hashedPassword);
+verifyPassword(plainPassword, hashedPassword);

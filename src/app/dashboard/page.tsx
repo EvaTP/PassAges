@@ -30,7 +30,7 @@ export default function Dashboard() {
 
         const parsedData = data.map((v: any) => ({
           ...v,
-          created_at: v.created_at ? new Date(v.created_at) : null,
+          created_at: new Date(v.created_at),
           updated_at: v.updated_at ? new Date(v.updated_at) : null,
         }));
         setVolunteers(parsedData);
@@ -146,7 +146,7 @@ export default function Dashboard() {
         throw new Error("Erreur lors de la mise à jour du rôle");
       }
 
-      const updatedVolunteer = await response.json();
+      // const updatedVolunteer = await response.json();
 
       // 💡 Affichage du message de la modale
       setModalMessage(

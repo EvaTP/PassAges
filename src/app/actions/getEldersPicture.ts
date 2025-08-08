@@ -2,10 +2,10 @@
 
 import { prisma } from "@/lib/prisma";
 import { redirect } from "next/navigation";
-import { cities } from "@prisma/client";
-import MomentType from "../components/MomentType";
-import { error } from "console";
-import { activities } from "@prisma/client";
+// import { cities } from "@prisma/client";
+// import MomentType from "../components/MomentType";
+// import { error } from "console";
+// import { activities } from "@prisma/client";
 
 export async function getEldersPicture() {
   try {
@@ -17,8 +17,17 @@ export async function getEldersPicture() {
     });
     //console.log("elders", elders);
     return elders;
-  } catch (error: any) {
-    console.error("Erreur lors de la récupération des images :", error.message);
+  } catch (error) {
+    // On vérifie que 'error' est bien une instance de la classe 'Error'
+    if (error instanceof Error) {
+      console.error(
+        "Erreur lors de la récupération des images :",
+        error.message
+      );
+    } else {
+      // Si ce n'est pas une instance d'Error, on affiche l'objet tel quel
+      console.error("Erreur lors de la récupération des images :", error);
+    }
     throw new Error("Erreur de récupération des images");
   }
 }
@@ -54,9 +63,3 @@ export async function searchVisitElders(formData: FormData) {
     redirect(`/activities?moment=${moments}&city=${city}`);
   }
 }
-
-/**
- * select id from activities
- * where elders.activity_id = activities.id
- *
- */
