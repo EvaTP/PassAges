@@ -1,4 +1,5 @@
 <img src="public/logo_passages.png" alt="Logo de l'application" width="100">
+
 # PassAges
 
 Site associatif de rencontres entre volontaires et seniors pour partager des moments de convivialité.
@@ -9,6 +10,9 @@ Ahmed Ayari : https://github.com/ahmedAyari94400
 
 Eva Tharrats : https://github.com/EvaTP
 
+<p align="center>
+<img src="public/passages.png" alt="visuel du site" width="100" height="100">
+</p>
 ## Stack
 
 - Trello, drawSQL
