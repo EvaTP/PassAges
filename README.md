@@ -11,7 +11,7 @@ Ahmed Ayari : https://github.com/ahmedAyari94400
 Eva Tharrats : https://github.com/EvaTP
 
 <p align="center>
-<img src="public/passages.png" alt="visuel du site" width="100" height="100">
+<img src="images/passages.png" alt="visuel du site" width="100" height="100">
 </p>
 
 ## Stack
