@@ -1,5 +1,4 @@
-![Logo de l'application](public/logo_passages.png)
-
+<img src="public/logo_passages.png" alt="Logo de l'application" width="100">
 # PassAges
 
 Site associatif de rencontres entre volontaires et seniors pour partager des moments de convivialité.

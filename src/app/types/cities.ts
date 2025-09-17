@@ -8,4 +8,5 @@ export interface City {
   region?: string;
   // Relations
   volunteers?: Volunteer[];
+  city_name?: string;
 }

@@ -2,7 +2,7 @@
 import Image from "next/image";
 import VolunteerForm from "@/app/components/VolunteerForm";
 // import Cookies from "js-cookie"; //npm install --save-dev @types/js-cookie pour que ça fonctionne en typescript
-import { redirect } from "next/navigation";
+// import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
 
 // Rubrique "Pourquoi devenir bénévole"
