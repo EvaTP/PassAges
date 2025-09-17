@@ -1,4 +1,4 @@
-<img src="public/logo_passages.png" alt="Logo de l'application" width="100">
+<img src="public/logo_passages.png" alt="Logo de l'application" width="90">
 
 # PassAges
 
@@ -11,7 +11,7 @@ Ahmed Ayari : https://github.com/ahmedAyari94400
 Eva Tharrats : https://github.com/EvaTP
 
 <p align="center">
-<img src="public/images/passages.png" alt="visuel du site" width="100" height="100">
+<img src="public/images/passages.png" alt="visuel du site" width="400" height="300">
 </p>
 
 ## Stack
