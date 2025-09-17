@@ -1,3 +1,5 @@
+![Logo de l'application](public/logo_passages.png)
+
 # PassAges
 
 Site associatif de rencontres entre volontaires et seniors pour partager des moments de convivialité.
@@ -14,7 +16,7 @@ Eva Tharrats : https://github.com/EvaTP
 - HTML/CSS, Typescript
 - Node.js
 - React, Next.js
-- BDD Neon
+- BDD PostgreSQL sur Neon
 - ORM Prisma
 - Middleware: bcrypt, NextAuth
 
