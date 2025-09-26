@@ -15,7 +15,8 @@ Eva Tharrats : https://github.com/EvaTP
 
 ## Stack
 
-- Trello, drawSQL
+- Gestion de projet : Trello
+- drawSQL
 - HTML/CSS, Typescript
 - Node.js
 - React, Next.js
@@ -35,3 +36,4 @@ Eva Tharrats : https://github.com/EvaTP
 
 - Canva
 - Lucide : https://lucide.dev/icons/
+- bibliothèque lucide-react

@@ -1,14 +1,21 @@
+"use client";
 
-export default function Logo(props: {image: string, label: string , label2: string }) {
-const firstPart =props.label.slice(0,4);
-const secondPart= props.label.slice(4);
+import Image from "next/image";
 
-    return (
-        <div className="flex items-center gap-2">
-        <img src={props.image} width={50} height={50} />
-        <p className="text-xl font-bold whitespace-nowrap"><span className="text-black  font-serif inline">{props.label}</span> <span className="text-pink-500  font-serif inline">{props.label2}</span> </p>
-    
-</div>
-    
-    )
+export default function Logo(props: {
+  image: string;
+  firstPart: string;
+  secondPart: string;
+}) {
+  return (
+    <div className="flex items-center gap-2">
+      <Image src={props.image} width={50} height={50} alt="Logo" />
+      <p className="text-3xl font-bold whitespace-nowrap">
+        <span className="text-black  font-serif inline">{props.firstPart}</span>
+        <span className="text-pink-500  font-serif inline">
+          {props.secondPart}
+        </span>
+      </p>
+    </div>
+  );
 }

@@ -36,8 +36,11 @@ export default function Volunteers() {
             POURQUOI DEVENIR BÉNÉVOLE ?
           </h2>
           <p className="text-center mt-2 mb-15 text-xl">
-            Être bénévole chez Pass<span className="text-pink-500">Ages</span>,
-            c'est bien plus qu'une simple activité.
+            Être bénévole chez{" "}
+            <span className="font-bold">
+              Pass<span className="text-pink-500">Ages</span>
+            </span>
+            , c'est bien plus qu'une simple activité.
             <br></br>
             C'est une expérience enrichissante qui apporte du sens à votre vie
             et à celle des autres.
