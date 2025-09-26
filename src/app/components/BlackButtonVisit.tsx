@@ -1,9 +1,8 @@
 "use client"; // composant Client Component
-import { ButtonProps } from "@/app/types/buttons";
+// import { ButtonProps } from "@/app/types/buttons";
 
 import { useRouter } from "next/navigation";
-import react from "react";
-import BlackButton from "@/app/components/BlackButton";
+// import BlackButton from "@/app/components/BlackButton";
 
 export default function BlackButtonVisit({ label }: { label: string }) {
   const router = useRouter();
