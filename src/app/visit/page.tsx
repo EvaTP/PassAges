@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { prisma } from "@/lib/prisma";
+import { Prisma } from "@prisma/client";
 import ElderCard from "@/app/components/ElderCard";
 import MomentToShare from "../components/MomentToShare";
 
@@ -17,9 +18,8 @@ const VisitParams = async ({
   const activity = (await searchParams)?.activity || "";
   console.log(activity);
 
-  //Appel avec prisma
-
-  const filters: any = {};
+  //Appel avec l'espace de noms Prisma
+  const filters: Prisma.eldersWhereInput = {};
 
   if (city) {
     filters.cities = {

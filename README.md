@@ -7,7 +7,6 @@ Site associatif de rencontres entre volontaires et seniors pour partager des mom
 👥 Project école réalisé par :
 
 Ahmed Ayari : https://github.com/ahmedAyari94400
-
 Eva Tharrats : https://github.com/EvaTP
 
 <p align="center">

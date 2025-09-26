@@ -1,7 +1,7 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { redirect } from "next/navigation";
+// import { redirect } from "next/navigation";
 // import { cities } from "@prisma/client";
 // import MomentType from "../components/MomentType";
 // import { error } from "console";
@@ -32,34 +32,30 @@ export async function getEldersPicture() {
   }
 }
 
-export async function searchVisitElders(formData: FormData) {
-  const moments = formData.get("moment") as string;
+// export async function searchVisitElders(formData: FormData) {
+//   const moments = formData.get("moment") as string;
 
-  if (moments == "-- Choisissez un moment --") {
-    throw new Error("Sélectionnez un moment");
-  }
+//   if (moments == "-- Choisissez un moment --") {
+//     throw new Error("Sélectionnez un moment");
+//   }
 
-  const activity = await prisma.activities.findMany({
-    where: { activity_type: moments },
-    include: { elders: true },
-  });
+//   const activity = await prisma.activities.findMany({
+//     where: { activity_type: moments },
+//     include: { elders: true },
+//   });
+//   console.log(activity);
+//   return activity;
+//   const city = formData.get("city");
+//   const activities = await prisma.activities.findMany({
+//     where: { activity_type: moments },
+//     include: { elders: true },
+//   });
 
-  console.log(activity);
+//   if (city == "") {
+//     throw new Error("Veuillez taper la ville recherchée");
+//   }
 
-  return activity;
-
-  const city = formData.get("city");
-
-  const activities = await prisma.activities.findMany({
-    where: { activity_type: moments },
-    include: { elders: true },
-  });
-
-  if (city == "") {
-    throw new Error("Veuillez taper la ville recherchée");
-  }
-
-  if (city && moments) {
-    redirect(`/activities?moment=${moments}&city=${city}`);
-  }
-}
+//   if (city && moments) {
+//     redirect(`/activities?moment=${moments}&city=${city}`);
+//   }
+// }

@@ -4,14 +4,14 @@ import { NextRequest, NextResponse } from "next/server";
 const prisma = new PrismaClient();
 
 // Définition du type pour les paramètres de la route dynamique avec l'ID
-interface RouteParams {
-  params: {
-    id: string;
-  };
-}
+// interface RouteParams {
+//   params: {
+//     id: string;
+//   };
+// }
 
 // typage
-type newVolunteerData = {
+type NewVolunteerData = {
   firstname: string;
   lastname: string;
   email: string;
@@ -20,25 +20,33 @@ type newVolunteerData = {
   motivation?: string;
 };
 
-
-
-
 export async function POST(req: NextRequest) {
   try {
-    const newVolunteerData = await req.json();
+    const newVolunteerData: NewVolunteerData = await req.json();
 
-    const { firstname, lastname, email, city, zipcode, motivation,password, moments, activities } =
-      newVolunteerData;
+    const {
+      firstname,
+      lastname,
+      email,
+      city,
+      zipcode,
+      motivation,
+      password,
+      moments,
+      activities,
+    } = newVolunteerData;
 
-      const volunteerDbInfo = await prisma.volunteers.findUnique({
+    const volunteerDbInfo = await prisma.volunteers.findUnique({
       where: {
         email: email,
         password: password,
-      }
-    })
+      },
+    });
 
-    if(volunteerDbInfo?.email == newVolunteerData.email || volunteerDbInfo?.password == newVolunteerData.password)
-    {
+    if (
+      volunteerDbInfo?.email == newVolunteerData.email ||
+      volunteerDbInfo?.password == newVolunteerData.password
+    ) {
       return NextResponse.json(
         { success: false, message: "⚠️Bénévole déjà enregistré." },
         { status: 400 }

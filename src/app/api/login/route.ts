@@ -1,8 +1,6 @@
-
-
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { cookies } from "next/headers";
+// import { cookies } from "next/headers";
 
 export async function POST(req: NextRequest) {
   try {
@@ -40,13 +38,13 @@ export async function POST(req: NextRequest) {
       );
 
       // 🔐 On ajoute un cookie httpOnly
-      response.cookies.set("session", volunteerDbInfo.firstname, {
-        httpOnly: true,
-        secure: true,
-        sameSite: "lax",
-        path: "/",
-        maxAge: 60 * 60 * 24, // 1 jour
-      });
+      // response.cookies.set("session", volunteerDbInfo.firstname, {
+      //   httpOnly: true,
+      //   secure: true,
+      //   sameSite: "lax",
+      //   path: "/",
+      //   maxAge: 60 * 60 * 24, // 1 jour
+      // });
 
       return response;
     }
@@ -65,4 +63,4 @@ export async function POST(req: NextRequest) {
   } finally {
     await prisma.$disconnect();
   }
-}    
+}

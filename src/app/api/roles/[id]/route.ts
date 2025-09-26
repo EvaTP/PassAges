@@ -8,6 +8,7 @@
 
 import { PrismaClient } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
+import { handleApiError } from "@/lib/handleApiError";
 
 const prisma = new PrismaClient();
 
@@ -46,7 +47,6 @@ export async function GET(req: NextRequest, { params }: RouteParams) {
         { status: 404 }
       );
     }
-
     console.log(`Rôle avec l'ID ${id} trouvé.`);
 
     return NextResponse.json({ success: true, data: role });
@@ -91,26 +91,8 @@ export async function PATCH(req: NextRequest, { params }: RouteParams) {
     console.log(`✅ Rôle avec l'ID ${id} mis à jour.`);
 
     return NextResponse.json({ success: true, data: updatedRole });
-  } catch (error: any) {
-    // Gère l'erreur si le rôle n'existe pas (P2025 de Prisma)
-    if (error.code === "P2025") {
-      return NextResponse.json(
-        {
-          success: false,
-          message: "❌ Rôle non trouvé pour la mise à jour.",
-        },
-        { status: 404 }
-      );
-    }
-    console.error("❌ Erreur lors de la mise à jour du rôle :", error);
-    return NextResponse.json(
-      {
-        success: false,
-        message: "❌ Erreur serveur lors de la mise à jour.",
-        details: error.message,
-      },
-      { status: 500 }
-    );
+  } catch (error: unknown) {
+    return handleApiError(error, "la mise à jour du rôle du bénévole");
   } finally {
     await prisma.$disconnect();
   }
@@ -143,26 +125,8 @@ export async function DELETE(req: NextRequest, { params }: RouteParams) {
       data: deletedRole,
       message: "✅ Rôle supprimé avec succès.",
     });
-  } catch (error: any) {
-    // Gère l'erreur si le rôle n'existe pas (P2025 de Prisma)
-    if (error.code === "P2025") {
-      return NextResponse.json(
-        {
-          success: false,
-          message: "❓Rôle non trouvé pour la suppression.",
-        },
-        { status: 404 }
-      );
-    }
-    console.error("❌ Erreur lors de la suppression du rôle :", error);
-    return NextResponse.json(
-      {
-        success: false,
-        message: "❌ Erreur serveur lors de la suppression.",
-        details: error.message,
-      },
-      { status: 500 }
-    );
+  } catch (error: unknown) {
+    return handleApiError(error, "la suppression du rôle");
   } finally {
     await prisma.$disconnect();
   }

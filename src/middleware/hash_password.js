@@ -1,6 +1,6 @@
 console.log("début du script de hashage");
 
-const bcrypt = require("bcrypt");
+import bcrypt from "bcrypt";
 const saltRounds = 10; // Facteur de travail : nombre de fois que l'algorithme sera exécuté
 
 // hasher un mot de passe

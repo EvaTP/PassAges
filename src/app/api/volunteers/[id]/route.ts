@@ -8,6 +8,7 @@
 
 import { PrismaClient } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
+import { handleApiError } from "@/lib/handleApiError";
 
 const prisma = new PrismaClient();
 
@@ -59,11 +60,16 @@ export async function GET(req: NextRequest, { params }: RouteParams) {
     console.log(`Volontaire avec l'ID ${id} trouvé.`);
 
     return NextResponse.json({ success: true, data: volunteer });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error(
       "❌ Erreur lors de la récupération du bénévole par ID :",
       error
     );
+
+    // Vérification explicite pour unknown
+    const errorMessage =
+      error instanceof Error ? error.message : "Erreur inconnue";
+
     return NextResponse.json(
       {
         success: false,
@@ -140,9 +146,14 @@ export async function PATCH(req: NextRequest, { params }: RouteParams) {
     console.log(`✅ Volontaire avec l'ID ${id} mis à jour.`);
 
     return NextResponse.json({ success: true, data: updatedVolunteer });
-  } catch (error: any) {
+  } catch (error: unknown) {
     // Gère l'erreur si le volontaire n'existe pas (P2025 de Prisma)
-    if (error.code === "P2025") {
+    if (
+      typeof error === "object" &&
+      error !== null &&
+      "code" in error &&
+      (error as { code?: string }).code === "P2025"
+    ) {
       return NextResponse.json(
         {
           success: false,
@@ -152,11 +163,13 @@ export async function PATCH(req: NextRequest, { params }: RouteParams) {
       );
     }
     console.error("❌ Erreur lors de la mise à jour du bénévole :", error);
+    const errorMessage =
+      error instanceof Error ? error.message : "Erreur inconnue";
     return NextResponse.json(
       {
         success: false,
         message: "❌ Erreur serveur lors de la mise à jour.",
-        details: error.message,
+        details: errorMessage,
       },
       { status: 500 }
     );
@@ -193,9 +206,14 @@ export async function DELETE(req: NextRequest, { params }: RouteParams) {
       data: deletedVolunteer,
       message: "✅ Volontaire supprimé avec succès.",
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     // Gère l'erreur si le volontaire n'existe pas (P2025 de Prisma)
-    if (error.code === "P2025") {
+    if (
+      typeof error === "object" &&
+      error !== null &&
+      "code" in error &&
+      (error as { code?: string }).code === "P2025"
+    ) {
       return NextResponse.json(
         {
           success: false,
@@ -205,11 +223,14 @@ export async function DELETE(req: NextRequest, { params }: RouteParams) {
       );
     }
     console.error("❌ Erreur lors de la suppression du bénévole :", error);
+
+    const errorMessage =
+      error instanceof Error ? error.message : "Erreur inconnue";
     return NextResponse.json(
       {
         success: false,
         message: "❌ Erreur serveur lors de la suppression.",
-        details: error.message,
+        details: errorMessage,
       },
       { status: 500 }
     );

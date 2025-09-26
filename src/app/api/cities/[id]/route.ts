@@ -19,7 +19,10 @@ interface RouteParams {
 }
 
 // DELETE : Supprimer une ville par son ID
-export async function DELETE(req: NextRequest, { params }: RouteParams) {
+export async function DELETE(
+  req: NextRequest,
+  { params }: { params: { id: string } }
+) {
   try {
     const { id } = params; // Récupère l'ID de la ville depuis les paramètres de l'URL
 
@@ -47,7 +50,12 @@ export async function DELETE(req: NextRequest, { params }: RouteParams) {
       message: "✅ Ville supprimée avec succès.",
     });
   } catch (error: unknown) {
-    // Gère l'erreur si la ville n'existe pas (P2025 de Prisma)
+    const errorMessage =
+      typeof error === "object" && error !== null && "message" in error
+        ? (error as { message: string }).message
+        : String(error);
+
+    // Gère l'erreur si la ville n'existe pas (erreur P2025 de Prisma)
     // Vérifie si l'erreur est un objet avec une propriété 'code'
     if (
       typeof error === "object" &&
@@ -63,12 +71,15 @@ export async function DELETE(req: NextRequest, { params }: RouteParams) {
         { status: 404 }
       );
     }
-    console.error("❌ Erreur lors de la suppression de la ville :", error);
+    console.error(
+      "❌ Erreur lors de la suppression de la ville :",
+      errorMessage
+    );
     return NextResponse.json(
       {
         success: false,
         message: "❌ Erreur serveur lors de la suppression.",
-        details: error.message,
+        details: errorMessage,
       },
       { status: 500 }
     );

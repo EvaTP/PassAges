@@ -24,7 +24,7 @@ type newVolunteerData = {
 };
 
 // GET : récupérer tous les bénévoles
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     const allVolunteers = await prisma.volunteers.findMany();
 
