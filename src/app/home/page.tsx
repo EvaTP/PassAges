@@ -7,10 +7,11 @@ import BlackButton from "@/app/components/BlackButton";
 import BlueButton from "@/app/components/BlueButton";
 import YellowButton from "@/app/components/YellowButton";
 import BlackButtonVisit from "@/app/components/BlackButtonVisit";
-// import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default async function Home() {
   const elders: ElderPicture[] = await getEldersPicture();
+  const router = useRouter();
 
   return (
     <>
@@ -86,7 +87,9 @@ export default async function Home() {
                     />
                   ) : (
                     <div className="w-full h-full bg-gray-200 flex items-center justify-center rounded-sm">
-                      <span className="text-gray-600 text-sm">Pas d'image</span>
+                      <span className="text-gray-600 text-sm">
+                        Pas d&apos;image
+                      </span>
                     </div>
                   )}
                 </div>
@@ -97,11 +100,11 @@ export default async function Home() {
 
         <div className="bg-rose-50 p-6 mt-20">
           <h2 className="text-center text-2xl font-bold mb-2">
-            COMMENT CA MARCHE
+            COMMENT ÇA MARCHE
           </h2>
           <p className="text-center mt-2 mb-15 text-xl">
-            Offrir un peu de votre temps, c'est offrir beaucoup.<br></br>
-            Découvrez comment planifier une visite en toute simplicité.
+            Offrir un peu de votre temps, c&apos;est offrir beaucoup. Découvrez
+            comment planifier une visite en toute simplicité.
           </p>
           <div className="grid md:grid-cols-4 gap-6">
             {HOW_IT_WORKS.map((w, index) => (
@@ -125,7 +128,7 @@ export default async function Home() {
             Offrez un peu de votre temps, partagez un moment, créez du lien...
             Chaque présence compte. <br />
             En tendant la main à une personne âgée, vous lui offrez bien plus
-            qu'une visite : une vraie bouffée de chaleur humaine.
+            qu&apos;une visite : une vraie bouffée de chaleur humaine.
           </p>
           <div className=" flex flex-row mt-10 mb-5 gap-6 content-center">
             {/* <BlackButton
@@ -133,8 +136,14 @@ export default async function Home() {
               onClick={handleProgrammerVisiteClick}
             /> */}
             <BlackButtonVisit label="Programmer une visite" />
-            <BlueButton label="Faire un don 🫶" />
-            <YellowButton label="Devenir bénévole" />
+            <BlueButton
+              label="Faire un don 🫶"
+              onClick={() => router.push("/#")}
+            />
+            <YellowButton
+              onClick={() => router.push("/volunteers")}
+              label="Devenir bénévole"
+            />
           </div>
         </div>
       </main>

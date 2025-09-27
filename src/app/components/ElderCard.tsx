@@ -1,7 +1,8 @@
 "use client";
 import Image from "next/image";
 import BlackButton from "./BlackButton";
-import { useContext } from "react";
+import React from "react";
+import { useRouter } from "next/navigation";
 
 // Type pour les données d'un elder avec ses relations
 type ElderWithRelations = {
@@ -25,6 +26,7 @@ interface ElderCardProps {
 }
 
 export default function ElderCard({ elder }: ElderCardProps): React.ReactNode {
+  const router = useRouter();
   return (
     <div className="bg-white rounded-lg shadow-md h-full flex flex-col justify-start overflow-hidden">
       {/* 1. Picture */}
@@ -66,9 +68,12 @@ export default function ElderCard({ elder }: ElderCardProps): React.ReactNode {
 
       {/* 7. Bouton "programmer un moment" */}
       <div className="flex justify-center p-4 mt-auto">
-        <a href="/volunteers">
-          <BlackButton label="Programmer un moment" />
-        </a>
+        {/* <a href="/volunteers"> */}
+        <BlackButton
+          onClick={() => router.push("/volunteers")}
+          label="Programmer un moment"
+        />
+        {/* </a> */}
       </div>
     </div>
   );

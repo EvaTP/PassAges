@@ -3,7 +3,7 @@ import Image from "next/image";
 import VolunteerForm from "@/app/components/VolunteerForm";
 // import Cookies from "js-cookie"; //npm install --save-dev @types/js-cookie pour que ça fonctionne en typescript
 // import { redirect } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 // Rubrique "Pourquoi devenir bénévole"
 import { WHY_VOLUNTEER } from "@/app/data/cards";
@@ -40,10 +40,10 @@ export default function Volunteers() {
             <span className="font-bold">
               Pass<span className="text-pink-500">Ages</span>
             </span>
-            , c'est bien plus qu'une simple activité.
+            , c&apos;est bien plus qu&apos;une simple activité.
             <br></br>
-            C'est une expérience enrichissante qui apporte du sens à votre vie
-            et à celle des autres.
+            C&apos;est une expérience enrichissante qui apporte du sens à votre
+            vie et à celle des autres.
           </p>
           <div className="grid md:grid-cols-4 gap-6">
             {WHY_VOLUNTEER.map((w, index) => (
