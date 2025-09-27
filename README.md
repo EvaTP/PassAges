@@ -4,7 +4,7 @@
 
 Site associatif de rencontres entre volontaires et seniors pour partager des moments de convivialité.
 
-👥 Project école réalisé par :
+👥 Projet école réalisé par :
 
 Ahmed Ayari : https://github.com/ahmedAyari94400
 Eva Tharrats : https://github.com/EvaTP
