@@ -28,11 +28,20 @@ export default function Dashboard() {
         const result = await response.json();
         const data = result.data;
 
-        const parsedData = data.map((v: any) => ({
-          ...v,
-          created_at: new Date(v.created_at),
-          updated_at: v.updated_at ? new Date(v.updated_at) : null,
+        const parsedData = (data as object[]).map((v) => ({
+          ...(v as any),
+          created_at: new Date((v as any).created_at),
+          updated_at: (v as any).updated_at
+            ? new Date((v as any).updated_at)
+            : null,
         }));
+
+        // ancienne version avec any
+        // const parsedData = data.map((v: any) => ({
+        //   ...v,
+        //   created_at: new Date(v.created_at),
+        //   updated_at: v.updated_at ? new Date(v.updated_at) : null,
+        // }));
         setVolunteers(parsedData);
       } catch (err: any) {
         console.error("Erreur lors de la récupération des volontaires:", err);

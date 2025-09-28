@@ -1,11 +1,12 @@
 "use client";
+import React from "react";
 
 export default function MomentType(props: {
   label: string;
   moments: Array<{ label: string; value: string }>;
   onChange: (moment: string) => void;
 }) {
-  const momentChanged = (e: any) => {
+  const momentChanged = (e: React.ChangeEvent<HTMLSelectElement>) => {
     props.onChange(e.target.value);
   };
   return (

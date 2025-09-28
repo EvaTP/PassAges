@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 interface SocialIcon {
   src: string;
@@ -36,17 +37,19 @@ export const PassagesSection: React.FC = () => {
       </h4>
       <p className="mb-4 leading-relaxed text-white">
         Notre mission est de recréer du lien avec les personnes âgées isolées,
-        en leur offrant des moments de partage, d'écoute et de présence.
+        en leur offrant des moments de partage, d&apos;écoute et de présence.
       </p>
       <div className="flex space-x-4 gap-4 ml-2">
         {socialIcons.map(({ src, alt }) => (
           <a
             key={alt}
-            // href="#"
+            href="#"
             className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-700 hover:bg-gray-600 transition"
             aria-label={alt}
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            <img src={src} alt={alt} className="w-6 h-6" />
+            <Image src={src} alt={alt} width={24} height={24} />
           </a>
         ))}
       </div>

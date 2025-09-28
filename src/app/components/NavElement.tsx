@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function NavElement(props: {
   icon: string;
@@ -8,7 +9,7 @@ export default function NavElement(props: {
   return (
     <li className="mr-10">
       <Link href={props.link} className="hover:text-gray-400 flex items-center">
-        <img src={props.icon} className="w-5 h-5 mr-3" alt={props.label} />
+        <Image src={props.icon} className="w-5 h-5 mr-3" alt={props.label} />
         <span className="inline-block">{props.label}</span>
       </Link>
     </li>

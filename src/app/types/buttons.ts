@@ -2,7 +2,7 @@
 
 export interface ButtonProps {
   label: string;
-  onClick: () => void;
+  onClick?: () => void;
   type?: "button" | "submit" | "reset"; // Pour le type HTML du bouton (optionnel avec ?)
 }
 

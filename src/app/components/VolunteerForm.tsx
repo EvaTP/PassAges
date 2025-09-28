@@ -1,6 +1,5 @@
 "use client";
-import { useEffect, useState, ChangeEvent } from "react";
-
+import { useState } from "react";
 //^ interfaces TypeScript
 type VolunteerFormData = {
   firstname: string;
@@ -97,7 +96,7 @@ export default function VolunteerForm() {
       <div className="">
         <div className="border-b border-gray-900/10 pb-3">
           <h2 className="text-center text-base/7 font-semibold text-gray-900 mt-4">
-            FORMULAIRE D'INSCRIPTION
+            FORMULAIRE D&apos;INSCRIPTION
           </h2>
           <p className="mt-3 text-center text-sm/6 text-gray-600">
             Remplissez ce formulaire pour rejoindre notre réseau de bénévoles.
