@@ -6,15 +6,8 @@ import { NextRequest, NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
 
-// Définition du type pour les paramètres de la route dynamique avec l'ID
-interface RouteParams {
-  params: {
-    id: string;
-  };
-}
-
 // typage
-type newVolunteerData = {
+type NewVolunteerData = {
   firstname: string;
   lastname: string;
   email: string;
@@ -54,7 +47,7 @@ export async function GET() {
 // POST : CREER un volunteer par l'administrateur
 export async function POST(req: NextRequest) {
   try {
-    const newVolunteerData = await req.json();
+    const newVolunteerData: NewVolunteerData = await req.json();
 
     const { firstname, lastname, email, city, zipcode, motivation } =
       newVolunteerData;

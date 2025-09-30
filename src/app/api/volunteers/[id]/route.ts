@@ -9,15 +9,29 @@
 import { PrismaClient } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 import { handleApiError } from "@/lib/handleApiError";
+import bcrypt from "bcrypt";
 
 const prisma = new PrismaClient();
 
-// Définition du type pour les paramètres de la route dynamique
+// Définition du type pour les paramètres de la route dynamique avec l'ID
 interface RouteParams {
   params: {
     id: string; // L'ID sera une chaîne de caractères provenant de l'URL
   };
 }
+
+// Typage pour une mise à jour (partielle)
+type UpdateVolunteerData = {
+  firstname?: string;
+  lastname?: string;
+  email?: string;
+  city_id?: number;
+  zipcode?: string;
+  motivation?: string;
+  activity_id?: number;
+  role?: string;
+  password?: string;
+};
 
 // GET : Récupérer un volontaire par son ID
 export async function GET(req: NextRequest, { params }: RouteParams) {
@@ -69,10 +83,7 @@ export async function GET(req: NextRequest, { params }: RouteParams) {
 }
 
 // PATCH : Mettre à jour un volontaire existant par son ID
-export async function PATCH(
-  req: NextRequest,
-  { params }: { params: { id: string } }
-) {
+export async function PATCH(req: NextRequest, { params }: RouteParams) {
   try {
     const { id } = params;
     const volunteerId = parseInt(id, 10);
@@ -84,20 +95,92 @@ export async function PATCH(
       );
     }
 
-    const body = await req.json();
+    const updateData: UpdateVolunteerData = await req.json();
 
+    // Si 'city' est fourni → trouver son ID
+    if (updateData.city_id && !updateData.city_id) {
+      const cityRecord = await prisma.cities.findUnique({
+        where: { city_name: updateData.city_id },
+      });
+
+      if (!cityRecord) {
+        return NextResponse.json(
+          { success: false, message: "❓ Ville non trouvée dans la base." },
+          { status: 404 }
+        );
+      }
+      updateData.city_id = cityRecord.id;
+      delete updateData.city_id;
+    }
+
+    // Si 'activity' est fournie → trouver son ID
+    if (updateData.activity_id && !updateData.activity_id) {
+      const activityRecord = await prisma.activities.findFirst({
+        where: { activity_type: updateData.activity_id },
+      });
+
+      if (!activityRecord) {
+        return NextResponse.json(
+          { success: false, message: "❓ Activité non trouvée dans la base." },
+          { status: 404 }
+        );
+      }
+      updateData.activity_id = activityRecord.id;
+      delete updateData.activity_id;
+    }
+
+    // Si 'password' est fourni → le hacher avant de l’enregistrer
+    if (updateData.password) {
+      updateData.password = await bcrypt.hash(updateData.password, 10);
+    }
+
+    // Effectue la mise à jour
     const updatedVolunteer = await prisma.volunteers.update({
       where: { id: volunteerId },
-      data: body,
+      data: updateData,
+      include: {
+        cities: { select: { city_name: true } },
+        activities: { select: { activity_type: true } },
+      },
     });
 
-    console.log(`Volontaire avec l'ID ${id} mis à jour.`);
+    console.log(`✅ Volontaire avec l'ID ${id} mis à jour.`);
 
     return NextResponse.json({ success: true, data: updatedVolunteer });
   } catch (error: unknown) {
     return handleApiError(error, "la mise à jour du bénévole");
   }
 }
+
+// export async function PATCH(
+//   req: NextRequest,
+//   { params }: { params: { id: string } }
+// ) {
+//   try {
+//     const { id } = params;
+//     const volunteerId = parseInt(id, 10);
+
+//     if (isNaN(volunteerId)) {
+//       return NextResponse.json(
+//         { success: false, message: "❓ ID de volontaire invalide." },
+//         { status: 400 }
+//       );
+//     }
+
+//     const body = await req.json();
+
+//     const updatedVolunteer = await prisma.volunteers.update({
+//       where: { id: volunteerId },
+//       data: body,
+//     });
+
+//     console.log(`Volontaire avec l'ID ${id} mis à jour.`);
+
+//     return NextResponse.json({ success: true, data: updatedVolunteer });
+//   } catch (error: unknown) {
+//     return handleApiError(error, "la mise à jour du bénévole");
+//   }
+// }
 
 // ancienne version
 // export async function PATCH(req: NextRequest, { params }: RouteParams) {

@@ -30,7 +30,7 @@ export default function VolunteerForm() {
     motivation: "",
   });
 
-  // const [cities, setCities] = useState<City[]>([]); (en attente de l'API villes et formulaire select)
+  const [cities, setCities] = useState<City[]>([]);
   const [activities, setActivities] = useState<Activity[]>([]);
   const [roles, setRoles] = useState<Role[]>([]);
 

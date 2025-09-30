@@ -1,5 +1,4 @@
 import React from "react";
-import Link from "next/link";
 
 interface InformationLink {
   label: string;
@@ -8,14 +7,14 @@ interface InformationLink {
 }
 
 const informationLinks: InformationLink[] = [
-  { label: "FAQs", href: "/faq" },
-  { label: "Liste des activités", href: "/activites" },
+  { label: "FAQs", href: "/#" },
+  { label: "Liste des activités", href: "/#" },
   {
     label: "Nous contacter",
     href: "mailto:passages@gmail.com",
     isExternal: true,
   },
-  { label: "Mentions légales", href: "/mentions-legales" },
+  { label: "Mentions légales", href: "/#" },
 ];
 
 export const InformationsSection: React.FC = () => {

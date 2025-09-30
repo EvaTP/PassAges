@@ -2,10 +2,10 @@
 import BlueButton from "@/app/components/BlueButton";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function LoginForm() {
-
-  const [firstname, setFirstname] = useState(""); 
+  const [firstname, setFirstname] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const router = useRouter();
@@ -25,8 +25,7 @@ export default function LoginForm() {
 
       if (response.ok) {
         setMessage(data.message); // ✅ Connexion réussie
-        router.push("/home") //On redirige le bénévole vers la page d'accueil une fois connecté
-        
+        router.push("/home"); //On redirige le bénévole vers la page d'accueil une fois connecté
       } else {
         setMessage(data.message); // ❌ Identifiants incorrects
       }
@@ -36,7 +35,6 @@ export default function LoginForm() {
     }
   };
 
-
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -44,11 +42,13 @@ export default function LoginForm() {
           <form action="#" method="POST" className="space-y-6 w-80">
             <div>
               <h2 className="mt-10 mb-8 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
-                <img
+                <Image
                   alt="logo-Passages"
                   src="/logo_passages.svg"
-                  className="mx-auto h-10 w-auto"
-                />{" "}
+                  fill
+                  className="object-contain"
+                  // className="mx-auto h-10 w-auto"
+                />
                 Se connecter
               </h2>
               <label
