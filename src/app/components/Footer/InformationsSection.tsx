@@ -27,10 +27,21 @@ export const InformationsSection: React.FC = () => {
         INFORMATIONS UTILES
       </h4>
       <ul className="footer-li text-white">
-        <li>FAQs</li>
-        <li>Liste des activités</li>
-        <li>Nous contacter</li>
-        <li>Mentions légales</li>
+        {informationLinks.map((link, index) => (
+          <li key={index}>
+            {link.href ? (
+              <a
+                href={link.href}
+                target={link.isExternal ? "_blank" : "_self"}
+                rel={link.isExternal ? "noopener noreferrer" : undefined}
+              >
+                {link.label}
+              </a>
+            ) : (
+              link.label
+            )}
+          </li>
+        ))}
       </ul>
     </div>
   );

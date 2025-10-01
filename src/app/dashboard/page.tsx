@@ -5,6 +5,7 @@ import ItemVolunteer from "./components/ItemVolunteer";
 import VolunteerOnhold from "./components/VolunteerOnhold";
 import VolunteerFormAdmin from "./components/VolunteerFormAdmin";
 import { Volunteer } from "@/app/types/volunteers";
+import { VolunteerRaw } from "@/app/types/volunteers";
 import ConfirmationModal from "./components/ConfirmationModal";
 
 export default function Dashboard() {
@@ -26,15 +27,51 @@ export default function Dashboard() {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const result = await response.json();
-        const data = result.data;
+        const volunteersData: VolunteerRaw[] = result.data;
 
-        const parsedData = (data as object[]).map((v) => ({
-          ...(v as any),
-          created_at: new Date((v as any).created_at),
-          updated_at: (v as any).updated_at
-            ? new Date((v as any).updated_at)
-            : null,
+        // Parsing pour respecter le type VolunteerRaw
+        const parsedData: Volunteer[] = volunteersData.map((v) => ({
+          ...v,
+          created_at: v.created_at ? new Date(v.created_at) : new Date(),
+          updated_at: v.updated_at ? new Date(v.updated_at) : new Date(),
         }));
+
+        // const parsedData: Volunteer[] = volunteersData.map(
+        //   (v: VolunteerRaw) => ({
+        //     id: v.id,
+        //     firstname: v.firstname,
+        //     lastname: v.lastname,
+        //     role: v.role ?? null,
+        //     password: v.password ?? null,
+        //     zipcode: v.zipcode ?? null,
+        //     motivation: v.motivation ?? "",
+        //     email: v.email ?? "",
+
+        //     created_at: v.created_at ? new Date(v.created_at) : new Date(),
+        //     updated_at: v.updated_at ? new Date(v.updated_at) : new Date(),
+
+        //     city_id: v.city_id ?? null,
+        //     activity_id: v.activity_id ?? null,
+
+        //     moments: v.moments ?? [],
+        //     activities: v.activities ?? null,
+        //     cities: v.cities ?? null,
+        //   })
+        // );
+
+        //   const parsedData: Volunteer[] = (data as Volunteer[]).map((v) => ({
+        //   ...v,
+        //   created_at: new Date(v.created_at),
+        //   updated_at: v.updated_at ? new Date(v.updated_at) : null,
+        // }));
+
+        // const parsedData = (data as object[]).map((v) => ({
+        //   ...(v as any),
+        //   created_at: new Date((v as any).created_at),
+        //   updated_at: (v as any).updated_at
+        //     ? new Date((v as any).updated_at)
+        //     : null,
+        // }));
 
         // ancienne version avec any
         // const parsedData = data.map((v: any) => ({
@@ -43,9 +80,9 @@ export default function Dashboard() {
         //   updated_at: v.updated_at ? new Date(v.updated_at) : null,
         // }));
         setVolunteers(parsedData);
-      } catch (err: any) {
-        console.error("Erreur lors de la récupération des volontaires:", err);
-        setError(err.message);
+      } catch (error) {
+        console.error("Erreur lors de la récupération des volontaires:", error);
+        setError(error instanceof Error ? error.message : String(error));
       } finally {
         setLoading(false);
       }

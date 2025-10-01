@@ -1,17 +1,9 @@
 //"use client";
 import Image from "next/image";
 import LoginForm from "@/app/components/LoginForm";
-
-
-
-
 import YellowButton from "@/app/components/YellowButton";
 
 export default async function Login() {
-
-    
-    
-
   return (
     <>
       <div className="">
@@ -32,17 +24,22 @@ export default async function Login() {
           <br />
           Chaque sourire porte une histoire, chaque rencontre est une promesse.
         </p>
-        <LoginForm />
-        <div>
-          <p className="mt-10 text-center text-lg text-gray-800">
-            Pas encore membre de la communauté Passages ? 👇
-          </p>
-          <br></br>
-          <div className="flex justify-center p-8">
-            <YellowButton label="Devenir bénévole" />
-          </div>
-        </div>
       </main>
+
+      {/* Formulaire de connexion */}
+      <div className="min-h-screen flex items-center justify-center">
+        <LoginForm />
+      </div>
+
+      <div className="bg-white">
+        <p className="mt-20 text-center text-2xl text-gray-800">
+          Pas encore membre de la communauté Passages ? 👇
+        </p>
+
+        <div className="flex justify-center p-8">
+          <YellowButton label="Devenir bénévole" />
+        </div>
+      </div>
     </>
   );
 }

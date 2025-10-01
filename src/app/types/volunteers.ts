@@ -11,10 +11,10 @@ export interface Volunteer {
   role: string | null;
   password: string | null;
   zipcode: string | null;
-  motivation: string;
-  email: string;
-  created_at: Date;
-  updated_at: Date;
+  motivation: string | null;
+  email: string | null;
+  created_at: Date | null;
+  updated_at: Date | null;
 
   // Clés étrangères
   city_id: number | null;
@@ -24,6 +24,22 @@ export interface Volunteer {
   moments?: Moment[];
   activities?: Activity | null;
   cities?: City | null;
+}
+
+// interface pour les données brutes reçues de l'API (avant conversion des dates)
+export interface VolunteerRaw {
+  id: number;
+  firstname: string;
+  lastname: string;
+  role: string | null;
+  password: string | null;
+  zipcode: string | null;
+  motivation: string;
+  email: string | null;
+  created_at: string | null;
+  updated_at: string | null;
+  city_id: number | null;
+  activity_id: number | null;
 }
 
 // interface ADMIN pour le formulaire de création de volontaires dans le dashboard
