@@ -9,15 +9,16 @@
 import { PrismaClient } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 import { handleApiError } from "@/lib/handleApiError"; // Importation de la fonction de gestion des erreurs
-import { ParamsWithId } from "@/app/types/paramsid";
 
 const prisma = new PrismaClient();
 
 // GET : Récupérer une ville par son ID
-export async function GET(req: NextRequest, context: { params: ParamsWithId }) {
+export async function GET(
+  req: NextRequest,
+  { params }: { params: { id: string } }
+) {
   try {
-    const { id } = context.params;
-    const cityId = parseInt(id, 10);
+    const cityId = parseInt(params.id, 10);
 
     if (isNaN(cityId)) {
       return NextResponse.json(
@@ -37,7 +38,7 @@ export async function GET(req: NextRequest, context: { params: ParamsWithId }) {
       );
     }
 
-    console.log(`Ville avec l'ID ${id} trouvée.`);
+    console.log(`Ville avec l'ID ${params.id} trouvée.`);
     return NextResponse.json({ success: true, data: city });
   } catch (error) {
     return handleApiError(error, "la récupération de la ville");
@@ -49,12 +50,12 @@ export async function GET(req: NextRequest, context: { params: ParamsWithId }) {
 // PATCH : Mettre à jour une ville par son ID
 export async function PATCH(
   req: NextRequest,
-  context: { params: ParamsWithId }
+  { params }: { params: { id: string } }
 ) {
   try {
-    const { id } = context.params;
+    const { id } = params;
     const updateData = await req.json();
-    const cityId = parseInt(id, 10);
+    const cityId = parseInt(params.id, 10);
 
     if (isNaN(cityId)) {
       return NextResponse.json(
@@ -80,11 +81,10 @@ export async function PATCH(
 // DELETE : Supprimer une ville par son ID
 export async function DELETE(
   req: NextRequest,
-  context: { params: ParamsWithId }
+  { params }: { params: { id: string } }
 ) {
   try {
-    const { id } = context.params;
-    const cityId = parseInt(id, 10);
+    const cityId = parseInt(params.id, 10);
 
     if (isNaN(cityId)) {
       return NextResponse.json(
@@ -97,7 +97,7 @@ export async function DELETE(
       where: { id: cityId },
     });
 
-    console.log(`Ville avec l'ID ${id} supprimée.`);
+    console.log(`Ville avec l'ID ${params.id} supprimée.`);
     return NextResponse.json({
       success: true,
       data: deletedCity,
