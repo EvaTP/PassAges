@@ -1,5 +1,5 @@
-// src/app/api/roels/[id]/route.ts
-// toutes les actions nécessitant de l'id du role
+// src/app/api/roles/[id]/route.ts
+// toutes les actions nécessitant de l'id du rôle :
 // GET by ID, Patch et Delete
 
 // - GET http://localhost:3000/api/roles/2
@@ -9,20 +9,14 @@
 import { PrismaClient } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 import { handleApiError } from "@/lib/handleApiError";
+import { ParamsWithId } from "@/app/types/paramsid";
 
 const prisma = new PrismaClient();
 
-// Définition du type pour les paramètres de la route dynamique
-interface RouteParams {
-  params: {
-    id: string; // L'ID sera une chaîne de caractères provenant de l'URL
-  };
-}
-
 // GET : Récupérer un rôle par son ID
-export async function GET(req: NextRequest, { params }: RouteParams) {
+export async function GET(req: NextRequest, context: { params: ParamsWithId }) {
   try {
-    const { id } = params; // Récupère l'ID du role depuis les paramètres de l'URL
+    const { id } = context.params; // Récupère l'ID du role depuis les paramètres de l'URL
 
     // Convertit l'ID en nombre entier, car Prisma attend un nombre pour l'ID
     const roleId = parseInt(id, 10);
@@ -66,9 +60,12 @@ export async function GET(req: NextRequest, { params }: RouteParams) {
 }
 
 // PATCH : Mettre à jour un rôle existant par son ID
-export async function PATCH(req: NextRequest, { params }: RouteParams) {
+export async function PATCH(
+  req: NextRequest,
+  context: { params: ParamsWithId }
+) {
   try {
-    const { id } = params; // Récupère l'ID du rôle depuis les paramètres de l'URL
+    const { id } = context.params; // Récupère l'ID du rôle depuis les paramètres de l'URL
     const updateData = await req.json(); // Récupère les données de mise à jour du corps de la requête
 
     // Convertit l'ID en nombre entier, car Prisma attend un nombre pour l'ID
@@ -99,9 +96,12 @@ export async function PATCH(req: NextRequest, { params }: RouteParams) {
 }
 
 // DELETE : Supprimer un volontaire par son ID
-export async function DELETE(req: NextRequest, { params }: RouteParams) {
+export async function DELETE(
+  req: NextRequest,
+  context: { params: ParamsWithId }
+) {
   try {
-    const { id } = params; // Récupère l'ID du rôle depuis les paramètres de l'URL
+    const { id } = context.params; // Récupère l'ID du rôle depuis les paramètres de l'URL
     // Convertit l'ID en nombre entier
     const roleId = parseInt(id, 10);
 

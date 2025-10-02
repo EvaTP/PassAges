@@ -1,5 +1,5 @@
 // src/app/api/cities/[id]/route.ts
-// toutes les actions nécessitant de l'id de la ville
+// toutes les actions nécessitant de l'id de la ville :
 // GET by ID, Patch et Delete
 
 // - GET http://localhost:3000/api/cities/12
@@ -9,20 +9,14 @@
 import { PrismaClient } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 import { handleApiError } from "@/lib/handleApiError"; // Importation de la fonction de gestion des erreurs
+import { ParamsWithId } from "@/app/types/paramsid";
 
 const prisma = new PrismaClient();
 
-// Définition du type pour les paramètres de la route dynamique
-interface RouteParams {
-  params: {
-    id: string; // L'ID sera une chaîne de caractères provenant de l'URL
-  };
-}
-
 // GET : Récupérer une ville par son ID
-export async function GET(req: NextRequest, { params }: RouteParams) {
+export async function GET(req: NextRequest, context: { params: ParamsWithId }) {
   try {
-    const { id } = params;
+    const { id } = context.params;
     const cityId = parseInt(id, 10);
 
     if (isNaN(cityId)) {
@@ -53,11 +47,13 @@ export async function GET(req: NextRequest, { params }: RouteParams) {
 }
 
 // PATCH : Mettre à jour une ville par son ID
-export async function PATCH(req: NextRequest, { params }: RouteParams) {
+export async function PATCH(
+  req: NextRequest,
+  context: { params: ParamsWithId }
+) {
   try {
-    const { id } = params;
+    const { id } = context.params;
     const updateData = await req.json();
-
     const cityId = parseInt(id, 10);
 
     if (isNaN(cityId)) {
@@ -82,9 +78,12 @@ export async function PATCH(req: NextRequest, { params }: RouteParams) {
 }
 
 // DELETE : Supprimer une ville par son ID
-export async function DELETE(req: NextRequest, { params }: RouteParams) {
+export async function DELETE(
+  req: NextRequest,
+  context: { params: ParamsWithId }
+) {
   try {
-    const { id } = params;
+    const { id } = context.params;
     const cityId = parseInt(id, 10);
 
     if (isNaN(cityId)) {

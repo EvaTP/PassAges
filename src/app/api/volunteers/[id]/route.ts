@@ -10,15 +10,9 @@ import { PrismaClient } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 import { handleApiError } from "@/lib/handleApiError";
 import bcrypt from "bcrypt";
+import { ParamsWithId } from "@/app/types/paramsid";
 
 const prisma = new PrismaClient();
-
-// Définition du type pour les paramètres de la route dynamique avec l'ID
-interface RouteParams {
-  params: {
-    id: string; // L'ID sera une chaîne de caractères provenant de l'URL
-  };
-}
 
 // Typage pour une mise à jour (partielle)
 type UpdateVolunteerData = {
@@ -34,9 +28,9 @@ type UpdateVolunteerData = {
 };
 
 // GET : Récupérer un volontaire par son ID
-export async function GET(req: NextRequest, { params }: RouteParams) {
+export async function GET(req: NextRequest, context: { params: ParamsWithId }) {
   try {
-    const { id } = params; // Récupère l'ID du volontaire depuis les paramètres de l'URL
+    const { id } = context.params; // Récupère l'ID du volontaire depuis les paramètres de l'URL
 
     // Convertit l'ID en nombre entier, car Prisma attend un nombre pour l'ID
     const volunteerId = parseInt(id, 10);
@@ -83,9 +77,12 @@ export async function GET(req: NextRequest, { params }: RouteParams) {
 }
 
 // PATCH : Mettre à jour un volontaire existant par son ID
-export async function PATCH(req: NextRequest, { params }: RouteParams) {
+export async function PATCH(
+  req: NextRequest,
+  context: { params: ParamsWithId }
+) {
   try {
-    const { id } = params;
+    const { id } = context.params;
     const volunteerId = parseInt(id, 10);
 
     if (isNaN(volunteerId)) {
@@ -98,9 +95,9 @@ export async function PATCH(req: NextRequest, { params }: RouteParams) {
     const updateData: UpdateVolunteerData = await req.json();
 
     // Si 'city' est fourni → trouver son ID
-    if (updateData.city_id && !updateData.city_id) {
+    if (updateData.city_id) {
       const cityRecord = await prisma.cities.findUnique({
-        where: { city_name: updateData.city_id },
+        where: { id: updateData.city_id },
       });
 
       if (!cityRecord) {
@@ -110,13 +107,12 @@ export async function PATCH(req: NextRequest, { params }: RouteParams) {
         );
       }
       updateData.city_id = cityRecord.id;
-      delete updateData.city_id;
     }
 
     // Si 'activity' est fournie → trouver son ID
-    if (updateData.activity_id && !updateData.activity_id) {
+    if (updateData.activity_id) {
       const activityRecord = await prisma.activities.findFirst({
-        where: { activity_type: updateData.activity_id },
+        where: { id: updateData.activity_id },
       });
 
       if (!activityRecord) {
@@ -126,7 +122,6 @@ export async function PATCH(req: NextRequest, { params }: RouteParams) {
         );
       }
       updateData.activity_id = activityRecord.id;
-      delete updateData.activity_id;
     }
 
     // Si 'password' est fourni → le hacher avant de l’enregistrer
@@ -278,9 +273,12 @@ export async function PATCH(req: NextRequest, { params }: RouteParams) {
 // }
 
 // DELETE : Supprimer un volontaire par son ID
-export async function DELETE(req: NextRequest, { params }: RouteParams) {
+export async function DELETE(
+  req: NextRequest,
+  context: { params: ParamsWithId }
+) {
   try {
-    const { id } = params; // Récupère l'ID du volontaire depuis les paramètres de l'URL
+    const { id } = context.params; // Récupère l'ID du volontaire depuis les paramètres de l'URL
 
     // Convertit l'ID en nombre entier
     const volunteerId = parseInt(id, 10);

@@ -3,19 +3,11 @@ import Image from "next/image";
 import VolunteerForm from "@/app/components/VolunteerForm";
 // import Cookies from "js-cookie"; //npm install --save-dev @types/js-cookie pour que ça fonctionne en typescript
 // import { redirect } from "next/navigation";
-import { useState } from "react";
 
 // Rubrique "Pourquoi devenir bénévole"
 import { WHY_VOLUNTEER } from "@/app/data/cards";
 
 export default function Volunteers() {
-  const [volunteer, setVolunteer] = useState<string | null>(null);
-
-  // useEffect(() => {
-  //   const storedName = Cookies.get("volunteer"); // lecture du cookie
-  //   setVolunteer(storedName ?? null);
-  // }, []);
-
   return (
     <>
       <div className="">

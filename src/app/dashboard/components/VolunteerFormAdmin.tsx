@@ -7,7 +7,8 @@ type VolunteerFormAdminData = {
   email: string;
   password: string;
   role: string;
-  city: string;
+  city_id?: number;
+  new_city?: string;
   zipcode?: string;
   activity_id?: number;
   motivation?: string;
@@ -24,13 +25,15 @@ export default function VolunteerForm() {
     email: "",
     password: "",
     role: "",
-    city: "",
+    city_id: undefined,
+    new_city: "",
     zipcode: "",
     activity_id: 0,
     motivation: "",
   });
 
   const [cities, setCities] = useState<City[]>([]);
+  const [isNewCity, setIsNewCity] = useState(false);
   const [activities, setActivities] = useState<Activity[]>([]);
   const [roles, setRoles] = useState<Role[]>([]);
 
@@ -39,7 +42,7 @@ export default function VolunteerForm() {
       const [citiesRes, activitiesRes, rolesRes] = await Promise.all([
         fetch("/api/cities"),
         fetch("/api/activities"),
-        fetch("api/roles"),
+        fetch("/api/roles"),
       ]);
 
       if (citiesRes.ok) {
@@ -66,11 +69,25 @@ export default function VolunteerForm() {
   ) => {
     const { name, value } = e.target;
 
-    setFormData((prev) => ({
-      ...prev,
-      [name]:
-        name === "city_id" || name === "activity_id" ? Number(value) : value,
-    }));
+    // Si c'est le select des villes
+    if (name === "city_id") {
+      if (value === "new") {
+        setIsNewCity(true);
+        setFormData((prev) => ({ ...prev, city_id: undefined }));
+      } else {
+        setIsNewCity(false);
+        setFormData((prev) => ({
+          ...prev,
+          city_id: Number(value),
+          new_city: "",
+        }));
+      }
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: name === "activity_id" ? Number(value) : value,
+      }));
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -92,11 +109,13 @@ export default function VolunteerForm() {
           email: "",
           password: "",
           role: "",
-          city: "",
+          city_id: undefined,
+          new_city: "",
           zipcode: "",
           activity_id: 0,
           motivation: "",
         });
+        setIsNewCity(false);
       } else {
         alert("Erreur : " + result.message);
       }
@@ -133,6 +152,7 @@ export default function VolunteerForm() {
             className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
           />
         </div>
+
         {/* Nom */}
         <div className="flex items-center gap-2">
           <label
@@ -215,7 +235,7 @@ export default function VolunteerForm() {
           value={formData.role}
           required
           onChange={handleChange}
-          className="input"
+          className="rounded-md border px-3 py-2"
         >
           <option value="" disabled>
             -- Sélectionnez un statut --
@@ -229,23 +249,49 @@ export default function VolunteerForm() {
       </div>
 
       <div className="grid grid-cols-2 gap-2 mt-10">
+        {/* Ville */}
         <div className="flex items-center gap-5">
-          {/* Ville */}
           <label
-            htmlFor="city"
+            htmlFor="city_id"
             className="block text-sm/6 font-medium text-gray-900"
           >
             Ville :
           </label>
-          <input
-            name="city"
-            value={formData.city}
-            onChange={handleChange}
+          <select
+            name="city_id"
+            value={isNewCity ? "new" : formData.city_id ?? ""}
             required
-          />
+            onChange={handleChange}
+            className="rounded-md border px-3 py-2"
+          >
+            <option value="" disabled>
+              -- Sélectionnez une ville --
+            </option>
+            {cities.map((city) => (
+              <option key={city.id} value={city.id}>
+                {city.city_name}
+              </option>
+            ))}
+            <option value="new">
+              -- Autre (ajouter une nouvelle ville) --
+            </option>
+          </select>
+
+          {isNewCity && (
+            <input
+              type="text"
+              name="new_city"
+              placeholder="Nom de la nouvelle ville"
+              required
+              value={formData.new_city}
+              onChange={handleChange}
+              className="mt-2 rounded-md border px-3 py-2"
+            />
+          )}
         </div>
+
+        {/* Code postal */}
         <div className="flex items-center gap-5">
-          {/* Code postal */}
           <label
             htmlFor="zipcode"
             className="w-32 text-sm font-medium text-gray-900"
@@ -316,7 +362,8 @@ export default function VolunteerForm() {
               email: "",
               password: "",
               role: "",
-              city: "",
+              city_id: undefined,
+              new_city: "",
               zipcode: "",
               activity_id: 0,
               motivation: "",

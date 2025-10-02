@@ -1,4 +1,6 @@
 // route pour créer un volontaire depuis le formulaire admin dans DASHBOARD
+// endpoint : POST http://localhost:3000/api/register
+// body : { firstname, lastname, email, password, role, city, zipcode, activity_id, motivation }
 
 import { PrismaClient } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
@@ -24,28 +26,29 @@ export async function POST(req: NextRequest) {
     } = body;
 
     if (
-      !firstname ||
-      !lastname ||
-      !email ||
-      !password ||
-      !city ||
+      !firstname.trim() ||
+      !lastname.trim() ||
+      !email.trim() ||
+      !password.trim() ||
+      !city.trim() ||
       !activity_id ||
-      !motivation
+      motivation === undefined ||
+      motivation === null
     ) {
       return NextResponse.json(
-        { success: false, message: "Champs requis manquants." },
+        { success: false, message: "Champs requis manquants ou invalides." },
         { status: 400 }
       );
     }
 
     // 1. Gérer la ville et la créer si absente
     let cityRecord = await prisma.cities.findUnique({
-      where: { city_name: city },
+      where: { city_name: city.trim() },
     });
 
     if (!cityRecord) {
       cityRecord = await prisma.cities.create({
-        data: { city_name: city },
+        data: { city_name: city.trim() },
       });
     }
 
@@ -70,15 +73,15 @@ export async function POST(req: NextRequest) {
     // 4. Créer le bénévole
     const newVolunteer = await prisma.volunteers.create({
       data: {
-        firstname,
-        lastname,
-        email,
+        firstname: firstname.trim(),
+        lastname: lastname.trim(),
+        email: email.trim().toLowerCase(),
         password: hashedPassword,
-        role,
+        role: role || "volunteer",
         city_id: cityRecord.id,
-        zipcode,
+        zipcode: zipcode ? zipcode.trim() : null, // Champ optionnel
         activity_id,
-        motivation,
+        motivation: motivation,
       },
     });
 
