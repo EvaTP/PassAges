@@ -147,36 +147,6 @@ export async function PATCH(
   }
 }
 
-// export async function PATCH(
-//   req: NextRequest,
-//   { params }: { params: { id: string } }
-// ) {
-//   try {
-//     const { id } = params;
-//     const volunteerId = parseInt(id, 10);
-
-//     if (isNaN(volunteerId)) {
-//       return NextResponse.json(
-//         { success: false, message: "❓ ID de volontaire invalide." },
-//         { status: 400 }
-//       );
-//     }
-
-//     const body = await req.json();
-
-//     const updatedVolunteer = await prisma.volunteers.update({
-//       where: { id: volunteerId },
-//       data: body,
-//     });
-
-//     console.log(`Volontaire avec l'ID ${id} mis à jour.`);
-
-//     return NextResponse.json({ success: true, data: updatedVolunteer });
-//   } catch (error: unknown) {
-//     return handleApiError(error, "la mise à jour du bénévole");
-//   }
-// }
-
 // ancienne version
 // export async function PATCH(req: NextRequest, { params }: RouteParams) {
 //   try {
