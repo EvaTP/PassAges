@@ -3,23 +3,29 @@ import Image from "next/image";
 import BlackButton from "./BlackButton";
 import React from "react";
 import { useRouter } from "next/navigation";
+import { Prisma } from "@prisma/client";
 
 // Type pour les données d'un elder avec ses relations
-type ElderWithRelations = {
-  id: number;
-  firstname: string;
-  lastname: string;
-  age: number | null;
-  job: string | null;
-  description: string | null;
-  picture: string | null;
-  cities: {
-    city_name: string;
-  } | null;
-  activities: {
-    activity_type: string;
-  } | null;
-};
+// type ElderWithRelations = {
+//   id: number;
+//   firstname: string;
+//   lastname: string;
+//   age: number | null;
+//   job: string | null;
+//   description: string | null;
+//   picture: string | null;
+//   cities: {
+//     city_name: string;
+//   } | null;
+//   activities: {
+//     activity_type: string;
+//   } | null;
+// };
+
+// ✅ Type basé directement sur Prisma
+export type ElderWithRelations = Prisma.eldersGetPayload<{
+  include: { cities: true; activities: true };
+}>;
 
 interface ElderCardProps {
   elder: ElderWithRelations;
@@ -73,7 +79,6 @@ export default function ElderCard({ elder }: ElderCardProps): React.ReactNode {
           onClick={() => router.push("/volunteers")}
           label="Programmer un moment"
         />
-        {/* </a> */}
       </div>
     </div>
   );

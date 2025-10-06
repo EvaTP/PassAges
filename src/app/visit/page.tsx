@@ -2,7 +2,8 @@ import Image from "next/image";
 import { prisma } from "@/lib/prisma";
 import { Prisma } from "@prisma/client";
 import ElderCard from "@/app/components/ElderCard";
-import MomentToShare from "../components/MomentToShare";
+import MomentToShare from "@/app/components/MomentToShare";
+import { ElderWithRelations } from "@/app/components/ElderCard";
 
 const VisitParams = async ({
   searchParams,
@@ -12,10 +13,10 @@ const VisitParams = async ({
     city?: string;
   };
 }) => {
-  const city = (await searchParams)?.city || "";
+  const city = searchParams?.city || "";
   console.log(city);
 
-  const activity = (await searchParams)?.activity || "";
+  const activity = searchParams?.activity || "";
   console.log(activity);
 
   //Appel avec l'espace de noms Prisma
@@ -39,13 +40,13 @@ const VisitParams = async ({
     };
   }
 
-  const elders = await prisma.elders.findMany({
+  const elders = (await prisma.elders.findMany({
     where: filters,
     include: {
       cities: true,
       activities: true,
     },
-  });
+  })) as ElderWithRelations[];
 
   return (
     <>
