@@ -9,15 +9,16 @@
 import { PrismaClient } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 import { handleApiError } from "@/lib/handleApiError";
-import { ParamsWithId } from "@/app/types/paramsid";
 
 const prisma = new PrismaClient();
 
 // GET : Récupérer un rôle par son ID
-export async function GET(req: NextRequest, context: { params: ParamsWithId }) {
+export async function GET(
+  req: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
   try {
-    const { id } = context.params; // Récupère l'ID du role depuis les paramètres de l'URL
-
+    const { id } = await params; //  Attend la résolution de la Promise
     // Convertit l'ID en nombre entier, car Prisma attend un nombre pour l'ID
     const roleId = parseInt(id, 10);
 
@@ -37,23 +38,16 @@ export async function GET(req: NextRequest, context: { params: ParamsWithId }) {
     // Si le rôle n'est pas trouvé
     if (!role) {
       return NextResponse.json(
-        { success: false, message: "❌ Röle non trouvé." },
+        { success: false, message: "❌ rôle non trouvé." },
         { status: 404 }
       );
     }
-    console.log(`Rôle avec l'ID ${id} trouvé.`);
+    console.log(`Rôle avec l'ID ${roleId} trouvé.`);
 
     return NextResponse.json({ success: true, data: role });
   } catch (error) {
-    console.error("❌ Erreur lors de la récupération du rôle par ID :", error);
-    return NextResponse.json(
-      {
-        success: false,
-        message: "❌ Erreur serveur lors de la récupération du rôle.",
-        details: error instanceof Error ? error.message : "Erreur inconnue",
-      },
-      { status: 500 }
-    );
+    console.error("❌ erreur lors de la récupération du rôle par ID :", error);
+    return handleApiError(error, "❌ erreur lors de la récupération du rôle");
   } finally {
     await prisma.$disconnect();
   }
@@ -62,10 +56,10 @@ export async function GET(req: NextRequest, context: { params: ParamsWithId }) {
 // PATCH : Mettre à jour un rôle existant par son ID
 export async function PATCH(
   req: NextRequest,
-  context: { params: ParamsWithId }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = context.params; // Récupère l'ID du rôle depuis les paramètres de l'URL
+    const { id } = await params; // Attend la résolution de la Promise
     const updateData = await req.json(); // Récupère les données de mise à jour du corps de la requête
 
     // Convertit l'ID en nombre entier, car Prisma attend un nombre pour l'ID
@@ -85,11 +79,14 @@ export async function PATCH(
       data: updateData, // Prisma mettra à jour uniquement les champs fournis dans updateData
     });
 
-    console.log(`✅ Rôle avec l'ID ${id} mis à jour.`);
+    console.log(`✅ Rôle avec l'ID ${roleId} mis à jour.`);
 
     return NextResponse.json({ success: true, data: updatedRole });
   } catch (error: unknown) {
-    return handleApiError(error, "la mise à jour du rôle du bénévole");
+    return handleApiError(
+      error,
+      "❌ erreur lors de la mise à jour du rôle du bénévole"
+    );
   } finally {
     await prisma.$disconnect();
   }
@@ -98,10 +95,10 @@ export async function PATCH(
 // DELETE : Supprimer un volontaire par son ID
 export async function DELETE(
   req: NextRequest,
-  context: { params: ParamsWithId }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = context.params; // Récupère l'ID du rôle depuis les paramètres de l'URL
+    const { id } = await params; // Attend la résolution de la Promise
     // Convertit l'ID en nombre entier
     const roleId = parseInt(id, 10);
 
@@ -114,19 +111,18 @@ export async function DELETE(
     }
 
     // Effectue la suppression dans la base de données
-    const deletedRole = await prisma.volunteers.delete({
+    const deletedRole = await prisma.roles.delete({
       where: { id: roleId },
     });
 
-    console.log(`Rôle avec l'ID ${id} supprimé.`);
-
+    console.log(`Rôle avec l'ID ${roleId} supprimé.`);
     return NextResponse.json({
       success: true,
       data: deletedRole,
       message: "✅ Rôle supprimé avec succès.",
     });
   } catch (error: unknown) {
-    return handleApiError(error, "la suppression du rôle");
+    return handleApiError(error, "❌ erreur lors de la suppression du rôle");
   } finally {
     await prisma.$disconnect();
   }
