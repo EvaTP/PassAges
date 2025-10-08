@@ -26,9 +26,9 @@ export default function MomentToShare(): React.ReactNode {
         <MomentType
           label="Moments à partager"
           moments={moments}
-          onChange={(activity: string) => {
+          onChange={(activity: string | number) => {
             console.log("Moment sélectionné: " + activity);
-            setActivity(activity);
+            setActivity(String(activity));
           }}
         />
         <br></br>
@@ -40,7 +40,7 @@ export default function MomentToShare(): React.ReactNode {
           }}
         />
         <div className="mt-5">
-          {/* On envois avec le lien du bouton la ville et le moment sélectionnés */}
+          {/* On envoie avec le lien du bouton la ville et le moment sélectionnés */}
           <a href={`/visit?city=${city}&activity=${activity}`}>
             <BlackButton label="Rechercher &nbsp;&nbsp;🔍" />
           </a>

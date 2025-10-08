@@ -1,6 +1,6 @@
 export default function ChooseCity(props: {
   label: string;
-  onChange: (city: string | number) => void;
+  onChange: (city: string) => void;
 }) {
   const cityChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;

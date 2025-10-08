@@ -31,7 +31,10 @@ Eva Tharrats : https://github.com/EvaTP
 - Formulaire de demande pour devenir bénévole dans la page Bénévole
 - Page de connexion [en cours]
 - Page "Faire un don" [en cours]
-- Page /dashboard pour les administrateurs : voir tous les volontaires, les volontaires en attente, création d'un nouveau volontaire
+- Page /dashboard pour les administrateurs :
+  - voir tous les volontaires, les volontaires en attente,
+  - acceptation/refus/mise en attente d'un volontaire
+  - création d'un nouveau volontaire
 
 ### Images & Icônes
 

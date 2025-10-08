@@ -1,5 +1,5 @@
 export interface CardData {
-  id: number;
+  id?: number;
   emoji: string;
   title: string;
   text: string;

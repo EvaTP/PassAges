@@ -3,13 +3,6 @@ import { NextRequest, NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
 
-// Définition du type pour les paramètres de la route dynamique avec l'ID
-// interface RouteParams {
-//   params: {
-//     id: string;
-//   };
-// }
-
 // typage
 type NewVolunteerData = {
   firstname: string;
@@ -24,31 +17,17 @@ export async function POST(req: NextRequest) {
   try {
     const newVolunteerData: NewVolunteerData = await req.json();
 
-    const {
-      firstname,
-      lastname,
-      email,
-      city,
-      zipcode,
-      motivation,
-      password,
-      moments,
-      activities,
-    } = newVolunteerData;
+    const { firstname, lastname, email, city, zipcode, motivation } =
+      newVolunteerData;
 
-    const volunteerDbInfo = await prisma.volunteers.findUnique({
-      where: {
-        email: email,
-        password: password,
-      },
+    // Vérifier si l'email existe déjà
+    const existingVolunteer = await prisma.volunteers.findUnique({
+      where: { email },
     });
 
-    if (
-      volunteerDbInfo?.email == newVolunteerData.email ||
-      volunteerDbInfo?.password == newVolunteerData.password
-    ) {
+    if (existingVolunteer) {
       return NextResponse.json(
-        { success: false, message: "⚠️Bénévole déjà enregistré." },
+        { success: false, message: "⚠️ Bénévole déjà enregistré." },
         { status: 400 }
       );
     }
@@ -72,22 +51,26 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Création du bénévole
+    // Création du bénévole (sans password - sera défini par l'admin)
     const newVolunteer = await prisma.volunteers.create({
       data: {
         firstname,
         lastname,
         email,
-        password,
         zipcode,
         motivation,
         city_id: cityRecord.id,
-        moments,
-        activities,
+        // password sera défini par l'admin lors de la validation
+        // moments et activities seront gérés après validation
       },
     });
 
-    return NextResponse.json({ success: true, data: newVolunteer });
+    return NextResponse.json({
+      success: true,
+      message:
+        "✅ Merci pour votre demande d'inscription ! Nous reviendrons vers vous rapidement.",
+      data: newVolunteer,
+    });
   } catch (error) {
     console.error("❌ Erreur dans la création d’un bénévole :", error);
     return NextResponse.json(

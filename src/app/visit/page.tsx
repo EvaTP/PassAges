@@ -5,21 +5,27 @@ import ElderCard from "@/app/components/ElderCard";
 import MomentToShare from "@/app/components/MomentToShare";
 import { ElderWithRelations } from "@/app/components/ElderCard";
 
-const VisitParams = async ({
-  searchParams,
-}: {
-  searchParams?: {
-    activity?: string;
-    city?: string;
-  };
-}) => {
-  const city = searchParams?.city || "";
+// Typage pour Next.js 15+
+type SearchParams = Promise<{
+  activity?: string;
+  city?: string;
+}>;
+
+type PageProps = {
+  searchParams: SearchParams;
+};
+
+export default async function VisitParams({ searchParams }: PageProps) {
+  // Await des searchParams car ils sont maintenant asynchrones
+  const params = await searchParams;
+
+  const city = params?.city || "";
   console.log(city);
 
-  const activity = searchParams?.activity || "";
+  const activity = params?.activity || "";
   console.log(activity);
 
-  //Appel avec l'espace de noms Prisma
+  // Appel avec l'espace de noms Prisma
   const filters: Prisma.eldersWhereInput = {};
 
   if (city) {
@@ -50,40 +56,109 @@ const VisitParams = async ({
 
   return (
     <>
-      <div className="">
-        <Image
-          className="w-full h-[290px] object-cover"
-          src="/images/hero-desktop-visiter.svg"
-          alt="hero-image"
-          width={180}
-          height={50}
-          priority
-        />
-      </div>
-      {/* Moments à partager*/}
+      {/* Moments à partager */}
+      <MomentToShare />
+
       <div>
-        <MomentToShare />
-      </div>
-      <main className="p-6 bg-gray-50">
-        <div className="mx-auto">
-          <h1>Je rends visite</h1>
+        <h1>Je rends visite</h1>
 
-          {/* Affichage de tous les elders */}
-          <div className="w-4/5 mx-auto grid grid-cols-4 gap-2.5">
-            {elders.map((elder) => (
-              <ElderCard key={elder.id} elder={elder} />
-            ))}
-          </div>
-
-          {/* Message si aucun elder */}
-          {/* {elders.length === 0 && (
-            <p className="text-center text-gray-500 mt-8">
-              Aucune visite disponible pour le moment.
-            </p>
-          )} */}
+        {/* Affichage de tous les elders */}
+        <div>
+          {elders.map((elder) => (
+            <ElderCard key={elder.id} elder={elder} />
+          ))}
         </div>
-      </main>
+
+        {/* Message si aucun elder */}
+        {/* {elders.length === 0 && (
+          <div>
+            Aucune visite disponible pour le moment.
+          </div>
+        )} */}
+      </div>
     </>
   );
-};
-export default VisitParams;
+}
+
+// ancienne version avec les params
+// export default async function VisitParams({
+//   searchParams,
+// }: {
+//   searchParams?: {
+//     activity?: string;
+//     city?: string;
+//   };
+// }) {
+//   const city = searchParams?.city || "";
+//   console.log(city);
+
+//   const activity = searchParams?.activity || "";
+//   console.log(activity);
+
+//   //Appel avec l'espace de noms Prisma
+//   const filters: Prisma.eldersWhereInput = {};
+
+//   if (city) {
+//     filters.cities = {
+//       city_name: {
+//         contains: city,
+//         mode: "insensitive",
+//       },
+//     };
+//   }
+
+//   if (activity) {
+//     filters.activities = {
+//       activity_type: {
+//         contains: activity,
+//         mode: "insensitive",
+//       },
+//     };
+//   }
+
+//   const elders = (await prisma.elders.findMany({
+//     where: filters,
+//     include: {
+//       cities: true,
+//       activities: true,
+//     },
+//   })) as ElderWithRelations[];
+
+//   return (
+//     <>
+//       <div className="">
+//         <Image
+//           className="w-full h-[290px] object-cover"
+//           src="/images/hero-desktop-visiter.svg"
+//           alt="hero-image"
+//           width={180}
+//           height={50}
+//           priority
+//         />
+//       </div>
+//       {/* Moments à partager*/}
+//       <div>
+//         <MomentToShare />
+//       </div>
+//       <main className="p-6 bg-gray-50">
+//         <div className="mx-auto">
+//           <h1>Je rends visite</h1>
+
+//           {/* Affichage de tous les elders */}
+//           <div className="w-4/5 mx-auto grid grid-cols-4 gap-2.5">
+//             {elders.map((elder) => (
+//               <ElderCard key={elder.id} elder={elder} />
+//             ))}
+//           </div>
+
+//           {/* Message si aucun elder */}
+//           {/* {elders.length === 0 && (
+//             <p className="text-center text-gray-500 mt-8">
+//               Aucune visite disponible pour le moment.
+//             </p>
+//           )} */}
+//         </div>
+//       </main>
+//     </>
+//   );
+// }
