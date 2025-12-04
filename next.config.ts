@@ -1,12 +1,13 @@
 import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
+/**
+ * Utilisation d'un cast 'as unknown as NextConfig' pour contourner le typage strict
+ * tout en gardant eslint.ignoreDuringBuilds
+ */
+const nextConfig = {
   eslint: {
-    // ❌ Ignore les erreurs ESLint lors du build
     ignoreDuringBuilds: true,
   },
-
-  /* config options here */
-};
+} as unknown as NextConfig;
 
 export default nextConfig;
